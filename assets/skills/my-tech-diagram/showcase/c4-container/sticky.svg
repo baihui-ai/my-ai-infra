@@ -1,0 +1,118 @@
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif">
+  <defs>
+    <marker id="arrS" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#868E96"/>
+    </marker>
+    <filter id="noteShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="1.5" dy="2" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="720" fill="#FAFAFA"/>
+
+  <text x="48" y="52" font-size="22" font-weight="600" fill="#343A40">在线商城系统 · C4 Container 架构图</text>
+  <text x="48" y="76" font-size="12" fill="#868E96">层级：Container（L2） | 范围：商城系统内部容器与外部依赖 | 风格：便签 sticky</text>
+
+  <!-- System Boundary：粉色虚线框 + 分组标题条 -->
+  <rect x="330" y="110" width="610" height="510" rx="8" fill="none" stroke="#AD1457" stroke-width="1.5" stroke-dasharray="8 6"/>
+  <rect x="346" y="120" width="232" height="28" rx="4" fill="#FCE4EC" stroke="#AD1457" stroke-width="1"/>
+  <text x="362" y="139" font-size="12" font-weight="600" fill="#880E4F">在线商城系统 [Software System]</text>
+
+  <!-- 连线 -->
+  <path d="M244 348 H420 V198 H496" fill="none" stroke="#868E96" stroke-width="1.5" marker-end="url(#arrS)"/>
+  <path d="M630 246 V306" fill="none" stroke="#868E96" stroke-width="1.5" marker-end="url(#arrS)"/>
+  <path d="M580 406 V452 H495 V462" fill="none" stroke="#868E96" stroke-width="1.5" marker-end="url(#arrS)"/>
+  <path d="M680 406 V452 H775 V462" fill="none" stroke="#868E96" stroke-width="1.5" marker-end="url(#arrS)"/>
+  <path d="M764 340 H880 V275 H996" fill="none" stroke="#868E96" stroke-width="1.5" marker-end="url(#arrS)"/>
+  <path d="M764 390 H918 V445 H996" fill="none" stroke="#868E96" stroke-width="1.5" marker-end="url(#arrS)"/>
+
+  <!-- 连线标签 -->
+  <text x="332" y="326" text-anchor="middle" font-size="12" fill="#868E96">浏览商品、提交订单</text>
+  <text x="332" y="342" text-anchor="middle" font-size="12" fill="#868E96">[HTTPS]</text>
+  <text x="712" y="272" text-anchor="middle" font-size="12" fill="#868E96">调用业务 API</text>
+  <text x="712" y="288" text-anchor="middle" font-size="12" fill="#868E96">[JSON/HTTPS]</text>
+  <text x="527" y="436" text-anchor="middle" font-size="12" fill="#868E96">读写商品/订单 [JDBC]</text>
+  <text x="737" y="436" text-anchor="middle" font-size="12" fill="#868E96">读写缓存 [RESP]</text>
+  <text x="822" y="356" text-anchor="middle" font-size="12" fill="#868E96">发起支付/接收回调</text>
+  <text x="822" y="372" text-anchor="middle" font-size="12" fill="#868E96">[HTTPS/REST]</text>
+  <text x="840" y="412" text-anchor="middle" font-size="12" fill="#868E96">创建运单/查询轨迹</text>
+  <text x="840" y="428" text-anchor="middle" font-size="12" fill="#868E96">[HTTPS/REST]</text>
+
+  <!-- Person：商城用户（参与者便签，浅黄） -->
+  <g transform="rotate(-0.8 150 348)" filter="url(#noteShadow)">
+    <rect x="60" y="300" width="180" height="96" rx="3" fill="#FFF9DB" stroke="#B08C00" stroke-width="1.2"/>
+    <path d="M226 300 h14 v14 z" fill="#B08C00" opacity="0.55"/>
+    <text x="150" y="336" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">商城用户</text>
+    <text x="150" y="354" text-anchor="middle" font-size="11" fill="#868E96">[Person]</text>
+    <text x="150" y="372" text-anchor="middle" font-size="11" fill="#868E96">微信小程序 / 浏览器访问</text>
+  </g>
+
+  <!-- Container：Web 前端（黄便签） -->
+  <g transform="rotate(0.6 630 198)" filter="url(#noteShadow)">
+    <rect x="500" y="150" width="260" height="96" rx="3" fill="#FFF3BF" stroke="#E8B004" stroke-width="1.2"/>
+    <path d="M746 150 h14 v14 z" fill="#E8B004" opacity="0.55"/>
+    <text x="630" y="186" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">Web 前端</text>
+    <text x="630" y="204" text-anchor="middle" font-size="11" fill="#868E96">[Container: React SPA]</text>
+    <text x="630" y="222" text-anchor="middle" font-size="11" fill="#868E96">商品浏览、购物车、下单页面</text>
+  </g>
+
+  <!-- Container：商城 API 服务（黄便签） -->
+  <g transform="rotate(-0.5 630 358)" filter="url(#noteShadow)">
+    <rect x="500" y="310" width="260" height="96" rx="3" fill="#FFF3BF" stroke="#E8B004" stroke-width="1.2"/>
+    <path d="M746 310 h14 v14 z" fill="#E8B004" opacity="0.55"/>
+    <text x="630" y="346" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">商城 API 服务</text>
+    <text x="630" y="364" text-anchor="middle" font-size="11" fill="#868E96">[Container: Java Spring Boot]</text>
+    <text x="630" y="382" text-anchor="middle" font-size="11" fill="#868E96">订单、支付、物流业务逻辑</text>
+  </g>
+
+  <!-- Container：PostgreSQL（绿圆柱便签） -->
+  <g transform="rotate(0.5 495 535)" filter="url(#noteShadow)">
+    <path d="M380 480 V576 A115 14 0 0 0 610 576 V480" fill="#D3F9D8" stroke="#5C940D" stroke-width="1.2"/>
+    <ellipse cx="495" cy="480" rx="115" ry="14" fill="#D3F9D8" stroke="#5C940D" stroke-width="1.2"/>
+    <text x="495" y="522" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">业务数据库</text>
+    <text x="495" y="540" text-anchor="middle" font-size="11" fill="#868E96">[Container: PostgreSQL]</text>
+    <text x="495" y="558" text-anchor="middle" font-size="11" fill="#868E96">商品、订单、用户数据</text>
+  </g>
+
+  <!-- Container：Redis（绿圆柱便签） -->
+  <g transform="rotate(-0.6 775 535)" filter="url(#noteShadow)">
+    <path d="M660 480 V576 A115 14 0 0 0 890 576 V480" fill="#D3F9D8" stroke="#5C940D" stroke-width="1.2"/>
+    <ellipse cx="775" cy="480" rx="115" ry="14" fill="#D3F9D8" stroke="#5C940D" stroke-width="1.2"/>
+    <text x="775" y="522" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">缓存</text>
+    <text x="775" y="540" text-anchor="middle" font-size="11" fill="#868E96">[Container: Redis]</text>
+    <text x="775" y="558" text-anchor="middle" font-size="11" fill="#868E96">热点数据缓存</text>
+  </g>
+
+  <!-- 外部系统：微信支付（粉便签，虚线边） -->
+  <g transform="rotate(0.8 1080 275)" filter="url(#noteShadow)">
+    <rect x="1000" y="230" width="160" height="90" rx="3" fill="#FCE4EC" stroke="#C2255C" stroke-width="1.2" stroke-dasharray="5 3"/>
+    <path d="M1146 230 h14 v14 z" fill="#C2255C" opacity="0.55"/>
+    <text x="1080" y="266" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">微信支付</text>
+    <text x="1080" y="284" text-anchor="middle" font-size="11" fill="#868E96">[外部系统]</text>
+    <text x="1080" y="302" text-anchor="middle" font-size="11" fill="#868E96">支付下单与回调</text>
+  </g>
+
+  <!-- 外部系统：顺丰物流（粉便签，虚线边） -->
+  <g transform="rotate(-0.7 1080 445)" filter="url(#noteShadow)">
+    <rect x="1000" y="400" width="160" height="90" rx="3" fill="#FCE4EC" stroke="#C2255C" stroke-width="1.2" stroke-dasharray="5 3"/>
+    <path d="M1146 400 h14 v14 z" fill="#C2255C" opacity="0.55"/>
+    <text x="1080" y="436" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">顺丰物流</text>
+    <text x="1080" y="454" text-anchor="middle" font-size="11" fill="#868E96">[外部系统]</text>
+    <text x="1080" y="472" text-anchor="middle" font-size="11" fill="#868E96">运单与轨迹查询</text>
+  </g>
+
+  <!-- 图例 -->
+  <rect x="48" y="690" width="14" height="14" rx="2" fill="#FFF9DB" stroke="#B08C00" stroke-width="1.2"/>
+  <text x="70" y="701" font-size="10" fill="#868E96">用户 Person</text>
+  <rect x="170" y="690" width="14" height="14" rx="2" fill="#FFF3BF" stroke="#E8B004" stroke-width="1.2"/>
+  <text x="192" y="701" font-size="10" fill="#868E96">容器 Container</text>
+  <path d="M310 694 V704 A8 3 0 0 0 326 704 V694" fill="#D3F9D8" stroke="#5C940D" stroke-width="1.2"/>
+  <ellipse cx="318" cy="694" rx="8" ry="3" fill="#D3F9D8" stroke="#5C940D" stroke-width="1.2"/>
+  <text x="334" y="701" font-size="10" fill="#868E96">数据库 / 缓存</text>
+  <rect x="434" y="690" width="14" height="14" rx="2" fill="#FCE4EC" stroke="#C2255C" stroke-width="1.2" stroke-dasharray="3 2"/>
+  <text x="456" y="701" font-size="10" fill="#868E96">外部系统</text>
+  <line x1="560" y1="697" x2="592" y2="697" stroke="#868E96" stroke-width="1.5" marker-end="url(#arrS)"/>
+  <text x="600" y="701" font-size="10" fill="#868E96">调用（协议见标注）</text>
+  <line x1="710" y1="697" x2="742" y2="697" stroke="#AD1457" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="750" y="701" font-size="10" fill="#868E96">系统边界</text>
+</svg>

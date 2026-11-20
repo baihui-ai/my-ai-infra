@@ -20,6 +20,14 @@
 
 | 需求 | 标题 | 优先级 | 说明 |
 |---|---|---|---|
+| 990 | [内置图示源码、动画与评测](990-embedded-diagrams/BRIEF.md) | P1 | 规格：standard；本项目模板，283项回归、动画/工作台与分发通过；Java两组编译及MySQL各9/9；Windows保留未实机项，图示历史样本缺口如实记录。 |
 | 997 | [内置 Skill 只读与个人 Skill 独立存储](997-personal-skill-library/BRIEF.md) | P1 | 实现完成；226 项测试、浏览器及实际 npm 卸载重装验收通过。 |
 | 996 | [取消 Coding 工具时清理专属目录](996-tool-directory-cleanup/BRIEF.md) | P1 | 实现完成；231 项测试与浏览器回归通过，目录整体归档清理，保留 .agents 真源。 |
 | 995 | [统一内置资产初始化来源](995-unified-builtin-assets/BRIEF.md) | P1 | 实现与验证完成；全部内置资产使用当前包来源，个人定制保留，发布验收见发行记录。 |
+| 988 | [一周对话经验沉淀与去重](988-weekly-conversation-lessons/BRIEF.md) | P1 | 规格：standard；11月20日定时新增/细化6组，独立8例综合通过、284项回归/实际包通过；4份Codex规范与10项目覆盖，1项目保留定制，既有doctor提示及业务未验证项见验收记录。 |
+
+## 已取消
+
+| 需求 | 标题 | 优先级 | 说明 |
+|---|---|---|---|
+| 989 | [项目级文档同步](989-project-feishu-sync/BRIEF.md) | P1 | 用户取消飞书文档能力；本地文档改用项目自身模板。 |

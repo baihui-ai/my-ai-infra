@@ -1,0 +1,88 @@
+{
+  "repository": "https://github.com/fuzhengwei/xfg-ddd-skills",
+  "commit": "aca0123726500026f508245b7e7b6cf6575d1246",
+  "version": "2.2.4",
+  "license": "MIT (declared in upstream README and Skill; no standalone LICENSE file)",
+  "files": {
+    "UPSTREAM_SKILL.md": {
+      "upstreamPath": "SKILL.md",
+      "sha256": "e0cef448f66fae1fde190048ec1e7cf8b9ba561d56dea5092048e11b3102ce02"
+    },
+    "README.md": {
+      "upstreamPath": "README.md",
+      "sha256": "8ab4349394be82fb7a724e89d1f1c109f31c6af6ee0995ad1c739ef919e5b4e1"
+    },
+    "references/port-adapter.md": {
+      "upstreamPath": "references/port-adapter.md",
+      "sha256": "5d9570e1a5d077d2aed273d45ad514604aad2433c621b095d13b40a028a1f605"
+    },
+    "references/entity.md": {
+      "upstreamPath": "references/entity.md",
+      "sha256": "3f5350e6f06e422e0f8375440144a9d3d46685ccb07bf8c7d376e4e179615c0b"
+    },
+    "references/architecture.md": {
+      "upstreamPath": "references/architecture.md",
+      "sha256": "ee4fa20dfd0eee649bfddd3d966f8b3d9e117c1fc7c2923f90ef3b228cae528a"
+    },
+    "references/infrastructure-layer.md": {
+      "upstreamPath": "references/infrastructure-layer.md",
+      "sha256": "69f36dd30c545c8c18bc2212d34f0f253b9858393c89054672729db83947a5ce"
+    },
+    "references/domain-design-guide.md": {
+      "upstreamPath": "references/domain-design-guide.md",
+      "sha256": "438be5c916728fda5984186c2e246eab5fbae15110d8e56ea3d5ccb5f7ed9285"
+    },
+    "references/repository.md": {
+      "upstreamPath": "references/repository.md",
+      "sha256": "11923f0fb64e8d2b4acc794fc81b76cbcb51e7cd236c1a9c4a3802769ecc52c0"
+    },
+    "references/devops-deployment.md": {
+      "upstreamPath": "references/devops-deployment.md",
+      "sha256": "e9d32f2729f198ddef5856ec51029e9b18ed34ff4e8d754f0152a7fd549e3df7"
+    },
+    "references/value-object.md": {
+      "upstreamPath": "references/value-object.md",
+      "sha256": "892bebae3695d307efa692bc1e9a8bb0f12b929f31781586762f91be2ce0a313"
+    },
+    "references/trigger-layer.md": {
+      "upstreamPath": "references/trigger-layer.md",
+      "sha256": "5f768aadb965c343568b949695d6404d6ebe0d694489f59b2e6b422712cfbd92"
+    },
+    "references/aggregate.md": {
+      "upstreamPath": "references/aggregate.md",
+      "sha256": "1743dc26905bee0702f0a54a02b64d3914e380e16ea4385fb6f3f172c80aa753"
+    },
+    "references/infrastructure-patterns.md": {
+      "upstreamPath": "references/infrastructure-patterns.md",
+      "sha256": "b6849b159c9cb156230a0ad644edc119ff16db8b12c481fddd8495458abdda07"
+    },
+    "references/case-layer.md": {
+      "upstreamPath": "references/case-layer.md",
+      "sha256": "464b1ef8d5de60edb162139ea5117d9015bbb5f52a768a997256ae17b7054b94"
+    },
+    "references/domain-patterns.md": {
+      "upstreamPath": "references/domain-patterns.md",
+      "sha256": "fd93da803d0b8ec7ecc85fc8863db9466ddcf8759ee5f184f4233b5647ef22d1"
+    },
+    "references/docker-images.md": {
+      "upstreamPath": "references/docker-images.md",
+      "sha256": "07f12969afdb2a5cdb38e6e3ead820be4512915b5996ad3effebbee3ddcf5f2d"
+    },
+    "references/naming.md": {
+      "upstreamPath": "references/naming.md",
+      "sha256": "7ecb1b8560d0b9872715a4bf7cef956caa35cd522c0debbff1e1182a0f470ce2"
+    },
+    "references/project-structure.md": {
+      "upstreamPath": "references/project-structure.md",
+      "sha256": "fde7774fc8ae9ecc81fc6994fda84f657b4cd16fb910c3c822bfd63b675afe4e"
+    },
+    "references/domain-service.md": {
+      "upstreamPath": "references/domain-service.md",
+      "sha256": "167103abfe15d9fa2a2f615a8f238a3536a48a75156187412369d4eef6f9352e"
+    },
+    "scripts/create-ddd-project.sh": {
+      "upstreamPath": "scripts/create-ddd-project.sh",
+      "sha256": "c8da6f4a2b19d5757d711e896302968a9a1df996269f635a9208a6ad591ce35b"
+    }
+  }
+}

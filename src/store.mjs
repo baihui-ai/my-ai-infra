@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
 import { fileURLToPath } from 'node:url';
-import { files, hash, json, read, readJSON, safe, stat, write, locked } from './fs.mjs';
+import { files, hash, json, resource, read, readJSON, safe, stat, write, locked } from './fs.mjs';
 import { BUILTINS, SHORTCUT_SKILLS, NAMING_VERSION, REMOVED_SKILLS, canonicalName, definition, normalizeText } from './names.mjs';
 import { ASSET_ROOT, SKILL_SOURCE, BUNDLE, sourceRoots, derivedAgent, addFile, addLink, addExtensions, extensionCatalog, parseExtension, assetRelative, namePart, legacyAssetPath, pruneLegacyAssetDirectories } from './assets.mjs';
 import { hasRetiredPromptLibrary, retiredPrompts } from './retired-prompts.mjs';
@@ -206,7 +206,7 @@ async function refreshRuntimeAssets(home) {
     const currentFiles = await files(target);
     if (json(currentFiles) === json(sourceFiles)) {
       let equal = true;
-      for (const relative of sourceFiles) if (await read(source, relative) !== await read(target, relative)) { equal = false; break; }
+      for (const relative of sourceFiles) if (json(await resource(source, relative)) !== json(await resource(target, relative))) { equal = false; break; }
       if (equal) return;
     }
   }
@@ -214,7 +214,7 @@ async function refreshRuntimeAssets(home) {
   const backup = `backups/runtime-assets-${Date.now()}-${randomUUID()}`;
   let moved = false;
   try {
-    for (const relative of await files(source)) await write(home, `${staging}/${relative}`, await read(source, relative));
+    for (const relative of await files(source)) await putEntry(home, `${staging}/${relative}`, await resource(source, relative));
     if (await stat(target)) {
       await fs.mkdir(path.dirname(await safe(home, backup)), { recursive: true });
       await fs.rename(target, await safe(home, backup)); moved = true;
@@ -242,9 +242,11 @@ export async function setup(home, tools = ['codex'], toolHome = os.homedir(), sk
       const {sourceRoot:root,sourceName} = available.find(a=>a.name===skill);
       for (const relative of await files(path.join(root,sourceName))) {
         const target = `${SKILL_SOURCE}/${skill}/${relative}`;
-        let text = await read(root,`${sourceName}/${relative}`);
+        const entry = await resource(root,`${sourceName}/${relative}`);
+        let text = entry.text;
         if (['my-ai-infra', 'my-create-memory'].includes(skill) && relative === 'scripts/my-ai-infra.mjs') text = `#!/usr/bin/env node\nimport { pathToFileURL } from 'node:url';\nconst { main } = await import(pathToFileURL(${JSON.stringify(path.join(home, 'runtime/src/cli.mjs'))}));\nmain(['--home', ${JSON.stringify(home)}, ...process.argv.slice(2)]).catch(e => { console.error(e.message); process.exitCode = e.exitCode || 1; });\n`;
-        addFile(desired,target,text);
+        if (entry.kind === 'binary') desired.set(target, entry);
+        else addFile(desired,target,text);
         for (const tool of tools.filter(tool => tool !== 'codex' && tool !== 'mcode')) addLink(desired,`${GLOBAL_TOOLS[tool]}/${skill}/${relative}`,target);
       }
       // MiniMax Code rejects a symlinked SKILL.md; its entry links the canonical Skill directory.
@@ -270,10 +272,10 @@ export async function setup(home, tools = ['codex'], toolHome = os.homedir(), sk
     addExtensions(desired,extensions,tools,true);
     const migrated = [];
     for (const [target, output] of desired) {
-      const before = await snapshot(toolHome,target), after = output.kind === 'file' ? {kind:'file',text:output.text} : {kind:'symlink',target:output.target};
-      const digest = entry => entry?.kind === 'file' ? hash(entry.text) : entry?.kind === 'symlink' ? hash(entry.target) : null;
+      const before = await snapshot(toolHome,target), after = output.kind === 'binary' ? output : output.kind === 'file' ? {kind:'file',text:output.text} : {kind:'symlink',target:output.target};
+      const digest = entry => entry?.kind === 'binary' ? entry.hash : entry?.kind === 'file' ? hash(entry.text) : entry?.kind === 'symlink' ? hash(entry.target) : null;
       const sameFile = before?.kind === 'file' && output.kind === 'symlink' && before.text === desired.get(output.source)?.text;
-      if (before && !retired.reset.has(target) && !equalEntry(before,after) && !sameFile && digest(before) !== previous[target]) throw Error(`Global ${target.includes('/agents/') ? 'Agent' : 'asset'} conflict: ${target}`);
+      if (before && !retired.reset.has(target) && !equalEntry(before,after) && !(before?.kind === 'binary' && after?.kind === 'binary' && before.hash === after.hash) && !sameFile && digest(before) !== previous[target]) throw Error(`Global ${target.includes('/agents/') ? 'Agent' : 'asset'} conflict: ${target}`);
       outputs.push({target,before,after}); next[target] = digest(after);
       if (output.kind === 'file') {
         const legacy = legacyAssetPath(target);
@@ -314,7 +316,7 @@ export async function setup(home, tools = ['codex'], toolHome = os.homedir(), sk
     }
     outputs.push(...migrated, ...retired.actions.map(action => ({ ...action, target: action.path })));
     for (const target of Object.keys(next)) if (retired.contains(target)) delete next[target];
-    const changed = outputs.filter(item => !equalEntry(item.before, item.after));
+    const changed = outputs.filter(item => !equalEntry(item.before, item.after) && !(item.before?.kind === 'binary' && item.after?.kind === 'binary' && item.before.hash === item.after.hash));
     const backup = `backups/global-${Date.now()}-${randomUUID()}`;
     if (changed.length) await write(home, `${backup}/journal.json`, json(changed));
     const recovery = await safe(home, backup);

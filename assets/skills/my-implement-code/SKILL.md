@@ -24,6 +24,18 @@ metadata:
 
 > 下文为默认路径，以项目 `mai-specs/FEATURE_LAYOUT.json` 为准。
 
+## Java 开发规范
+
+本次涉及 Java 代码、Java 接口设计或数据访问时，加载内置 [java-dev](../java-dev/SKILL.md) 的本项目适配，读取并执行 [java-dev 内置规范](../my-create-feature/references/java-dev.md)中本阶段适用的要求，包含用户约定的类型、职责、复用与 SQL 索引检查；非 Java 任务跳过。评审记录实际证据与例外，不能将规范已加载等同于检查通过。
+
+## 功能生效与恢复
+
+遵循[功能生效与恢复开关约定](../my-create-feature/references/feature-activation.md)：默认上线即按需求生效，新增开关须有明确需求或可执行的快速恢复依据；核对实际配置和完整调用链，避免发布后仍默认关闭。按本阶段记录设计依据、实现或验证证据与缺口。
+
+## 按场景核对交付经验
+
+本次涉及异常/告警、异步与多存储结果、参考行为对齐、规格提交范围、重复确认或复杂阅读/弹层交互时，按[交付经验](../my-create-feature/references/delivery-lessons.md)读取对应小节并记录本阶段适用的决策或证据；已有覆盖直接引用，不为无关主题追加任务。
+
 ## 个人偏好记忆
 
 若已安装 my-create-memory，按[个人记忆接入约定](../my-create-memory/references/sdd-integration.md)在开始时读取当前场景的已生效偏好。只有明确长期偏好、修订或有复用价值的用户纠正才条件触发抽取；默认异步委派，主任务继续，同一证据不重复派发。已作为子任务运行时仅回传证据，由主 Agent 统一委派，不递归派发。无新证据不生成记忆；收尾核对实际落盘结果。

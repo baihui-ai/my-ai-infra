@@ -4,6 +4,10 @@
     "codex"
   ],
   "skills": [
+    "my-auto-design",
+    "my-auto-feature",
+    "my-init-repo-memory",
+    "my-simple-feature",
     "my-create-feature",
     "my-create-prd",
     "my-create-design",
@@ -11,6 +15,13 @@
     "my-create-test-plan",
     "my-implement-code",
     "my-review-code",
-    "my-ai-infra"
+    "my-render-design-html",
+    "java-dev",
+    "my-analyze-debt",
+    "my-create-memory",
+    "my-create-worktree",
+    "my-tech-diagram",
+    "my-ai-infra",
+    "xfg-ddd-skills"
   ]
 }

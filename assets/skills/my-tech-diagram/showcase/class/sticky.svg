@@ -1,0 +1,100 @@
+<svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif">
+  <defs>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.1"/>
+    </filter>
+    <marker id="gen" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="14" markerHeight="14" orient="auto">
+      <path d="M 1 1 L 11 6 L 1 11 z" fill="#FAFAFA" stroke="#ADB5BD" stroke-width="1.2"/>
+    </marker>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1200" height="675" fill="#FAFAFA"/>
+
+  <!-- 标题 -->
+  <text x="60" y="58" font-size="22" font-weight="600" fill="#343A40">Order 类图</text>
+  <text x="60" y="80" font-size="11" fill="#868E96">UML Class Diagram · Sticky Notes</text>
+
+  <!-- ========== Order（核心类便签，绿色） ========== -->
+  <g transform="rotate(-0.8 190 195)">
+    <rect x="80" y="120" width="220" height="150" rx="3" fill="#D3F9D8" stroke="#5C940D" stroke-width="1.2" filter="url(#sh)"/>
+    <path d="M286 120 h14 v14 z" fill="#5C940D" opacity="0.55"/>
+    <text x="190" y="134" text-anchor="middle" font-size="10" fill="#868E96">核心类</text>
+    <text x="190" y="150" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">Order</text>
+    <line x1="80" y1="156" x2="300" y2="156" stroke="#5C940D" stroke-width="1"/>
+    <text x="96" y="178" font-size="12" fill="#343A40">+ id</text>
+    <text x="96" y="200" font-size="12" fill="#343A40">+ status</text>
+    <text x="96" y="222" font-size="12" fill="#343A40">+ totalAmount</text>
+    <line x1="80" y1="232" x2="300" y2="232" stroke="#5C940D" stroke-width="1"/>
+    <text x="96" y="252" font-size="12" fill="#343A40">+ pay()</text>
+    <text x="96" y="266" font-size="12" fill="#343A40">+ cancel()</text>
+  </g>
+
+  <!-- ========== OrderLine（黄色便签） ========== -->
+  <g transform="rotate(0.7 630 184)">
+    <rect x="520" y="140" width="220" height="88" rx="3" fill="#FFF3BF" stroke="#E8B004" stroke-width="1.2" filter="url(#sh)"/>
+    <path d="M726 140 h14 v14 z" fill="#E8B004" opacity="0.55"/>
+    <text x="630" y="153" text-anchor="middle" font-size="10" fill="#868E96">类</text>
+    <text x="630" y="169" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">OrderLine</text>
+    <line x1="520" y1="176" x2="740" y2="176" stroke="#E8B004" stroke-width="1"/>
+    <text x="536" y="198" font-size="12" fill="#343A40">+ quantity</text>
+    <text x="536" y="220" font-size="12" fill="#343A40">+ unitPrice</text>
+  </g>
+
+  <!-- ========== Product（黄色便签） ========== -->
+  <g transform="rotate(-0.6 990 184)">
+    <rect x="880" y="140" width="220" height="88" rx="3" fill="#FFF3BF" stroke="#E8B004" stroke-width="1.2" filter="url(#sh)"/>
+    <path d="M1086 140 h14 v14 z" fill="#E8B004" opacity="0.55"/>
+    <text x="990" y="153" text-anchor="middle" font-size="10" fill="#868E96">类</text>
+    <text x="990" y="169" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">Product</text>
+    <line x1="880" y1="176" x2="1100" y2="176" stroke="#E8B004" stroke-width="1"/>
+    <text x="896" y="198" font-size="12" fill="#343A40">+ name</text>
+    <text x="896" y="220" font-size="12" fill="#343A40">+ price</text>
+  </g>
+
+  <!-- ========== Customer（黄色便签） ========== -->
+  <g transform="rotate(0.8 190 448)">
+    <rect x="80" y="420" width="220" height="56" rx="3" fill="#FFF3BF" stroke="#E8B004" stroke-width="1.2" filter="url(#sh)"/>
+    <path d="M286 420 h14 v14 z" fill="#E8B004" opacity="0.55"/>
+    <text x="190" y="441" text-anchor="middle" font-size="10" fill="#868E96">类（父类）</text>
+    <text x="190" y="462" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">Customer</text>
+  </g>
+
+  <!-- ========== VIPCustomer（浅黄便签，子类） ========== -->
+  <g transform="rotate(-0.7 190 584)">
+    <rect x="80" y="556" width="220" height="56" rx="3" fill="#FFF9DB" stroke="#B08C00" stroke-width="1.2" filter="url(#sh)"/>
+    <path d="M286 556 h14 v14 z" fill="#B08C00" opacity="0.55"/>
+    <text x="190" y="577" text-anchor="middle" font-size="10" fill="#868E96">类（子类）</text>
+    <text x="190" y="598" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">VIPCustomer</text>
+  </g>
+
+  <!-- ========== 关系 ========== -->
+  <!-- 组合：Order ◆—— OrderLine（实心菱形在整体 Order 端） -->
+  <line x1="318" y1="184" x2="518" y2="184" stroke="#ADB5BD" stroke-width="1.5"/>
+  <polygon points="300,184 310,177 320,184 310,191" fill="#343A40"/>
+  <text x="330" y="172" font-size="11" fill="#868E96">1</text>
+  <text x="512" y="172" text-anchor="end" font-size="11" fill="#868E96">1..*</text>
+
+  <!-- 关联：OrderLine —— Product（Product 端多重性 1） -->
+  <line x1="742" y1="184" x2="878" y2="184" stroke="#ADB5BD" stroke-width="1.5"/>
+  <text x="872" y="172" text-anchor="end" font-size="11" fill="#868E96">1</text>
+
+  <!-- 关联：Order —— Customer（Customer 端多重性 1） -->
+  <line x1="190" y1="272" x2="190" y2="418" stroke="#ADB5BD" stroke-width="1.5"/>
+  <text x="202" y="412" font-size="11" fill="#868E96">1</text>
+
+  <!-- 继承：VIPCustomer —▷ Customer（空心三角指向父类） -->
+  <line x1="190" y1="554" x2="190" y2="478" stroke="#ADB5BD" stroke-width="1.5" marker-end="url(#gen)"/>
+
+  <!-- ========== 图例（分组标题条样式） ========== -->
+  <g>
+    <rect x="760" y="560" width="380" height="76" rx="4" fill="#FCE4EC" stroke="#AD1457" stroke-width="1"/>
+    <polygon points="782,582 792,575 802,582 792,589" fill="#343A40"/>
+    <line x1="806" y1="582" x2="846" y2="582" stroke="#ADB5BD" stroke-width="1.5"/>
+    <text x="856" y="586" font-size="11" fill="#880E4F">组合 Composition（菱形在整体端）</text>
+    <line x1="782" y1="614" x2="826" y2="614" stroke="#ADB5BD" stroke-width="1.5" marker-end="url(#gen)"/>
+    <text x="856" y="618" font-size="11" fill="#880E4F">继承 Generalization（三角指向父类）</text>
+    <line x1="1020" y1="582" x2="1060" y2="582" stroke="#ADB5BD" stroke-width="1.5"/>
+    <text x="1068" y="586" font-size="11" fill="#880E4F">关联</text>
+  </g>
+</svg>

@@ -35,3 +35,7 @@ Logo 由内置 imagegen 于 2026-10-13 生成；项目内保存透明 PNG，来�
 2026-10-14，负责人提供标题为 “Cog Train — Originkit” 的 React/WebGL 代码片段作为视觉与运动参考。原始输入 SHA-256：`4883d59879e50b114741cbd904e6081b4a53009dc56d5702d9d7941498a0e549`。
 
 [web/cog-train.js](web/cog-train.js) 使用原生 Canvas 2D 实现，参考共同齿距、齿轮接触相位、反向转动和指针速度反馈机制；重新实现轮廓路径缓存、浅色语义配色、阅读区域、响应式布局与动效生命周期。分发内容未包含原始 React 组件或 GLSL 源码，也未引入相应运行时依赖。此登记保留参考来源，不对输入片段的上游许可作推定。
+
+## xfg-ddd-skills
+
+内置 [fuzhengwei/xfg-ddd-skills](https://github.com/fuzhengwei/xfg-ddd-skills)，版本 2.2.4，固定提交 `aca0123726500026f508245b7e7b6cf6575d1246`。上游 README 声明 MIT © 小傅哥 bugstack.cn，Skill 头部声明 MIT；该快照未含独立 LICENSE 文件，保留原声明，未自行补造上游许可正文。原始入口、README、17份参考和建项脚本完整保存在 [内置目录](assets/skills/xfg-ddd-skills/)，逐文件指纹见 UPSTREAM.json；本项目增加任务入口和适配规则。

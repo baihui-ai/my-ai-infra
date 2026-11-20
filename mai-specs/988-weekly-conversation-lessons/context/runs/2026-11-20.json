@@ -1,0 +1,115 @@
+{
+  "date": "2026-11-20",
+  "kind": "manual-catch-up",
+  "window": {
+    "start": "2026-11-13T01:30:11.000Z",
+    "end": "2026-11-20T01:30:11.000Z",
+    "timezone": "Asia/Shanghai"
+  },
+  "regularQuotaRemainingPercent": 100,
+  "personalLimitIgnored": true,
+  "activeListComplete": true,
+  "archivedListComplete": true,
+  "candidateThreadCount": 19,
+  "reread": [
+    {
+      "threadId": "01a1d273-04e9-7873-9c83-bd3fba5ac3f9",
+      "pages": 1,
+      "turnsRead": 10
+    },
+    {
+      "threadId": "01a1e862-3b02-7743-8486-360ba0b87ff6",
+      "pages": 3,
+      "turnsRead": 30
+    },
+    {
+      "threadId": "01a1f27e-97fe-7ad2-87b8-be4773f27258",
+      "pages": 1,
+      "turnsRead": 6
+    },
+    {
+      "threadId": "01a17bcb-5d5e-7560-a0d8-129bad5ec8fd",
+      "pages": 17,
+      "turnsRead": 170
+    },
+    {
+      "threadId": "01a1f1c5-ad19-7fd1-9e5a-0748b3d1815b",
+      "pages": 1,
+      "turnsRead": 1
+    },
+    {
+      "threadId": "01a1e816-7588-72d1-9713-cce6d13093b4",
+      "pages": 1,
+      "turnsRead": 2
+    },
+    {
+      "threadId": "01a1774e-d413-7342-81cf-b75f238fd1cd",
+      "pages": 1,
+      "turnsRead": 10
+    },
+    {
+      "threadId": "01a1e8c0-2a86-76f1-87e3-7f463550111e",
+      "pages": 1,
+      "turnsRead": 2
+    }
+  ],
+  "method": "在已审核周数据和稳定key基础上复读11月18日水位之后有更新的8会话，分页读取真实消息；回合开始时间不等于续发消息时间，按上下文与证据去重。不保存原文/凭据。",
+  "lessons": [
+    {
+      "key": "sql-business-computation-boundary",
+      "sources": [
+        {
+          "threadId": "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "turnId": "01a1f276-fb30-7863-b1d3-63f9cdaca761",
+          "messageId": "01a1f278-fd33-7880-b4ec-68ef96de11c9"
+        }
+      ],
+      "target": "assets/skills/my-create-feature/references/java-dev.md",
+      "status": "implemented-validated-synced",
+      "validation": "test/2026-11-20-RUN_REPORT.md"
+    },
+    {
+      "key": "default-no-query-row-locks",
+      "sources": [
+        {
+          "threadId": "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "turnId": "01a1f276-fb30-7863-b1d3-63f9cdaca761",
+          "messageId": "01a1f286-3c46-7e70-b42a-10a20df2eaa8"
+        }
+      ],
+      "target": "assets/skills/my-create-feature/references/java-dev.md",
+      "status": "implemented-validated-synced",
+      "validation": "test/2026-11-20-RUN_REPORT.md"
+    },
+    {
+      "key": "bounded-task-replay-and-empty-payload",
+      "sources": [
+        {
+          "threadId": "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "turnId": "01a1f688-db5f-7420-a166-5e3f00035713",
+          "messageId": "01a1f688-dbf0-7fc1-972a-5159daee6c51"
+        },
+        {
+          "threadId": "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "turnId": "01a1f631-c0e0-7700-86f8-58d556dcd109",
+          "messageId": "01a1f631-c161-70d2-9a7b-c8b2d907f839"
+        }
+      ],
+      "target": "assets/skills/my-create-feature/references/delivery-lessons.md",
+      "status": "implemented-validated-synced",
+      "validation": "test/2026-11-20-RUN_REPORT.md"
+    }
+  ],
+  "deduplicated": [
+    "avoid-unnecessary-transactions",
+    "sql-write-and-transaction-budget",
+    "reference-protected-scope",
+    "delivery-slice-inventory",
+    "async-observable-result"
+  ],
+  "notGeneralized": [
+    "某项目ID倒序作为全局默认",
+    "账户设置及日志片段",
+    "非开发书籍/创作调研请求"
+  ]
+}

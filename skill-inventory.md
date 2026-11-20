@@ -147,3 +147,9 @@ chat 的 core 表达团队稳定必装，addon 表达可装卸自研能力，ven
 ## 个人记忆 MVP
 
 新增 [my-create-memory](assets/skills/my-create-memory/SKILL.md) 作为辅助能力，默认初始化安装，已有项目需显式选中。以宁缺毋滥为准入原则，7 个 SDD Skill 按条件委派；记忆正文保存在个人库，每个范围一个 memory.md。详见[个人记忆指南](docs/memory.md)。
+
+## 内置文档、Java 与图示源码
+
+`my-tech-diagram`、`java-dev` 完整源码归 assets/skills 统一维护并随包安装。图示的规范、样图、showcase、动画脚本及评测均为本仓库资产；Java 阶段读取内置规范适配，文档使用本项目阶段规范与模板。默认初始化包含这些能力，固定清单需显式选择；来源与类别仍按现有资产模型显示。图示浏览器评测运行 `npm run test:diagrams`。
+
+`xfg-ddd-skills` 的完整参考、原始入口和建项脚本内置于 `assets/skills/xfg-ddd-skills/`，通过 java-dev 和 SDD Java 约定按需加载。新建 Java 项目默认采用该架构并先设计后实现；存量项目学习适用代码规范，保留已有架构。安装不会执行建项或部署脚本。

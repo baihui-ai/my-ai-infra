@@ -81,3 +81,9 @@ CLI 与 Web 的资产清单、编辑界面包含所有类型。Web 新建按钮�
 - `plan` 和 `doctor` 只读；迁移在显式安装、同步或升级时执行。
 
 阶段共用协议及类型定义位于 [my-create-feature/references](skills/my-create-feature/references/stage-contracts.md)。简版 PRD/设计模板随所属 Skill 分发，只有一份源；项目 `_templates/simple/` 可覆盖，已存在产物增量维护。
+
+## 内置文档与绘图源码
+
+`my-tech-diagram`、`java-dev` 的完整源码、参考和评测均保存在本目录，项目统一管理，不依赖维护者主目录。图示 PNG/JPG 等内置资源按原始字节参与计划 revision、安装备份、回滚和冲突策略；merge 保留本地图片并保存包内候选，replace 备份后恢复包内容。个人资产导入与正文编辑仍限文本目录，避免在现有编辑 API 中错误解码二进制文件。
+
+`xfg-ddd-skills` 的完整参考、原始入口和建项脚本内置于 `assets/skills/xfg-ddd-skills/`，通过 java-dev 和 SDD Java 约定按需加载。新建 Java 项目默认采用该架构并先设计后实现；存量项目学习适用代码规范，保留已有架构。安装不会执行建项或部署脚本。

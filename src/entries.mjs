@@ -1,20 +1,28 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
-import { read, safe, stat, write, json } from './fs.mjs';
+import { hash, safe, stat, write, json } from './fs.mjs';
 
 export async function snapshot(root, relative) {
   const file = await safe(root, relative, { leafLink: true }), info = await stat(file);
   if (!info) return null;
   if (info.isSymbolicLink()) return { kind: 'symlink', target: await fs.readlink(file) };
   if (!info.isFile()) throw Error(`Expected a file: ${file}`);
-  return { kind: 'file', text: await read(root, relative) };
+  const bytes = await fs.readFile(file), text = bytes.toString('utf8');
+  return Buffer.from(text).equals(bytes) ? { kind: 'file', text } : { kind: 'binary', hash: hash(bytes) };
 }
 export const equalEntry = (a, b) => json(a) === json(b);
 
 export async function putEntry(root, relative, entry, { restore = false } = {}) {
   const file = await safe(root, relative, { leafLink: true });
   if (entry === null) { if (await stat(file)) await fs.unlink(file); return; }
+  if (entry.kind === 'binary') {
+    if (typeof entry.data !== 'string') throw Error('Binary installation requires data');
+    const bytes = Buffer.from(entry.data, 'base64');
+    if (hash(bytes) !== entry.hash) throw Error('Binary resource digest mismatch');
+    if ((await stat(file))?.isSymbolicLink()) await fs.unlink(file);
+    await write(root, relative, bytes); return;
+  }
   if (entry.kind === 'file') {
     if ((await stat(file))?.isSymbolicLink()) await fs.unlink(file);
     await write(root, relative, entry.text); return;

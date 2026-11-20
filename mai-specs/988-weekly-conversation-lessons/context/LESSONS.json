@@ -1,0 +1,693 @@
+{
+  "date": "2026-11-17",
+  "window": {
+    "start": 1794303587,
+    "end": 1794908387
+  },
+  "lessons": [
+    {
+      "key": "failure-retry-alerts",
+      "sources": [
+        [
+          "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "01a1e8b6-36d2-7660-80e6-9c9bff96de35"
+        ],
+        [
+          "01a1cd3b-ff24-7591-b08a-2c05930e1d7c",
+          "01a1d21f-3291-7df1-9018-b4314dbabff3"
+        ],
+        [
+          "01a1cd3b-ff24-7591-b08a-2c05930e1d7c",
+          "01a1e348-2722-7ed1-9fa6-31f7e372ff44"
+        ]
+      ],
+      "target": "assets/skills/my-create-feature/references/delivery-lessons.md",
+      "status": "implemented-validated-synced",
+      "validation": "test/ACCEPTANCE_REPORT.md"
+    },
+    {
+      "key": "reference-protected-scope",
+      "sources": [
+        [
+          "01a1cd3b-ff24-7591-b08a-2c05930e1d7c",
+          "01a1e371-d0bd-7150-bb84-80bc0275c275"
+        ],
+        [
+          "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "01a1c502-4546-7382-bfad-6c113c8fb62b"
+        ]
+      ],
+      "target": "assets/skills/my-create-feature/references/delivery-lessons.md",
+      "status": "implemented-validated-synced",
+      "validation": "test/ACCEPTANCE_REPORT.md"
+    },
+    {
+      "key": "async-observable-result",
+      "sources": [
+        [
+          "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "01a1e867-16a2-7401-a238-7bf4cb38f0c0"
+        ],
+        [
+          "01a1aaad-7d82-7232-9260-11a356662877",
+          "01a1c98d-7589-78d1-be1c-c1f67e080455"
+        ]
+      ],
+      "target": "assets/skills/my-create-feature/references/delivery-lessons.md",
+      "status": "implemented-validated-synced",
+      "validation": "test/ACCEPTANCE_REPORT.md"
+    },
+    {
+      "key": "project-spec-git-policy",
+      "sources": [
+        [
+          "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "01a1e895-e4c8-7173-a469-9d2588fc15ac"
+        ],
+        [
+          "01a1e840-da56-7450-a9e7-a0d115640e90",
+          "01a1e88d-e07a-7582-b590-cea2a5f2dafa"
+        ]
+      ],
+      "target": "assets/skills/my-create-feature/references/delivery-lessons.md",
+      "status": "implemented-validated-synced",
+      "validation": "test/ACCEPTANCE_REPORT.md"
+    },
+    {
+      "key": "avoid-reasking-known-answer",
+      "sources": [
+        [
+          "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "01a1c4f4-9d06-7df1-bd44-33c48a20ad8f"
+        ]
+      ],
+      "target": "assets/skills/my-create-feature/references/delivery-lessons.md",
+      "status": "implemented-validated-synced",
+      "validation": "test/ACCEPTANCE_REPORT.md"
+    },
+    {
+      "key": "real-container-interaction",
+      "sources": [
+        [
+          "01a1e714-3de8-74c3-b76a-5769fe166aea",
+          "01a1e7e6-dfb9-77a0-8aba-212908179db9"
+        ],
+        [
+          "01a1e804-0b0c-7830-b39b-fa4b9db7f9b4",
+          "01a1e81f-4f17-7f12-88a2-505b1d423e2e"
+        ],
+        [
+          "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "01a1e8de-fbf3-70b3-bcfe-61ab1d0794c7"
+        ]
+      ],
+      "target": "assets/skills/my-create-feature/references/delivery-lessons.md",
+      "status": "implemented-validated-synced",
+      "validation": "test/ACCEPTANCE_REPORT.md"
+    },
+    {
+      "key": "sql-write-and-transaction-budget",
+      "sources": [
+        [
+          "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "01a1ec1c-f70e-7783-b58a-e3c4af8cf8b9"
+        ],
+        [
+          "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "01a1ec69-0b13-7eb3-8812-b99310a0560a"
+        ]
+      ],
+      "target": "assets/skills/my-create-feature/references/java-dev.md",
+      "status": "implemented-validated-synced",
+      "validation": "test/2026-11-18-RUN_REPORT.md",
+      "date": "2026-11-18"
+    },
+    {
+      "key": "safe-success-retention",
+      "sources": [
+        [
+          "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "01a1ec81-83be-7482-bfea-5d3a8e63cd84"
+        ]
+      ],
+      "target": "assets/skills/my-create-feature/references/delivery-lessons.md",
+      "status": "implemented-validated-synced",
+      "validation": "test/2026-11-18-RUN_REPORT.md",
+      "date": "2026-11-18"
+    },
+    {
+      "key": "delivery-slice-inventory",
+      "sources": [
+        [
+          "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "01a1ed4e-b23c-72b0-874e-1cfe091a477f"
+        ],
+        [
+          "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "01a1ed4f-f6ce-7b02-ad70-ab2ad68a6a8e"
+        ]
+      ],
+      "target": "assets/skills/my-create-feature/references/delivery-lessons.md",
+      "status": "implemented-validated-synced",
+      "validation": "test/2026-11-18-RUN_REPORT.md",
+      "date": "2026-11-18"
+    },
+    {
+      "key": "avoid-unnecessary-transactions",
+      "date": "2026-11-19",
+      "sourceDescription": "本会话用户明确要求：能不开启事务就不开启",
+      "target": "assets/skills/my-create-feature/references/java-dev.md",
+      "status": "implemented-validated-synced",
+      "validation": "test/2026-11-19-TRANSACTION_RULE.md"
+    },
+    {
+      "key": "sql-business-computation-boundary",
+      "sources": [
+        {
+          "threadId": "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "turnId": "01a1f276-fb30-7863-b1d3-63f9cdaca761",
+          "messageId": "01a1f278-fd33-7880-b4ec-68ef96de11c9"
+        }
+      ],
+      "target": "assets/skills/my-create-feature/references/java-dev.md",
+      "status": "implemented-validated-synced",
+      "validation": "test/2026-11-20-RUN_REPORT.md",
+      "date": "2026-11-20"
+    },
+    {
+      "key": "default-no-query-row-locks",
+      "sources": [
+        {
+          "threadId": "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "turnId": "01a1f276-fb30-7863-b1d3-63f9cdaca761",
+          "messageId": "01a1f286-3c46-7e70-b42a-10a20df2eaa8"
+        }
+      ],
+      "target": "assets/skills/my-create-feature/references/java-dev.md",
+      "status": "implemented-validated-synced",
+      "validation": "test/2026-11-20-RUN_REPORT.md",
+      "date": "2026-11-20"
+    },
+    {
+      "key": "bounded-task-replay-and-empty-payload",
+      "sources": [
+        {
+          "threadId": "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "turnId": "01a1f688-db5f-7420-a166-5e3f00035713",
+          "messageId": "01a1f688-dbf0-7fc1-972a-5159daee6c51"
+        },
+        {
+          "threadId": "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "turnId": "01a1f631-c0e0-7700-86f8-58d556dcd109",
+          "messageId": "01a1f631-c161-70d2-9a7b-c8b2d907f839"
+        }
+      ],
+      "target": "assets/skills/my-create-feature/references/delivery-lessons.md",
+      "status": "implemented-validated-synced",
+      "validation": "test/2026-11-20-RUN_REPORT.md",
+      "date": "2026-11-20"
+    },
+    {
+      "key": "typed-contract-http-wrapper",
+      "sources": [
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7b7-ddea-7d41-bd4b-d976592b4587",
+          "messageId": "01a1f7bd-c8cb-7fb0-9753-8f72e9f2883d"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7b7-ddea-7d41-bd4b-d976592b4587",
+          "messageId": "01a1f7c4-2ce1-7220-abf2-7d5aa950e25f"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7ad-80fb-7fe2-9f1d-e0a4cd4082cb",
+          "messageId": "01a1f7b0-316e-7893-b5ff-2a66c0162f85"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7a3-857d-7d72-baf4-505c4cc74bd9",
+          "messageId": "01a1f7a3-f5c1-7d21-b72f-e06885a6058b"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7a3-857d-7d72-baf4-505c4cc74bd9",
+          "messageId": "01a1f7a6-ecbc-7c51-9315-9d5bcd463708"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7a3-857d-7d72-baf4-505c4cc74bd9",
+          "messageId": "01a1f7a7-79c0-7121-8b06-d2300861a1db"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7a3-857d-7d72-baf4-505c4cc74bd9",
+          "messageId": "01a1f7a8-b839-7432-9102-e5144f52bf4e"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7a3-857d-7d72-baf4-505c4cc74bd9",
+          "messageId": "01a1f7a9-1d89-7403-839e-201c939e8c8b"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7a3-857d-7d72-baf4-505c4cc74bd9",
+          "messageId": "01a1f7a9-fe3a-7a52-a145-e4d44699783f"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7a3-857d-7d72-baf4-505c4cc74bd9",
+          "messageId": "01a1f7ac-cdad-7850-827f-ab94861e7bfa"
+        }
+      ],
+      "status": "implemented-validated-synced-with-customizations",
+      "validation": "test/2026-11-20-SCHEDULED_REPORT.md"
+    },
+    {
+      "key": "repository-boundary-and-single-table-write",
+      "sources": [
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f7e6-6002-7970-90fb-8fe41a7eae9c"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f7e8-92b6-7741-b38a-a53276d3e04a"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f7e8-c68c-7b01-891c-c8c3196d2b4c"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f7e9-6df5-75f0-a7cc-ec021c53bc27"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f7ed-1481-76b1-bc86-f44d05ca0e74"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f7ed-9b66-7e82-bedf-67155fdba6bc"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f7ed-ce1e-74b3-90b6-346120d49bbe"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f7f0-197c-74e2-8d32-17c8f657c4d9"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f7f0-ca4b-70d2-8a74-712c90f14378"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f7fa-a771-78a2-9c43-1335add8e434"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f7fe-c4b6-7d71-b253-f31c2003f41c"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f7ff-83e2-7951-aaf9-345bf0db0bf3"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f800-3122-7720-8619-f86ecd00549b"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f807-4272-7b20-b4bd-59b492eb1486"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f813-b7b2-78b3-9560-498ada645f0f"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f814-21a9-7172-b45f-a4e4617192f2"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f828-8c4f-7431-b0e3-6257af6e4f6f"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f77a-3dfe-79b0-8056-2d20196efab7",
+          "messageId": "01a1f77b-6338-7942-8022-c212f6b0bf47"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f77a-3dfe-79b0-8056-2d20196efab7",
+          "messageId": "01a1f77c-b69e-7aa3-b2a4-5b84aed82941"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f77a-3dfe-79b0-8056-2d20196efab7",
+          "messageId": "01a1f77d-3c09-7d01-8ad3-1cd2da0e15a5"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f77a-3dfe-79b0-8056-2d20196efab7",
+          "messageId": "01a1f780-a4d0-76f3-ac2b-e61421863a64"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f77a-3dfe-79b0-8056-2d20196efab7",
+          "messageId": "01a1f782-14a2-7b71-9547-c0487c44e1a3"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f77a-3dfe-79b0-8056-2d20196efab7",
+          "messageId": "01a1f797-9db2-7f03-a506-c462a1504787"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f77a-3dfe-79b0-8056-2d20196efab7",
+          "messageId": "01a1f798-0697-7551-a25b-057bee95794f"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f774-a3b7-7d50-af98-40c2466ed1ce",
+          "messageId": "01a1f774-a4df-7793-9eb2-49989af69abe"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f774-a3b7-7d50-af98-40c2466ed1ce",
+          "messageId": "01a1f776-56a0-7f50-b214-1f3de91fba0d"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f774-a3b7-7d50-af98-40c2466ed1ce",
+          "messageId": "01a1f777-a270-7113-9b15-de014641bed0"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f774-a3b7-7d50-af98-40c2466ed1ce",
+          "messageId": "01a1f778-37c2-7e13-b403-d9b146d14e81"
+        }
+      ],
+      "status": "implemented-validated-synced-with-customizations",
+      "validation": "test/2026-11-20-SCHEDULED_REPORT.md"
+    },
+    {
+      "key": "method-transaction-proxy-existing-manager",
+      "sources": [
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f7e6-6002-7970-90fb-8fe41a7eae9c"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f7e8-92b6-7741-b38a-a53276d3e04a"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f7e8-c68c-7b01-891c-c8c3196d2b4c"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f7e9-6df5-75f0-a7cc-ec021c53bc27"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f7ed-1481-76b1-bc86-f44d05ca0e74"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f7ed-9b66-7e82-bedf-67155fdba6bc"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f7ed-ce1e-74b3-90b6-346120d49bbe"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f7f0-197c-74e2-8d32-17c8f657c4d9"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f7f0-ca4b-70d2-8a74-712c90f14378"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f7fa-a771-78a2-9c43-1335add8e434"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f7fe-c4b6-7d71-b253-f31c2003f41c"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f7ff-83e2-7951-aaf9-345bf0db0bf3"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f800-3122-7720-8619-f86ecd00549b"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f807-4272-7b20-b4bd-59b492eb1486"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f813-b7b2-78b3-9560-498ada645f0f"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f814-21a9-7172-b45f-a4e4617192f2"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7db-4809-7242-92cb-1530d4edfbaa",
+          "messageId": "01a1f828-8c4f-7431-b0e3-6257af6e4f6f"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f762-c659-7732-acf0-9d4a29ae5cfc",
+          "messageId": "01a1f762-c7e5-7d23-abef-46c170e52b7a"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f762-c659-7732-acf0-9d4a29ae5cfc",
+          "messageId": "01a1f763-51f1-7b71-973c-7a4650ab1503"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f762-c659-7732-acf0-9d4a29ae5cfc",
+          "messageId": "01a1f763-7e0e-7573-9d54-0872ab3eb83a"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f762-c659-7732-acf0-9d4a29ae5cfc",
+          "messageId": "01a1f764-40de-7f93-8526-790a788cef45"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f762-c659-7732-acf0-9d4a29ae5cfc",
+          "messageId": "01a1f765-51b7-7f12-be58-effd73432cbc"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f762-c659-7732-acf0-9d4a29ae5cfc",
+          "messageId": "01a1f766-1149-7941-a06f-bdbf8d38e18b"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f762-c659-7732-acf0-9d4a29ae5cfc",
+          "messageId": "01a1f766-709a-7943-a081-8a33913624c1"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f762-c659-7732-acf0-9d4a29ae5cfc",
+          "messageId": "01a1f76a-a06c-7383-9aa6-18a597cf8d43"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f762-c659-7732-acf0-9d4a29ae5cfc",
+          "messageId": "01a1f76e-88d6-7f81-a6da-b8fca1f516b2"
+        }
+      ],
+      "status": "implemented-validated-synced-with-customizations",
+      "validation": "test/2026-11-20-SCHEDULED_REPORT.md"
+    },
+    {
+      "key": "ddl-comment-and-review-style",
+      "sources": [
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7a3-857d-7d72-baf4-505c4cc74bd9",
+          "messageId": "01a1f7a3-f5c1-7d21-b72f-e06885a6058b"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7a3-857d-7d72-baf4-505c4cc74bd9",
+          "messageId": "01a1f7a6-ecbc-7c51-9315-9d5bcd463708"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7a3-857d-7d72-baf4-505c4cc74bd9",
+          "messageId": "01a1f7a7-79c0-7121-8b06-d2300861a1db"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7a3-857d-7d72-baf4-505c4cc74bd9",
+          "messageId": "01a1f7a8-b839-7432-9102-e5144f52bf4e"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7a3-857d-7d72-baf4-505c4cc74bd9",
+          "messageId": "01a1f7a9-1d89-7403-839e-201c939e8c8b"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7a3-857d-7d72-baf4-505c4cc74bd9",
+          "messageId": "01a1f7a9-fe3a-7a52-a145-e4d44699783f"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f7a3-857d-7d72-baf4-505c4cc74bd9",
+          "messageId": "01a1f7ac-cdad-7850-827f-ab94861e7bfa"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f79c-6f10-7203-8555-8babd7912971",
+          "messageId": "01a1f79d-b9cd-7a50-9a88-3b98fa6121ab"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f79c-6f10-7203-8555-8babd7912971",
+          "messageId": "01a1f79e-622a-76e3-a9f0-391d4a0130f5"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f79c-6f10-7203-8555-8babd7912971",
+          "messageId": "01a1f79e-f140-7a33-b481-e35ccdf39cfd"
+        }
+      ],
+      "status": "implemented-validated-synced-with-customizations",
+      "validation": "test/2026-11-20-SCHEDULED_REPORT.md"
+    },
+    {
+      "key": "persisted-payload-representation-compatibility",
+      "sources": [
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f82d-4efb-7fd3-8329-e5a631d8084a",
+          "messageId": "01a1f82d-a640-7162-a49e-d2ecc23fadc1"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f82d-4efb-7fd3-8329-e5a631d8084a",
+          "messageId": "01a1f82d-db25-7653-ae8e-501a99b7af92"
+        }
+      ],
+      "status": "implemented-validated-synced-with-customizations",
+      "validation": "test/2026-11-20-SCHEDULED_REPORT.md"
+    },
+    {
+      "key": "replay-latest-correction-vs-winner-priority",
+      "sources": [
+        {
+          "threadId": "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "turnId": "01a1f6d4-edf6-7f83-9932-c3a7964faab6",
+          "messageId": "01a1f6d4-ee81-71b0-a8d7-4503f46d90f9"
+        },
+        {
+          "threadId": "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "turnId": "01a1f688-db5f-7420-a166-5e3f00035713",
+          "messageId": "01a1f688-dbf0-7fc1-972a-5159daee6c51"
+        },
+        {
+          "threadId": "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "turnId": "01a1f688-db5f-7420-a166-5e3f00035713",
+          "messageId": "01a1f68b-9e2d-7853-9dab-9cc1c5a94469"
+        },
+        {
+          "threadId": "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "turnId": "01a1f688-db5f-7420-a166-5e3f00035713",
+          "messageId": "01a1f68b-e866-7521-88a7-9c200e58cfcb"
+        },
+        {
+          "threadId": "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "turnId": "01a1f688-db5f-7420-a166-5e3f00035713",
+          "messageId": "01a1f691-f5e2-7df2-880b-b12d5eabff2e"
+        },
+        {
+          "threadId": "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "turnId": "01a1f688-db5f-7420-a166-5e3f00035713",
+          "messageId": "01a1f692-ed9c-73d3-87ed-499591ba1896"
+        },
+        {
+          "threadId": "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "turnId": "01a1f688-db5f-7420-a166-5e3f00035713",
+          "messageId": "01a1f694-0d0f-7573-bdb2-9b449c2e3e14"
+        },
+        {
+          "threadId": "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "turnId": "01a1f688-db5f-7420-a166-5e3f00035713",
+          "messageId": "01a1f695-1e52-7182-849a-dba71eba6ca4"
+        }
+      ],
+      "status": "implemented-validated-synced-with-customizations",
+      "validation": "test/2026-11-20-SCHEDULED_REPORT.md"
+    }
+  ],
+  "deduplicated": [
+    "feature-activation",
+    "java-types-reuse-frameworks",
+    "base-fields-defaults-indexes",
+    "control-flow-braces-predicates",
+    "business-exception-reuse"
+  ],
+  "notGeneralized": [
+    "project-colors-fonts-frameworks",
+    "specific-third-party-retry-counts",
+    "local-port-preferences",
+    "OKR-domain-fields",
+    "other-project-Feishu-requests"
+  ],
+  "lastProcessedWindow": {
+    "start": "2026-11-13T08:58:16.346Z",
+    "end": "2026-11-20T08:58:16.346Z",
+    "timezone": "Asia/Shanghai"
+  },
+  "lastRun": "context/runs/2026-11-20-scheduled.json"
+}

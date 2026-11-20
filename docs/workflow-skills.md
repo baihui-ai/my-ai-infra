@@ -64,3 +64,22 @@ mai sync --project /path/to/repo
 简版模板随 PRD/设计 Skill 安装；项目 `_templates/simple/` 可覆盖。已有文档增量维护，坏覆盖模板不会静默回退。simple 和 standard 共用产物路径，旧模板固定 PRD 字段可填写实际有效需求来源及 AC，不要求生成占位 PRD。
 
 `my-create-design` 写完新建或修订的 Markdown 方案和关联附录后，默认调用 [my-render-design-html](../assets/skills/my-render-design-html/SKILL.md)，生成同目录同名 HTML 审阅版。只要 Markdown 时可在请求中注明。工作台的“选择 SDD 主流程”同时选中两项。已有固定清单的项目可选中渲染 Skill 后同步。
+
+## Java 规范接入
+
+Java 设计、方案评审、实现与代码评审按需读取内置 [java-dev 规范](../assets/skills/my-create-feature/references/java-dev.md)，与现有自动工作流共同执行，无需单独安装 java-dev。正文作为 my-create-feature 的附属资源分发，四个阶段入口显式引用；手工裁剪安装时保留该依赖。非 Java 任务跳过。
+
+规范覆盖 import、强类型参数、单一职责、既有方法及框架复用、成熟工具、输入校验、并发和 SQL/索引/分页。原 java-dev 中相互冲突的页码约定改为遵循项目契约，Lombok 改为依项目技术栈选用。规则不强制改变已有接口或引入依赖；实际效果按规范末尾行为案例在宿主中评测。
+
+表结构设计与方案评审要求新建业务表包含 `id`、`create_time`、`update_time`、`create_by`、`update_by`、`is_deleted` 六个基础字段，类型和默认值沿用目标项目已有约定；Java 实现同步核对公共实体、审计填充和逻辑删除映射。存量表差异按本次迁移范围处理。
+
+## 技术方案与画图适配
+
+设计与方案评审使用本项目自身的[技术文档与图示规范](../assets/skills/my-create-feature/references/technical-docs.md)，覆盖决策依据、接口/数据契约、兼容性、非全屏窗口和必要机制图。默认调用完整内置的 my-tech-diagram；用户指定其他工具时按可用能力适配。HTML 优先复用已有图资产。
+
+
+## 内置源码与动画
+
+`my-tech-diagram`、`java-dev` 的完整源码位于 assets/skills，随项目安装和同步，统一由本仓库维护。my-tech-diagram 包含原有参考规范、样图、showcase 和评测；新增动画包装脚本为静态 SVG 提供焦点步骤演示，支持播放/暂停/逐步/重置、减少动画及离屏暂停。
+
+PRD 与技术设计按图示要求调用 my-tech-diagram，方案评审核对图文与静态/动画证据，HTML 审阅复用图和动画页。静态 SVG 用于不支持动画的阅读环境，动画 HTML 作为本地审阅产物。Java 四阶段读取完整 java-dev 及本项目适配。手工固定安装清单需包含这些依赖，默认初始化包含全部内置资产。

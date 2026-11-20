@@ -1,0 +1,21 @@
+{
+  "skill_name": "java-dev",
+  "evals": [
+    {
+      "eval_id": 1,
+      "eval_name": "existing-jpa-export-six-fields",
+      "prompt": "在提供的订单示例中实现按状态分批查询订单摘要的服务入口，并提供供现有定时调度调用的全量导出方法。导出调用方提供 outputName，空白名称应拒绝；结果按订单 ID 稳定顺序交给现有 OrderExportSink。给出导出记录表的建议 DDL（记录 outputName、状态、处理数量），沿用项目类型和默认值约定，并说明实际索引查询路径、定时扫描分页以及需要补验的内容。沿用现有项目的依赖与接口，交付修改后的源码和简短方案；不访问真实业务数据库或外部服务，不改输入目录，不伪造编译/测试证据。",
+      "input": "input",
+      "assertions": [
+        "业务入出参使用具名类型并正常import",
+        "复用现有JPA查询与toSummary，不另造重复数据层",
+        "单表查询沿status/is_deleted/id索引，任务游标分页且稳定推进",
+        "outputName空白校验复用成熟工具",
+        "服务与批量导出职责拆分，主流程可读",
+        "DDL六基础字段类型默认沿项目约定，默认值解释不声称保证索引有效"
+      ],
+      "baseline": "without_skill",
+      "limitations": "one synthetic project; no statistical or production generalization"
+    }
+  ]
+}

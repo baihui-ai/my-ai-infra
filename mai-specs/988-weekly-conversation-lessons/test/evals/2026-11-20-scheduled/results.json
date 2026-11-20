@@ -1,0 +1,162 @@
+{
+  "evaluation": "independent read-only decision forward test",
+  "source_sha256": {
+    "assets/skills/my-review-code/SKILL.md": "e86215ba232df98479b8b818889d23d51d9eb212af9c2794b00dfdc0d3d03c9e",
+    "assets/skills/my-create-feature/references/java-dev.md": "83b63c7df04b8e1d63dabfa28d1c26c1d90b68163899b589c94d163a5da67621",
+    "assets/skills/my-create-feature/references/code-review-rules.md": "737d8a9e491537cc1dede8f05e0ea6365c8da2cf5acdb4655bebb3171d59160a",
+    "assets/skills/my-create-feature/references/delivery-lessons.md": "d60a350c512346347a463631664d865b16134dfa1bb13e4684f30bce3a0ceb3b"
+  },
+  "source_hash_note": "评测读取后、发送发现前后核对的实际源指纹；java-dev第95行仍为条件式旧措辞时记录。",
+  "scope": "读取四份规范，对八个给定真实小任务分别形成决策；不改源码/规格/全局入口，不访问其他项目、数据库、外网或生产。",
+  "cases": [
+    {
+      "id": "C1",
+      "scenario": "固定Map响应含null，内部计数与byte[]下载并存",
+      "decision": "先记录HTTP实际字段、NULL与缺失、类型、序列化配置和兼容调用方，把固定Map响应改为明确模型/DTO/record；HTTP绑定和序列化字段采用包装类型并验证缺省、校验与拆箱。若历史输出必须为Map，使用明确对象的边界toMap，保留null而不是使用会拒绝null的构造方式，检查字段名/顺序/序列化行为。内部计数和局部计算可继续使用基本类型或必要内部Map；byte[]下载及void无内容协议保持原样。",
+      "basis": [
+        "java-dev.md：Java契约与仓储边界补充，第1～2条",
+        "code-review-rules.md：类型与风格、HTTP边界"
+      ],
+      "boundaries": [
+        "不是把全部Java方法及数组都包装化。",
+        "不以空DTO内藏Map规避固定字段契约。",
+        "需要序列化/HTTP回归证据，不把文档决策当兼容性已通过。"
+      ],
+      "result": "pass"
+    },
+    {
+      "id": "C2",
+      "scenario": "已有MyBatis Mapper，Service拼接SQL，提议另建MysqlBaseRepository",
+      "decision": "复用当前Mapper，把本次业务SQL及参数绑定放到既有数据访问层，Service保留实际业务目的、批次/分页循环、重试和事务编排。核对已有PO/结果映射及调用端契约，避免字符串拼接执行SQL或以运行时探表代替固定模型。不创建等价MysqlBaseRepository/SQL执行器，也不因示例包含该类型而强迁JPA。只有项目真实已经采用该基础Repository时才遵守其实际继承与类型约定。",
+      "basis": [
+        "java-dev.md：实现与复用、Java契约与仓储边界补充第4条",
+        "code-review-rules.md：仓储职责"
+      ],
+      "boundaries": [
+        "不将业务编排塞入Mapper/Repository默认方法。",
+        "SQL条件、绑定、NULL/重复行等行为在迁移中保持。",
+        "缺源码或编译验证时不宣称已经完成迁移。"
+      ],
+      "result": "pass"
+    },
+    {
+      "id": "C3",
+      "scenario": "this.run注解、已有外层事务、单数据源且文件解析在事务内",
+      "decision": "先追踪实际Bean、代理入口、外层事务和传播/回滚规则。默认代理模式下this.run不会触发run上的新事务设置，但已有外层事务仍有效，不能据此说当前完全没有事务。将不需要数据库一致性保护的文件解析/校验/转换移到实际外层事务开始之前；必要写入在真实代理入口的具体方法内保留最小事务，写前复核状态/版本/租约。复用现有单数据源管理器、连接池和Repository能力；删除误导性重复注解要验证回滚及框架写入语义。",
+      "basis": [
+        "java-dev.md：事务按需使用、事务入口与字段设计补充第1～2条",
+        "code-review-rules.md：事务与锁"
+      ],
+      "boundaries": [
+        "不能只移动到一个未开启新事务的内部方法就声称解析已在事务外。",
+        "不为形式新增自注入、AopContext、REQUIRES_NEW或第二套管理器。",
+        "必须同成同败的操作仍保持原子性；实际代理与事务测试待验。"
+      ],
+      "result": "pass"
+    },
+    {
+      "id": "C4",
+      "scenario": "四表JOIN小范围查询无计划，另有JOIN UPDATE和跨表并发资格",
+      "decision": "四表查询在最多五表边界内，但超过通常三表的偏好，仍需当前业务理由与实际数据量、过滤、索引及扫描/结果规模证据；未取得EXPLAIN时标待验，不能因表少或声称小范围就判高效，也不直接拆成N+1。写入按补充规则的严格单表约定处理，不新增JOIN UPDATE/JOIN DELETE；跨表资格分别通过仓储处理时保留必要原子条件、资格复核、受影响行数及最小一致性单元，不能裸先查后写引入并发竞争。",
+      "basis": [
+        "java-dev.md：SQL与数据访问第4条、第6～7条；Java契约与仓储边界补充第5条",
+        "code-review-rules.md：表与SQL、事务与锁"
+      ],
+      "boundaries": [
+        "当前同一文档对连表写入存在条件偏好与严格禁止两种表述，应先统一措辞。",
+        "单表改写不等于消除死锁，也不能丢失跨表业务资格规则。",
+        "执行计划、并发及方言无真实证据时保留合并条件。"
+      ],
+      "result": "needs_wording_fix"
+    },
+    {
+      "id": "C5",
+      "scenario": "跨实例重复任务，分布式锁租约可能过期，提议删唯一约束",
+      "decision": "保留实现业务唯一性和幂等的数据库约束，不以已有分布式锁替代。追踪全部写入口、锁拥有者和租约到期后旧持有者是否仍可提交，核对项目现有的条件更新、版本/持有者校验、幂等键及约束冲突处理。围绕真实竞争窗口选择最小必要保护，并验证租约过期、重试、异常释放及重复投递；优先复用现有能力，不新增通用协调框架。",
+      "basis": [
+        "java-dev.md：类型与Spring并发约定；Java契约与仓储边界补充第6条",
+        "code-review-rules.md：事务与锁、行为保真"
+      ],
+      "boundaries": [
+        "分布式互斥不能证明跨实例永不并发，租约过期可能让两个执行者重叠。",
+        "不默认给所有查询加行锁，也不承诺绝无死锁。",
+        "真实并发/失效恢复测试未执行，不宣称已消重成功。"
+      ],
+      "result": "pass"
+    },
+    {
+      "id": "C6",
+      "scenario": "未知完成时间、TEXT备注及缺少项目类型依据的六基础字段",
+      "decision": "未知完成时间保留未发生语义，不填当前时间或0伪装已完成；TEXT备注根据数据库能力和业务可空语义处理，不强套默认值。为本次新增/修改DDL提供准确COMMENT，合理初始状态才采用NOT NULL与DEFAULT，核对数据库默认与应用填充分工。六个基础字段列入设计，但类型/主键/审计/逻辑删除取值必须查目标项目真实约定，证据不足明确待确认而不杜撰。单独用真实查询、分布和执行计划检验索引，不能保证默认非空就走索引。",
+      "basis": [
+        "java-dev.md：表结构基础字段、事务入口与字段设计补充第3条",
+        "code-review-rules.md：表与SQL、验证"
+      ],
+      "boundaries": [
+        "不能用空字符串、假操作人或假时间掩盖必填缺失。",
+        "不擅改无关历史字段；新默认还需写入/回填兼容验证。",
+        "不把规范读取当DDL运行或索引验收。"
+      ],
+      "result": "pass"
+    },
+    {
+      "id": "C7",
+      "scenario": "历史两种合法载荷，新解析器只认一种，旧前端和重试仍存在，遇坏JSON",
+      "decision": "盘点新旧写入者、数据库存量、消费者、重试/重放、预览和前端解析协议，为已支持的两种合法表示提供明确版本识别或边界适配与固定模型，不仅验证新写入。保持升级混合版本可读，必要迁移沿用现有机制；有效旧格式不能被归为损坏或空任务。坏JSON、未知/不支持版本、必填身份缺失仍应明确报错并按项目错误/重试分类处理，不catch一切降为成功。",
+      "basis": [
+        "delivery-lessons.md：第3节载荷解析与持久化表示兼容条款",
+        "java-dev.md：固定类型与边界适配",
+        "code-review-rules.md：行为保真"
+      ],
+      "boundaries": [
+        "可选合法空补丁与坏JSON是两种情况。",
+        "不让JsonNode/动态Map扩散为固定业务API，也不凭空引入迁移框架。",
+        "两种格式、存量和混合升级链路需要实际测试。"
+      ],
+      "result": "pass"
+    },
+    {
+      "id": "C8",
+      "scenario": "ID倒序被纠正为升序，最终值按版本判优，手工/定时两路径，作者A和模块限制",
+      "decision": "以最新明确的升序纠正替换旧倒序假设，两条执行路径按同一已确认契约从小到大执行。把执行顺序与最终字段/版本优先级分别设计和验证，不为新版本优先擅改执行方向。按实际Git基线、提交/作者证据与模块路径交集固定改造范围；不能猜作者别名或因依赖关系扩大到未授权他人代码。若必要适配超出授权范围，保留具体依赖缺口并完成可独立部分，不冒充两路径已一致。",
+      "basis": [
+        "delivery-lessons.md：第3节任务顺序与版本、第4节重构范围、第5节已有答案",
+        "my-review-code/SKILL.md：固定比较对象和范围",
+        "code-review-rules.md：范围与命名、行为保真"
+      ],
+      "boundaries": [
+        "不把本项目的升序、作者名或类名变成全局默认。",
+        "不能仅改手工路径或只改排序而漏掉版本覆盖/显式清空语义。",
+        "没有Git归属及手工/定时回归证据时不报告范围和行为验收已通过。"
+      ],
+      "result": "pass"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "priority": "P2",
+      "blocking": false,
+      "file": "assets/skills/my-create-feature/references/java-dev.md",
+      "lines": [
+        95,
+        144
+      ],
+      "finding": "SQL与数据访问小节写“默认单表，目标项目明确禁止时不得JOIN UPDATE”，后文已确认偏好写新增/改造UPDATE、DELETE仅单表并禁止JOIN UPDATE/JOIN DELETE。同一份规范的条件式偏好与严格禁止口径不一致，按小节渐进读取时可能让未明确禁止的项目误以为仍能采用连表写。",
+      "suggestion": "把第95行与当前补充规则同步为明确的单表写入约定；保留跨表资格/依赖的最小原子性与并发保护要求，不通过裸查询后更新来满足语法偏好。",
+      "verification": "修正后定向复评C4，保留本次原始记录；不需为文档口径调整声称已运行数据库。"
+    }
+  ],
+  "summary": {
+    "completed": 8,
+    "pass": 7,
+    "needs_wording_fix": 1,
+    "blocking_findings": 0,
+    "nonblocking_findings": 1
+  },
+  "limitations": [
+    "这是独立桌面对话决策，不是Java编译、数据库/并发/载荷升级或生产验收。",
+    "没有用关键词出现当成行为通过；每例保存具体决策、范围及待验边界。",
+    "只覆盖八个指定输入，不宣称所有模型和实际宿主均有效。"
+  ]
+}

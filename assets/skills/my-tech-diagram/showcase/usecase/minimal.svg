@@ -1,0 +1,99 @@
+<svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#9CA3AF"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="900" fill="#FFFFFF"/>
+
+  <!-- 标题 -->
+  <text x="40" y="56" font-size="22" font-weight="600" fill="#1F2328">在线商城用例图</text>
+
+  <!-- 系统边界 -->
+  <rect x="320" y="120" width="740" height="620" fill="#F9FAFB" stroke="#D1D5DB" stroke-width="1.5"/>
+  <text x="344" y="152" font-size="16" font-weight="600" fill="#1F2328">在线商城</text>
+
+  <!-- 用例椭圆（左列：买家） -->
+  <ellipse cx="460" cy="240" rx="95" ry="34" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1.5"/>
+  <text x="460" y="245" text-anchor="middle" font-size="14" font-weight="500" fill="#1F2328">浏览商品</text>
+
+  <ellipse cx="460" cy="370" rx="95" ry="34" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1.5"/>
+  <text x="460" y="375" text-anchor="middle" font-size="14" font-weight="500" fill="#1F2328">下单</text>
+
+  <ellipse cx="460" cy="500" rx="95" ry="34" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1.5"/>
+  <text x="460" y="505" text-anchor="middle" font-size="14" font-weight="500" fill="#1F2328">支付订单</text>
+
+  <ellipse cx="460" cy="640" rx="95" ry="34" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1.5"/>
+  <text x="460" y="645" text-anchor="middle" font-size="14" font-weight="500" fill="#1F2328">申请退款</text>
+
+  <!-- 被 include 的用例 -->
+  <ellipse cx="720" cy="630" rx="95" ry="34" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1.5"/>
+  <text x="720" y="635" text-anchor="middle" font-size="14" font-weight="500" fill="#1F2328">校验库存</text>
+
+  <!-- 用例椭圆（右列：运营） -->
+  <ellipse cx="900" cy="260" rx="95" ry="34" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1.5"/>
+  <text x="900" y="265" text-anchor="middle" font-size="14" font-weight="500" fill="#1F2328">上架商品</text>
+
+  <ellipse cx="900" cy="390" rx="95" ry="34" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1.5"/>
+  <text x="900" y="395" text-anchor="middle" font-size="14" font-weight="500" fill="#1F2328">处理退款</text>
+
+  <!-- 参与者：买家（左） -->
+  <g stroke="#1F2328" stroke-width="1.5" fill="none">
+    <circle cx="150" cy="380" r="14" fill="#FFFFFF"/>
+    <line x1="150" y1="394" x2="150" y2="460"/>
+    <line x1="118" y1="426" x2="182" y2="426"/>
+    <line x1="150" y1="460" x2="126" y2="502"/>
+    <line x1="150" y1="460" x2="174" y2="502"/>
+  </g>
+  <text x="150" y="536" text-anchor="middle" font-size="14" font-weight="600" fill="#1F2328">买家</text>
+  <text x="150" y="558" text-anchor="middle" font-size="11" fill="#6B7280">主要参与者</text>
+
+  <!-- 参与者：运营（右） -->
+  <g stroke="#1F2328" stroke-width="1.5" fill="none">
+    <circle cx="1250" cy="300" r="14" fill="#FFFFFF"/>
+    <line x1="1250" y1="314" x2="1250" y2="380"/>
+    <line x1="1218" y1="340" x2="1282" y2="340"/>
+    <line x1="1250" y1="380" x2="1226" y2="422"/>
+    <line x1="1250" y1="380" x2="1274" y2="422"/>
+  </g>
+  <text x="1250" y="456" text-anchor="middle" font-size="14" font-weight="600" fill="#1F2328">运营</text>
+  <text x="1250" y="478" text-anchor="middle" font-size="11" fill="#6B7280">参与者</text>
+
+  <!-- 参与者：支付网关（右，外部系统） -->
+  <g stroke="#2563EB" stroke-width="1.5" fill="none">
+    <circle cx="1250" cy="480" r="14" fill="#FFFFFF"/>
+    <line x1="1250" y1="494" x2="1250" y2="560"/>
+    <line x1="1218" y1="520" x2="1282" y2="520"/>
+    <line x1="1250" y1="560" x2="1226" y2="602"/>
+    <line x1="1250" y1="560" x2="1274" y2="602"/>
+  </g>
+  <text x="1250" y="636" text-anchor="middle" font-size="14" font-weight="600" fill="#2563EB">支付网关</text>
+  <text x="1250" y="658" text-anchor="middle" font-size="11" fill="#6B7280">外部系统</text>
+
+  <!-- 关联（实线，无箭头）：买家 -->
+  <g stroke="#9CA3AF" stroke-width="1.5">
+    <line x1="182" y1="410" x2="414" y2="268"/>
+    <line x1="182" y1="430" x2="381" y2="387"/>
+    <line x1="182" y1="450" x2="377" y2="486"/>
+    <line x1="182" y1="470" x2="414" y2="610"/>
+  </g>
+
+  <!-- 关联（实线，无箭头）：运营 -->
+  <g stroke="#9CA3AF" stroke-width="1.5">
+    <line x1="1282" y1="320" x2="989" y2="273"/>
+    <line x1="1282" y1="350" x2="989" y2="381"/>
+  </g>
+
+  <!-- 关联（实线，无箭头）：支付网关 — 支付订单 -->
+  <line x1="1218" y1="522" x2="557" y2="503" stroke="#9CA3AF" stroke-width="1.5"/>
+
+  <!-- include：支付订单 → 校验库存 -->
+  <line x1="515" y1="528" x2="663" y2="601" stroke="#9CA3AF" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arr)"/>
+  <text x="589" y="552" text-anchor="middle" font-size="11" fill="#6B7280">«include»</text>
+
+  <!-- 图例 -->
+  <line x1="40" y1="800" x2="90" y2="800" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="100" y="804" font-size="11" fill="#6B7280">关联（Association）：参与者与用例</text>
+  <line x1="40" y1="828" x2="90" y2="828" stroke="#9CA3AF" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arr)"/>
+  <text x="100" y="832" font-size="11" fill="#6B7280">«include»：基用例必然执行被指向的用例</text>
+</svg>

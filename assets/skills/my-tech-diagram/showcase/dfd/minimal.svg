@@ -1,0 +1,73 @@
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#9CA3AF"/>
+    </marker>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+
+  <!-- 标题 -->
+  <text x="48" y="60" font-size="22" font-weight="600" fill="#1F2328">订单处理数据流图</text>
+  <text x="48" y="84" font-size="12" fill="#6B7280">DFD · Level 0 · Yourdon-DeMarco 记号</text>
+
+  <!-- ========== 数据流（连线先画，压在节点下层） ========== -->
+  <!-- F1 买家 → 订单处理：订单数据 -->
+  <line x1="240" y1="332" x2="482" y2="332" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="361" y="318" text-anchor="middle" font-size="12" fill="#6B7280">订单数据</text>
+
+  <!-- F4 订单处理 → 支付网关：支付指令 -->
+  <line x1="638" y1="332" x2="878" y2="332" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="758" y="318" text-anchor="middle" font-size="12" fill="#6B7280">支付指令</text>
+
+  <!-- F2 订单处理 → 订单库：订单记录（折线：下 → 右 → 下） -->
+  <path d="M 614 388 V 480 H 920 V 528" fill="none" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="767" y="470" text-anchor="middle" font-size="12" fill="#6B7280">订单记录</text>
+
+  <!-- F3 库存库 → 订单处理：库存信息（折线：上 → 右 → 上） -->
+  <path d="M 240 528 V 440 H 506 V 390" fill="none" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="373" y="430" text-anchor="middle" font-size="12" fill="#6B7280">库存信息</text>
+
+  <!-- ========== 节点 ========== -->
+  <!-- 外部实体：买家 -->
+  <rect x="80" y="300" width="160" height="64" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1.5"/>
+  <text x="160" y="324" text-anchor="middle" font-size="11" fill="#6B7280">外部实体</text>
+  <text x="160" y="346" text-anchor="middle" font-size="14" font-weight="500" fill="#1F2328">买家</text>
+
+  <!-- 加工：1.0 订单处理（圆形，强调色） -->
+  <circle cx="560" cy="332" r="76" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="560" y="316" text-anchor="middle" font-size="11" fill="#2563EB">加工 1.0</text>
+  <text x="560" y="344" text-anchor="middle" font-size="15" font-weight="500" fill="#1F2328">订单处理</text>
+
+  <!-- 外部实体：支付网关 -->
+  <rect x="880" y="300" width="160" height="64" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1.5"/>
+  <text x="960" y="324" text-anchor="middle" font-size="11" fill="#6B7280">外部实体</text>
+  <text x="960" y="346" text-anchor="middle" font-size="14" font-weight="500" fill="#1F2328">支付网关</text>
+
+  <!-- 数据存储：D2 库存库（开口矩形，左侧 ID 格） -->
+  <path d="M 360 532 H 120 V 588 H 360" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1.5"/>
+  <line x1="160" y1="532" x2="160" y2="588" stroke="#D1D5DB" stroke-width="1.5"/>
+  <text x="140" y="565" text-anchor="middle" font-size="11" fill="#6B7280">D2</text>
+  <text x="260" y="554" text-anchor="middle" font-size="11" fill="#6B7280">数据存储</text>
+  <text x="260" y="574" text-anchor="middle" font-size="14" font-weight="500" fill="#1F2328">库存库</text>
+
+  <!-- 数据存储：D1 订单库（开口矩形，左侧 ID 格） -->
+  <path d="M 1040 532 H 800 V 588 H 1040" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1.5"/>
+  <line x1="840" y1="532" x2="840" y2="588" stroke="#D1D5DB" stroke-width="1.5"/>
+  <text x="820" y="565" text-anchor="middle" font-size="11" fill="#6B7280">D1</text>
+  <text x="940" y="554" text-anchor="middle" font-size="11" fill="#6B7280">数据存储</text>
+  <text x="940" y="574" text-anchor="middle" font-size="14" font-weight="500" fill="#1F2328">订单库</text>
+
+  <!-- ========== 图例 ========== -->
+  <g>
+    <rect x="48" y="636" width="24" height="16" rx="4" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1.5"/>
+    <text x="80" y="649" font-size="10" fill="#6B7280">外部实体</text>
+    <circle cx="160" cy="644" r="9" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+    <text x="176" y="649" font-size="10" fill="#6B7280">加工</text>
+    <path d="M 252 636 H 228 V 652 H 252" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1.5"/>
+    <text x="260" y="649" font-size="10" fill="#6B7280">数据存储</text>
+    <line x1="330" y1="644" x2="366" y2="644" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <text x="374" y="649" font-size="10" fill="#6B7280">数据流（标签 = 数据名）</text>
+  </g>
+</svg>

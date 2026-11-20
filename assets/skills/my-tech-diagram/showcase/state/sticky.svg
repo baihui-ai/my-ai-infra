@@ -1,0 +1,112 @@
+<svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif">
+  <defs>
+    <marker id="arrNote" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ADB5BD"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="675" fill="#FAFAFA"/>
+
+  <!-- 标题 -->
+  <text x="48" y="52" font-size="20" font-weight="600" fill="#343A40">订单状态图</text>
+
+  <!-- ============ 主流程（横向，y=300）============ -->
+  <!-- 初态 -->
+  <circle cx="128" cy="300" r="10" fill="#343A40"/>
+  <line x1="140" y1="300" x2="203" y2="300" stroke="#ADB5BD" stroke-width="1.5" marker-end="url(#arrNote)"/>
+
+  <!-- 待支付（状态便签，黄） -->
+  <g transform="rotate(-0.8 280 300)">
+    <rect x="205" y="255" width="150" height="90" rx="3" fill="#FFF3BF" stroke="#E8B004" stroke-width="1.2"/>
+    <path d="M341 255 h14 v14 z" fill="#E8B004" opacity="0.55"/>
+    <text x="280" y="284" text-anchor="middle" font-size="10" fill="#868E96">状态</text>
+    <text x="280" y="312" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">待支付</text>
+  </g>
+
+  <!-- 待发货 -->
+  <g transform="rotate(0.8 520 300)">
+    <rect x="445" y="255" width="150" height="90" rx="3" fill="#FFF3BF" stroke="#E8B004" stroke-width="1.2"/>
+    <path d="M581 255 h14 v14 z" fill="#E8B004" opacity="0.55"/>
+    <text x="520" y="284" text-anchor="middle" font-size="10" fill="#868E96">状态</text>
+    <text x="520" y="312" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">待发货</text>
+  </g>
+
+  <!-- 已发货 -->
+  <g transform="rotate(-0.8 760 300)">
+    <rect x="685" y="255" width="150" height="90" rx="3" fill="#FFF3BF" stroke="#E8B004" stroke-width="1.2"/>
+    <path d="M821 255 h14 v14 z" fill="#E8B004" opacity="0.55"/>
+    <text x="760" y="284" text-anchor="middle" font-size="10" fill="#868E96">状态</text>
+    <text x="760" y="312" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">已发货</text>
+  </g>
+
+  <!-- 已完成（终态便签，绿） -->
+  <g transform="rotate(0.8 1000 300)">
+    <rect x="925" y="255" width="150" height="90" rx="3" fill="#D3F9D8" stroke="#5C940D" stroke-width="1.6"/>
+    <path d="M1061 255 h14 v14 z" fill="#5C940D" opacity="0.55"/>
+    <text x="1000" y="284" text-anchor="middle" font-size="10" fill="#868E96">终态</text>
+    <text x="1000" y="312" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">已完成</text>
+  </g>
+
+  <!-- 主流程转换 -->
+  <line x1="357" y1="300" x2="443" y2="300" stroke="#ADB5BD" stroke-width="1.5" marker-end="url(#arrNote)"/>
+  <text x="400" y="288" text-anchor="middle" font-size="11" fill="#868E96">支付成功</text>
+
+  <line x1="597" y1="300" x2="683" y2="300" stroke="#ADB5BD" stroke-width="1.5" marker-end="url(#arrNote)"/>
+  <text x="640" y="288" text-anchor="middle" font-size="11" fill="#868E96">发货</text>
+
+  <line x1="837" y1="300" x2="923" y2="300" stroke="#ADB5BD" stroke-width="1.5" marker-end="url(#arrNote)"/>
+  <text x="880" y="288" text-anchor="middle" font-size="11" fill="#868E96">确认收货</text>
+
+  <!-- ============ 异常/取消路径（下方一行，y=528）============ -->
+  <!-- 已取消（终态便签，粉） -->
+  <g transform="rotate(0.8 280 528)">
+    <rect x="205" y="483" width="150" height="90" rx="3" fill="#FCE4EC" stroke="#C2255C" stroke-width="1.6"/>
+    <path d="M341 483 h14 v14 z" fill="#C2255C" opacity="0.55"/>
+    <text x="280" y="512" text-anchor="middle" font-size="10" fill="#868E96">终态</text>
+    <text x="280" y="540" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">已取消</text>
+  </g>
+
+  <!-- 退款中 -->
+  <g transform="rotate(-0.8 760 528)">
+    <rect x="685" y="483" width="150" height="90" rx="3" fill="#FCE4EC" stroke="#C2255C" stroke-width="1.2"/>
+    <path d="M821 483 h14 v14 z" fill="#C2255C" opacity="0.55"/>
+    <text x="760" y="512" text-anchor="middle" font-size="10" fill="#868E96">状态</text>
+    <text x="760" y="540" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">退款中</text>
+  </g>
+
+  <!-- 已关闭（终态便签，粉） -->
+  <g transform="rotate(0.8 1000 528)">
+    <rect x="925" y="483" width="150" height="90" rx="3" fill="#FCE4EC" stroke="#C2255C" stroke-width="1.6"/>
+    <path d="M1061 483 h14 v14 z" fill="#C2255C" opacity="0.55"/>
+    <text x="1000" y="512" text-anchor="middle" font-size="10" fill="#868E96">终态</text>
+    <text x="1000" y="540" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">已关闭</text>
+  </g>
+
+  <!-- 异常路径转换 -->
+  <line x1="280" y1="347" x2="280" y2="481" stroke="#ADB5BD" stroke-width="1.5" marker-end="url(#arrNote)"/>
+  <text x="325" y="418" text-anchor="middle" font-size="11" fill="#868E96">超时取消</text>
+
+  <line x1="760" y1="347" x2="760" y2="481" stroke="#ADB5BD" stroke-width="1.5" marker-end="url(#arrNote)"/>
+  <text x="805" y="418" text-anchor="middle" font-size="11" fill="#868E96">申请退款</text>
+
+  <line x1="837" y1="528" x2="923" y2="528" stroke="#ADB5BD" stroke-width="1.5" marker-end="url(#arrNote)"/>
+  <text x="880" y="516" text-anchor="middle" font-size="11" fill="#868E96">退款成功</text>
+
+  <!-- ============ 图例 ============ -->
+  <g font-size="10" fill="#868E96">
+    <circle cx="56" cy="616" r="5" fill="#343A40"/>
+    <text x="68" y="620">初态</text>
+
+    <rect x="120" y="606" width="22" height="18" rx="2" fill="#FFF3BF" stroke="#E8B004" stroke-width="1.2"/>
+    <text x="150" y="620">状态</text>
+
+    <rect x="196" y="606" width="22" height="18" rx="2" fill="#D3F9D8" stroke="#5C940D" stroke-width="1.2"/>
+    <text x="226" y="620">终态（完成）</text>
+
+    <rect x="310" y="606" width="22" height="18" rx="2" fill="#FCE4EC" stroke="#C2255C" stroke-width="1.2"/>
+    <text x="340" y="620">终态（取消/关闭）</text>
+
+    <line x1="452" y1="616" x2="490" y2="616" stroke="#ADB5BD" stroke-width="1.5" marker-end="url(#arrNote)"/>
+    <text x="498" y="620">转换（标注 = 触发事件）</text>
+  </g>
+</svg>

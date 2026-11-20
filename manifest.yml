@@ -31,6 +31,13 @@ canonical:
   format_hook_usage: docs/format-hooks.md
   feature_initializer: assets/skills/my-create-feature/scripts/init-feature.mjs
   feature_profiles: assets/skills/my-create-feature/references/FEATURE_PROFILES.json
+  diagram_skill: assets/skills/my-tech-diagram/SKILL.md
+  diagram_animation: assets/skills/my-tech-diagram/scripts/animate-svg.mjs
+  technical_doc_rules: assets/skills/my-create-feature/references/technical-docs.md
+  java_ddd_skill: assets/skills/xfg-ddd-skills/SKILL.md
+  java_dev_rules: assets/skills/my-create-feature/references/java-dev.md
+  java_code_review: assets/skills/my-create-feature/references/code-review-rules.md
+  delivery_lessons: assets/skills/my-create-feature/references/delivery-lessons.md
   stage_contracts: assets/skills/my-create-feature/references/stage-contracts.md
   feature_layout: assets/skills/my-create-feature/template/FEATURE_LAYOUT.json
   feature_validator: assets/skills/my-create-feature/scripts/validate-feature.mjs
@@ -69,6 +76,15 @@ configuration:
   - copilot
   - mcode
 deliverables:
+- assets/skills/my-create-feature/references/code-review-rules.md
+- assets/skills/my-create-feature/references/delivery-lessons.md
+- assets/skills/xfg-ddd-skills/SKILL.md
+- assets/skills/xfg-ddd-skills/UPSTREAM.json
+- assets/skills/java-dev/evals/project-adaptation/evals.json
+- assets/skills/my-tech-diagram/SKILL.md
+- assets/skills/java-dev/SKILL.md
+- assets/skills/my-create-feature/references/technical-docs.md
+- assets/skills/my-create-feature/references/java-dev.md
 - docs/workflow-skills.md
 - src/retired-prompts.mjs
 - assets/skills/my-auto-feature/SKILL.md

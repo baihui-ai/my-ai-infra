@@ -1,0 +1,109 @@
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif">
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0 H0 V24" fill="none" stroke="#1C2330" stroke-width="0.5"/>
+    </pattern>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="milestoneGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#A78BFA"/>
+    </linearGradient>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#22D3EE"/>
+    </marker>
+  </defs>
+
+  <!-- 背景 + 网格 -->
+  <rect width="1280" height="720" fill="#0D1117"/>
+  <rect width="1280" height="720" fill="url(#grid)"/>
+
+  <!-- 标题 -->
+  <text x="60" y="76" font-size="24" font-weight="600" fill="#E6EDF3">2026 下半年 Roadmap</text>
+  <text x="60" y="102" font-size="12" fill="#8B949E">Q3 – Q4 2026 · 产品路线图 · 主题级视图</text>
+
+  <!-- 季度标签（时间轴上方） -->
+  <text x="390" y="152" text-anchor="middle" font-size="16" font-weight="600" fill="#E6EDF3">Q3 2026</text>
+  <text x="890" y="152" text-anchor="middle" font-size="16" font-weight="600" fill="#E6EDF3">Q4 2026</text>
+
+  <!-- 里程碑标注（时间轴上方） -->
+  <text x="640" y="182" text-anchor="middle" font-size="10" fill="#8B949E">里程碑</text>
+  <text x="640" y="200" text-anchor="middle" font-size="13" font-weight="600" fill="#22D3EE">9月 · 搜索 2.0 上线</text>
+  <text x="1128" y="182" text-anchor="end" font-size="10" fill="#8B949E">里程碑</text>
+  <text x="1128" y="200" text-anchor="end" font-size="13" font-weight="600" fill="#A78BFA">12月 · AI 助手 Beta</text>
+
+  <!-- 时间轴 -->
+  <line x1="140" y1="250" x2="1128" y2="250" stroke="#3D4450" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- 月份刻度与标签 -->
+  <g stroke="#3D4450" stroke-width="1.5">
+    <line x1="140" y1="244" x2="140" y2="256"/>
+    <line x1="307" y1="244" x2="307" y2="256"/>
+    <line x1="473" y1="244" x2="473" y2="256"/>
+    <line x1="807" y1="244" x2="807" y2="256"/>
+    <line x1="973" y1="244" x2="973" y2="256"/>
+  </g>
+  <g font-size="10" fill="#8B949E" text-anchor="middle">
+    <text x="140" y="276">7月</text>
+    <text x="307" y="276">8月</text>
+    <text x="473" y="276">9月</text>
+    <text x="807" y="276">10月</text>
+    <text x="973" y="276">11月</text>
+    <text x="1128" y="276">12月</text>
+  </g>
+
+  <!-- 季度分隔虚线 -->
+  <line x1="640" y1="130" x2="640" y2="540" stroke="#30363D" stroke-width="1" stroke-dasharray="6 4"/>
+
+  <!-- 里程碑菱形：9月末（Q3 末） -->
+  <path d="M640 239 L651 250 L640 261 L629 250 z" fill="url(#milestoneGrad)" filter="url(#glow)"/>
+  <!-- 里程碑菱形：12月末（Q4 末） -->
+  <path d="M1128 239 L1139 250 L1128 261 L1117 250 z" fill="url(#milestoneGrad)" filter="url(#glow)"/>
+
+  <!-- 季度与主题卡的连接线 -->
+  <line x1="390" y1="261" x2="390" y2="336" stroke="#30363D" stroke-width="1.5"/>
+  <line x1="890" y1="261" x2="890" y2="336" stroke="#30363D" stroke-width="1.5"/>
+  <line x1="390" y1="416" x2="390" y2="436" stroke="#30363D" stroke-width="1.5"/>
+  <line x1="890" y1="416" x2="890" y2="436" stroke="#30363D" stroke-width="1.5"/>
+
+  <!-- Q3 主题卡 1：搜索性能优化 -->
+  <g>
+    <rect x="240" y="340" width="300" height="76" rx="10" fill="#161B22" stroke="#22D3EE" stroke-width="2" filter="url(#glow)"/>
+    <text x="390" y="368" text-anchor="middle" font-size="10" fill="#8B949E">Q3 · 主题</text>
+    <text x="390" y="396" text-anchor="middle" font-size="15" font-weight="500" fill="#22D3EE">搜索性能优化</text>
+  </g>
+
+  <!-- Q3 主题卡 2：多语言扩展 -->
+  <g>
+    <rect x="240" y="440" width="300" height="76" rx="10" fill="#161B22" stroke="#30363D" stroke-width="1.5"/>
+    <text x="390" y="468" text-anchor="middle" font-size="10" fill="#8B949E">Q3 · 主题</text>
+    <text x="390" y="496" text-anchor="middle" font-size="15" font-weight="500" fill="#E6EDF3">多语言扩展</text>
+  </g>
+
+  <!-- Q4 主题卡 1：AI 导购助手 -->
+  <g>
+    <rect x="740" y="340" width="300" height="76" rx="10" fill="#161B22" stroke="#30363D" stroke-width="1.5"/>
+    <text x="890" y="368" text-anchor="middle" font-size="10" fill="#8B949E">Q4 · 主题</text>
+    <text x="890" y="396" text-anchor="middle" font-size="15" font-weight="500" fill="#E6EDF3">AI 导购助手</text>
+  </g>
+
+  <!-- Q4 主题卡 2：供应商门户 -->
+  <g>
+    <rect x="740" y="440" width="300" height="76" rx="10" fill="#161B22" stroke="#30363D" stroke-width="1.5"/>
+    <text x="890" y="468" text-anchor="middle" font-size="10" fill="#8B949E">Q4 · 主题</text>
+    <text x="890" y="496" text-anchor="middle" font-size="15" font-weight="500" fill="#E6EDF3">供应商门户</text>
+  </g>
+
+  <!-- 图例 -->
+  <g>
+    <path d="M72 632 L80 640 L72 648 L64 640 z" fill="#22D3EE"/>
+    <text x="92" y="644" font-size="11" fill="#8B949E">里程碑（零工期事件）</text>
+    <rect x="222" y="631" width="22" height="16" rx="4" fill="#161B22" stroke="#30363D" stroke-width="1.5"/>
+    <text x="254" y="644" font-size="11" fill="#8B949E">主题条目（planned）</text>
+  </g>
+
+  <!-- 脚注 -->
+  <text x="60" y="690" font-size="10" fill="#8B949E">口径说明：条目粒度为主题，不含任务分解；里程碑时间精确到月（9 月末 / 12 月末）。</text>
+</svg>

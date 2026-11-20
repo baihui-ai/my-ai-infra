@@ -32,6 +32,12 @@ export async function read(root, relative) {
   if (!Buffer.from(text).equals(bytes)) throw Error(`Binary assets are not yet supported: ${file}`);
   return text;
 }
+// Bundled resources can contain reference images; text-only editing/import stays strict.
+export async function resource(root, relative) {
+  const file = await safe(root, relative);
+  const bytes = await fs.readFile(file), text = bytes.toString('utf8');
+  return Buffer.from(text).equals(bytes) ? { kind: 'file', text } : { kind: 'binary', hash: hash(bytes), data: bytes.toString('base64') };
+}
 export async function readJSON(root, relative, fallback) {
   await safe(root, relative);
   const text = await read(root, relative);

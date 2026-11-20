@@ -131,9 +131,31 @@
       "category": "workflow",
       "default": false,
       "aliases": []
+    },
+    {
+      "name": "my-tech-diagram",
+      "label": "技术图与动画演示",
+      "category": "support",
+      "default": false,
+      "aliases": []
+    },
+    {
+      "name": "java-dev",
+      "label": "Java 开发与数据规范",
+      "category": "support",
+      "default": false,
+      "aliases": []
+    },
+    {
+      "name": "xfg-ddd-skills",
+      "label": "Java DDD 架构与代码规范",
+      "category": "support",
+      "default": false,
+      "aliases": []
     }
   ],
   "removedSkills": [
-    "my-verify-feature"
+    "my-verify-feature",
+    "lily-doc"
   ]
 }

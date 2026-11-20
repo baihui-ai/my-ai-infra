@@ -1,0 +1,136 @@
+<svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif">
+  <defs>
+    <marker id="arrGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5C940D"/>
+    </marker>
+    <marker id="arrOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#E8590C"/>
+    </marker>
+    <marker id="arrPurple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#862E9C"/>
+    </marker>
+  </defs>
+
+  <rect width="1600" height="900" fill="#FFFFFF"/>
+
+  <!-- 标题 -->
+  <text x="40" y="52" font-size="22" font-weight="600" fill="#343A40">限界上下文映射图</text>
+  <text x="40" y="78" font-size="12" fill="#868E96">Context Map · 箭头方向 = 影响方向（上游 → 下游）</text>
+
+  <!-- ===== 分带背景 + 分组标题条 ===== -->
+  <!-- 核心域 -->
+  <rect x="180" y="100" width="1100" height="160" rx="4" fill="#FAFAFA"/>
+  <rect x="196" y="152" width="132" height="56" rx="4" fill="#FCE4EC" stroke="#AD1457" stroke-width="1"/>
+  <text x="262" y="177" text-anchor="middle" font-size="14" font-weight="600" fill="#880E4F">核心域</text>
+  <text x="262" y="196" text-anchor="middle" font-size="11" fill="#AD1457">Core Domain</text>
+  <text x="204" y="228" font-size="10" fill="#868E96">差异化竞争力，重点投入</text>
+
+  <!-- 支撑域 -->
+  <rect x="180" y="280" width="1100" height="160" rx="4" fill="#FAFAFA"/>
+  <rect x="196" y="332" width="132" height="56" rx="4" fill="#FCE4EC" stroke="#AD1457" stroke-width="1"/>
+  <text x="262" y="357" text-anchor="middle" font-size="14" font-weight="600" fill="#880E4F">支撑域</text>
+  <text x="262" y="376" text-anchor="middle" font-size="11" fill="#AD1457">Supporting</text>
+  <text x="204" y="408" font-size="10" fill="#868E96">支撑核心域，定制开发</text>
+
+  <!-- 通用域 -->
+  <rect x="180" y="460" width="1100" height="160" rx="4" fill="#FAFAFA"/>
+  <rect x="196" y="512" width="132" height="56" rx="4" fill="#FCE4EC" stroke="#AD1457" stroke-width="1"/>
+  <text x="262" y="537" text-anchor="middle" font-size="14" font-weight="600" fill="#880E4F">通用域</text>
+  <text x="262" y="556" text-anchor="middle" font-size="11" fill="#AD1457">Generic</text>
+  <text x="204" y="588" font-size="10" fill="#868E96">通用能力，可外购复用</text>
+
+  <!-- ===== 关系连线 ===== -->
+  <!-- 1. 定价 → 订单：供需配合 C/S -->
+  <line x1="560" y1="180" x2="656" y2="180" stroke="#5C940D" stroke-width="1.5" marker-end="url(#arrGreen)"/>
+  <text x="610" y="164" text-anchor="middle" font-size="11" font-weight="500" fill="#5C940D">供需配合 C/S</text>
+
+  <!-- 2. 库存 → 订单：供需配合 C/S -->
+  <line x1="770" y1="308" x2="770" y2="236" stroke="#5C940D" stroke-width="1.5" marker-end="url(#arrGreen)"/>
+  <text x="782" y="276" text-anchor="start" font-size="11" font-weight="500" fill="#5C940D">供需配合 C/S</text>
+
+  <!-- 3. 权限 → 订单：遵奉者 CF（折线） -->
+  <path d="M 1070 488 L 1070 202 L 884 202" fill="none" stroke="#E8590C" stroke-width="1.5" marker-end="url(#arrOrange)"/>
+  <text x="1082" y="350" text-anchor="start" font-size="11" font-weight="500" fill="#E8590C">遵奉者 CF</text>
+
+  <!-- 4. 用户 ↔ 权限：共享内核 SK（双向） -->
+  <line x1="560" y1="540" x2="956" y2="540" stroke="#5C940D" stroke-width="1.5" marker-start="url(#arrGreen)" marker-end="url(#arrGreen)"/>
+  <text x="758" y="524" text-anchor="middle" font-size="11" font-weight="500" fill="#5C940D">共享内核 SK</text>
+
+  <!-- 5. 支付宝 → 订单：防腐层 ACL -->
+  <line x1="1350" y1="158" x2="908" y2="158" stroke="#862E9C" stroke-width="1.5" marker-end="url(#arrPurple)"/>
+  <text x="1129" y="142" text-anchor="middle" font-size="11" font-weight="500" fill="#862E9C">防腐层 ACL</text>
+
+  <!-- ===== 上下文卡片（便签 + 折角 + 微旋转） ===== -->
+  <!-- 定价上下文（核心域） -->
+  <g transform="rotate(-0.7 450 180)">
+    <rect x="340" y="128" width="220" height="104" rx="3" fill="#FFF3BF" stroke="#E8B004" stroke-width="1.2"/>
+    <path d="M 546 128 h14 v14 z" fill="#E8B004" opacity="0.55"/>
+    <text x="450" y="162" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">定价上下文</text>
+    <text x="450" y="184" text-anchor="middle" font-size="11" fill="#868E96">Pricing Context</text>
+    <text x="450" y="206" text-anchor="middle" font-size="11" fill="#868E96">报价与折扣计算</text>
+  </g>
+
+  <!-- 订单上下文（核心域，强调便签：加粗边框）+ ACL 小梯形 -->
+  <g transform="rotate(0.6 770 180)">
+    <rect x="660" y="128" width="220" height="104" rx="3" fill="#FFF3BF" stroke="#E8B004" stroke-width="2"/>
+    <path d="M 546 128 h14 v14 z" fill="#E8B004" opacity="0.55" transform="translate(320 0)"/>
+    <text x="770" y="162" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">订单上下文</text>
+    <text x="770" y="184" text-anchor="middle" font-size="11" fill="#868E96">Order Context</text>
+    <text x="770" y="206" text-anchor="middle" font-size="11" fill="#868E96">订单全生命周期管理</text>
+    <!-- ACL 小梯形（订单框右边缘，下游一侧） -->
+    <path d="M 880 144 L 904 150 L 904 166 L 880 172 Z" fill="#F3E5F5" stroke="#862E9C" stroke-width="1.5"/>
+    <text x="892" y="161" text-anchor="middle" font-size="9" font-weight="600" fill="#862E9C">ACL</text>
+  </g>
+
+  <!-- 库存上下文（支撑域） -->
+  <g transform="rotate(0.7 770 360)">
+    <rect x="660" y="308" width="220" height="104" rx="3" fill="#FFF3BF" stroke="#E8B004" stroke-width="1.2"/>
+    <path d="M 866 308 h14 v14 z" fill="#E8B004" opacity="0.55"/>
+    <text x="770" y="342" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">库存上下文</text>
+    <text x="770" y="364" text-anchor="middle" font-size="11" fill="#868E96">Inventory Context</text>
+    <text x="770" y="386" text-anchor="middle" font-size="11" fill="#868E96">库存查询与扣减</text>
+  </g>
+
+  <!-- 用户上下文（通用域） -->
+  <g transform="rotate(0.6 450 540)">
+    <rect x="340" y="488" width="220" height="104" rx="3" fill="#FFF3BF" stroke="#E8B004" stroke-width="1.2"/>
+    <path d="M 546 488 h14 v14 z" fill="#E8B004" opacity="0.55"/>
+    <text x="450" y="522" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">用户上下文</text>
+    <text x="450" y="544" text-anchor="middle" font-size="11" fill="#868E96">User Context</text>
+    <text x="450" y="566" text-anchor="middle" font-size="11" fill="#868E96">账号认证</text>
+  </g>
+
+  <!-- 权限上下文（通用域） -->
+  <g transform="rotate(-0.8 1070 540)">
+    <rect x="960" y="488" width="220" height="104" rx="3" fill="#FFF3BF" stroke="#E8B004" stroke-width="1.2"/>
+    <path d="M 1166 488 h14 v14 z" fill="#E8B004" opacity="0.55"/>
+    <text x="1070" y="522" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">权限上下文</text>
+    <text x="1070" y="544" text-anchor="middle" font-size="11" fill="#868E96">Permission Context</text>
+    <text x="1070" y="566" text-anchor="middle" font-size="11" fill="#868E96">角色与权限</text>
+  </g>
+
+  <!-- 支付宝（外部系统便签，分带之外，虚线边） -->
+  <g transform="rotate(0.7 1460 180)">
+    <rect x="1350" y="128" width="220" height="104" rx="3" fill="#FCE4EC" stroke="#C2255C" stroke-width="1.2" stroke-dasharray="6 4"/>
+    <path d="M 1556 128 h14 v14 z" fill="#C2255C" opacity="0.55"/>
+    <text x="1460" y="152" text-anchor="middle" font-size="10" fill="#868E96">外部系统 External</text>
+    <text x="1460" y="176" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">支付宝</text>
+    <text x="1460" y="196" text-anchor="middle" font-size="11" fill="#868E96">Alipay</text>
+    <text x="1460" y="216" text-anchor="middle" font-size="11" fill="#868E96">外部支付系统</text>
+  </g>
+
+  <!-- ===== 图例 ===== -->
+  <line x1="180" y1="684" x2="216" y2="684" stroke="#5C940D" stroke-width="1.5" marker-end="url(#arrGreen)"/>
+  <text x="224" y="688" font-size="11" fill="#343A40">协作类：供需配合 C/S · 共享内核 SK（双向）</text>
+
+  <line x1="560" y1="684" x2="596" y2="684" stroke="#E8590C" stroke-width="1.5" marker-end="url(#arrOrange)"/>
+  <text x="604" y="688" font-size="11" fill="#343A40">遵奉者 CF</text>
+
+  <line x1="720" y1="684" x2="756" y2="684" stroke="#862E9C" stroke-width="1.5" marker-end="url(#arrPurple)"/>
+  <text x="764" y="688" font-size="11" fill="#343A40">防腐层 ACL</text>
+
+  <rect x="900" y="676" width="24" height="16" rx="3" fill="#FCE4EC" stroke="#C2255C" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <text x="932" y="688" font-size="11" fill="#343A40">外部系统（虚线框）</text>
+
+  <text x="1120" y="688" font-size="11" fill="#868E96">箭头方向 = 影响方向（上游 U → 下游 D）</text>
+</svg>

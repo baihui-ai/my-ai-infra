@@ -46,7 +46,8 @@ export async function startWeb({ home, project, port = 4317 }) {
       if (req.method !== 'POST') return send(404, { error: 'Not found' });
       let size = 0, chunks = [];
       for await (const chunk of req) { size += chunk.length; if (size > 1024 * 1024) throw Error('Request too large'); chunks.push(chunk); }
-      const body = JSON.parse(Buffer.concat(chunks).toString('utf8') || '{}');
+      let body;try{body=JSON.parse(Buffer.concat(chunks).toString('utf8')||'{}');}catch{throw Error('请求内容无效');}
+      if(!body||Array.isArray(body)||typeof body!=='object')throw Error('请求内容无效');
       if (url.pathname === '/api/memory/read') return send(200, await readMemory(home, body));
       if (url.pathname === '/api/memory/recall') return send(200, await recallMemory(home, body));
       if (url.pathname === '/api/memory/save') return send(200, await saveMemory(home, body, body.content, body.revision));

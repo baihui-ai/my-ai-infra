@@ -1,0 +1,113 @@
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif">
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+
+  <!-- 标题 -->
+  <text x="64" y="48" font-size="20" font-weight="600" fill="#1F2328">合同管理限界上下文 · 领域模型图</text>
+
+  <!-- 聚合边界（虚线圆角框） -->
+  <rect x="64" y="170" width="240" height="140" rx="12" fill="none" stroke="#9CA3AF" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="88" y="192" font-size="11" fill="#6B7280">项目聚合</text>
+
+  <rect x="380" y="150" width="520" height="380" rx="12" fill="none" stroke="#9CA3AF" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="404" y="172" font-size="11" fill="#6B7280">合同聚合</text>
+
+  <rect x="976" y="170" width="240" height="140" rx="12" fill="none" stroke="#9CA3AF" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="1000" y="192" font-size="11" fill="#6B7280">供应商聚合</text>
+
+  <!-- 连线（置于卡片下层） -->
+  <!-- R1 Project 1 — 1..* Contract（跨聚合 ID 引用，虚线流动 + 数据包） -->
+  <path id="r1" d="M 272 246 H 520" fill="none" stroke="#2563EB" stroke-width="1.5" stroke-dasharray="6 4">
+    <animate attributeName="stroke-dashoffset" from="20" to="0" dur="0.8s" repeatCount="indefinite"/>
+  </path>
+  <!-- R3 Contract 0..* — 1 Supplier（跨聚合 ID 引用，虚线流动 + 数据包） -->
+  <path id="r3" d="M 760 246 H 1008" fill="none" stroke="#2563EB" stroke-width="1.5" stroke-dasharray="6 4">
+    <animate attributeName="stroke-dashoffset" from="20" to="0" dur="0.8s" repeatCount="indefinite"/>
+  </path>
+  <!-- R2/R4 Contract 1 — 0..* ContractAttachment（聚合内，实线） -->
+  <path d="M 560 268 V 350 H 522 V 430" fill="none" stroke="#9CA3AF" stroke-width="1.5"/>
+  <!-- R5 Contract 1 — 1 Money（聚合内，实线） -->
+  <path d="M 720 268 V 350 H 758 V 430" fill="none" stroke="#9CA3AF" stroke-width="1.5"/>
+
+  <!-- ID 引用数据包（沿路径移动的小圆点） -->
+  <circle cx="272" cy="246" r="4" fill="#2563EB">
+    <animateMotion dur="2s" repeatCount="indefinite"><mpath href="#r1"/></animateMotion>
+  </circle>
+  <circle cx="760" cy="246" r="4" fill="#2563EB">
+    <animateMotion dur="2s" begin="1s" repeatCount="indefinite"><mpath href="#r3"/></animateMotion>
+  </circle>
+
+  <!-- 多重性与引用方式标注 -->
+  <text x="288" y="236" text-anchor="middle" font-size="11" fill="#6B7280">1</text>
+  <text x="500" y="236" text-anchor="middle" font-size="11" fill="#6B7280">1..*</text>
+  <text x="342" y="232" text-anchor="middle" font-size="10" fill="#2563EB">ID 引用</text>
+
+  <text x="780" y="236" text-anchor="middle" font-size="11" fill="#6B7280">0..*</text>
+  <text x="992" y="236" text-anchor="middle" font-size="11" fill="#6B7280">1</text>
+  <text x="938" y="232" text-anchor="middle" font-size="10" fill="#2563EB">ID 引用</text>
+
+  <text x="570" y="296" text-anchor="start" font-size="11" fill="#6B7280">1</text>
+  <text x="530" y="414" text-anchor="start" font-size="11" fill="#6B7280">0..*</text>
+
+  <text x="730" y="296" text-anchor="start" font-size="11" fill="#6B7280">1</text>
+  <text x="766" y="414" text-anchor="start" font-size="11" fill="#6B7280">1</text>
+
+  <!-- Project 卡片（聚合根） -->
+  <rect x="96" y="210" width="176" height="72" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="184" y="225" text-anchor="middle" font-size="10" fill="#6B7280">聚合根 · Aggregate Root</text>
+  <text x="184" y="244" text-anchor="middle" font-size="14" font-weight="600" fill="#1F2328">Project</text>
+  <line x1="108" y1="253" x2="260" y2="253" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="184" y="271" text-anchor="middle" font-size="13" fill="#1F2328">项目</text>
+
+  <!-- Contract 卡片（聚合根，右上角脉冲心跳） -->
+  <rect x="520" y="196" width="240" height="72" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <circle cx="752" cy="196" r="5" fill="#2563EB">
+    <animate attributeName="opacity" values="1;0.2;1" dur="1.6s" repeatCount="indefinite"/>
+  </circle>
+  <text x="640" y="211" text-anchor="middle" font-size="10" fill="#6B7280">聚合根 · Aggregate Root</text>
+  <text x="640" y="230" text-anchor="middle" font-size="14" font-weight="600" fill="#1F2328">Contract</text>
+  <line x1="532" y1="239" x2="748" y2="239" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="640" y="257" text-anchor="middle" font-size="13" fill="#1F2328">合同</text>
+
+  <!-- ContractAttachment 卡片（实体） -->
+  <rect x="412" y="430" width="220" height="72" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1.5"/>
+  <text x="522" y="445" text-anchor="middle" font-size="10" fill="#6B7280">实体 · Entity</text>
+  <text x="522" y="464" text-anchor="middle" font-size="14" font-weight="600" fill="#1F2328">ContractAttachment</text>
+  <line x1="424" y1="473" x2="620" y2="473" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="522" y="491" text-anchor="middle" font-size="13" fill="#1F2328">合同附件</text>
+
+  <!-- Money 卡片（值对象） -->
+  <rect x="668" y="430" width="180" height="72" rx="8" fill="#F9FAFB" stroke="#D1D5DB" stroke-width="1.5"/>
+  <text x="758" y="445" text-anchor="middle" font-size="10" fill="#6B7280">值对象 · Value Object</text>
+  <text x="758" y="464" text-anchor="middle" font-size="14" font-weight="600" fill="#1F2328">Money</text>
+  <line x1="680" y1="473" x2="836" y2="473" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="758" y="491" text-anchor="middle" font-size="13" fill="#1F2328">金额</text>
+
+  <!-- Supplier 卡片（聚合根） -->
+  <rect x="1008" y="210" width="176" height="72" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="1096" y="225" text-anchor="middle" font-size="10" fill="#6B7280">聚合根 · Aggregate Root</text>
+  <text x="1096" y="244" text-anchor="middle" font-size="14" font-weight="600" fill="#1F2328">Supplier</text>
+  <line x1="1020" y1="253" x2="1172" y2="253" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="1096" y="271" text-anchor="middle" font-size="13" fill="#1F2328">供应商</text>
+
+  <!-- 图例 -->
+  <rect x="64" y="638" width="24" height="16" rx="4" fill="none" stroke="#9CA3AF" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="96" y="650" font-size="10" fill="#6B7280">聚合边界</text>
+
+  <rect x="170" y="638" width="24" height="16" rx="4" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="202" y="650" font-size="10" fill="#6B7280">聚合根</text>
+
+  <rect x="260" y="638" width="24" height="16" rx="4" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1.5"/>
+  <text x="292" y="650" font-size="10" fill="#6B7280">实体</text>
+
+  <rect x="340" y="638" width="24" height="16" rx="4" fill="#F9FAFB" stroke="#D1D5DB" stroke-width="1.5"/>
+  <text x="372" y="650" font-size="10" fill="#6B7280">值对象</text>
+
+  <line x1="440" y1="646" x2="464" y2="646" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="472" y="650" font-size="10" fill="#6B7280">聚合内关联</text>
+
+  <line x1="556" y1="646" x2="580" y2="646" stroke="#2563EB" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="588" y="650" font-size="10" fill="#6B7280">跨聚合 ID 引用（流动）</text>
+
+  <!-- 脚注：假设声明 -->
+  <text x="64" y="676" font-size="10" fill="#6B7280">注：「项目 → 合同」的跨聚合引用方式用户未指定，按 ID 引用绘制（假设）；「合同 — 金额 Money」多重性按 1 对 1 绘制（假设）。</text>
+</svg>

@@ -36,7 +36,10 @@
     "lint": "node scripts/lint.mjs",
     "verify": "npm run build:skill && npm run lint && npm run validate && npm test",
     "release:check": "npm run verify && node scripts/release-check.mjs",
-    "test:web": "node scripts/check-web.mjs"
+    "test:web": "node scripts/check-web.mjs",
+    "test:diagrams": "node scripts/check-diagrams.mjs",
+    "eval:diagrams": "node scripts/check-diagram-evals.mjs",
+    "eval:java": "node scripts/check-java-runtime.mjs"
   },
   "engines": {
     "node": ">=22"

@@ -122,6 +122,11 @@ try {
   await links(installedRoot);
   const missing = await checkSkillResources(installedRoot, assets.map(a => a.name)); ensure(!missing.length, missing.join('\n'));
   pass('Offline npx bin, read-only version/catalog, packaged documentation and Skill resources');
+  ensure(!names.some(name=>name.startsWith('assets/skills/lily-doc/')),'Removed document Skill was packaged');
+  ensure(!names.some(name=>/^(?:src|web)\/feishu/.test(name)),'Removed document-cloud runtime was packaged');
+  for(const name of ['PRD.tmpl.md','TECH_DESIGN.tmpl.md','TEST_PLAN.tmpl.md'])ensure(names.includes('templates/mai-specs/_templates/'+name),'Missing project-owned standard template: '+name);
+  pass('Project-owned document templates are packaged without the removed document-cloud runtime or external template Skill');
+
 
   const globalPrefix = path.join(temp, 'global install');
   await npmRun(['install','--global','--prefix',globalPrefix,'--offline','--no-audit','--no-fund',artifact]);
@@ -157,6 +162,28 @@ try {
     ensure((await fs.readdir(directory,{withFileTypes:true})).some(entry => entry.name === 'SKILL.md' && entry.isFile()), `Skill manifest must be a regular file: ${name}`);
   }
   pass(`All ${selectedSkills.length} selected Skills have discoverable regular SKILL.md files`);
+  const dddRoot = path.join(installedRoot, 'assets/skills/xfg-ddd-skills');
+  const upstreamDdd = JSON.parse(await fs.readFile(path.join(dddRoot, 'UPSTREAM.json'), 'utf8'));
+  for (const resource of await files(dddRoot)) {
+    const bytes = await fs.readFile(path.join(dddRoot, resource));
+    const canonical = path.join(project, '.agents/skills/xfg-ddd-skills', resource);
+    ensure((await fs.readFile(canonical)).equals(bytes), `DDD resource changed after installation: ${resource}`);
+    if (upstreamDdd.files[resource]) ensure(createHash('sha256').update(bytes).digest('hex') === upstreamDdd.files[resource].sha256, `DDD upstream checksum mismatch: ${resource}`);
+    for (const adapter of ['.claude', '.cursor', '.github']) ensure(await fs.realpath(path.join(project, adapter, 'skills/xfg-ddd-skills', resource)) === await fs.realpath(canonical), `DDD resource link is broken: ${adapter}/${resource}`);
+  }
+  await run('bash', ['-n', path.join(dddRoot, 'scripts/create-ddd-project.sh')]);
+  pass('Packaged DDD source, references and optional scaffold script preserve upstream checksums and install through adapters without executing generation');
+  const diagramRoot = path.join(installedRoot, 'assets/skills/my-tech-diagram');
+  for (const resource of await files(diagramRoot)) {
+    const canonical = path.join(project, '.agents/skills/my-tech-diagram', resource);
+    ensure((await fs.readFile(canonical)).equals(await fs.readFile(path.join(diagramRoot, resource))), `Diagram source bytes differ after packaged installation: ${resource}`);
+    for (const adapter of ['.claude', '.cursor', '.github']) ensure(await fs.realpath(path.join(project, adapter, 'skills/my-tech-diagram', resource)) === await fs.realpath(canonical), `Diagram resource link is broken: ${adapter}/${resource}`);
+  }
+  const diagramSteps = path.join(temp, 'diagram-steps.json'), diagramHtml = path.join(temp, 'diagram.html');
+  await fs.writeFile(diagramSteps, JSON.stringify({ steps: [{ label: '完整静态图' }, { label: '阅读已有关系' }] }));
+  await run(process.execPath, [path.join(project, '.agents/skills/my-tech-diagram/scripts/animate-svg.mjs'), '--svg', path.join(project, '.agents/skills/my-tech-diagram/showcase/sequence/minimal.svg'), '--steps', diagramSteps, '--out', diagramHtml]);
+  ensure((await fs.readFile(diagramHtml, 'utf8')).startsWith('<!-- mai-diagram-animation:v1 -->'), 'Packaged animation script did not produce a managed HTML');
+  pass('Packaged my-tech-diagram preserves every source/image byte, resolves tool references and generates offline animation HTML');
   if (process.env.MAI_CODEX_BIN) {
     await checkCodexDiscovery(process.env.MAI_CODEX_BIN,await fs.realpath(project),selectedSkills);
     pass('Codex app-server skills/list discovers every selected Skill after global mai init');

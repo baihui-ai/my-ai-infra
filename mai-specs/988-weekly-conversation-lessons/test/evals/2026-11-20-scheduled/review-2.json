@@ -1,0 +1,27 @@
+{
+  "evaluation": "targeted read-only re-review",
+  "case": "C4",
+  "initial_results_sha256": "3d7562ef820ea64e5ec01ac2e57cf48d59ebe1858ab0543d06c6bf5ae7d83cff",
+  "revised_source_sha256": {
+    "assets/skills/my-review-code/SKILL.md": "e86215ba232df98479b8b818889d23d51d9eb212af9c2794b00dfdc0d3d03c9e",
+    "assets/skills/my-create-feature/references/java-dev.md": "2335dfa4fa536e2178c6954ad094f8ed42b72cb436d0090b6af97501f217bb9d",
+    "assets/skills/my-create-feature/references/code-review-rules.md": "737d8a9e491537cc1dede8f05e0ea6365c8da2cf5acdb4655bebb3171d59160a",
+    "assets/skills/my-create-feature/references/delivery-lessons.md": "d60a350c512346347a463631664d865b16134dfa1bb13e4684f30bce3a0ceb3b"
+  },
+  "scope": "只复评连表写口径F01与C4，保留原始8场景记录，不改任何源码或执行数据库。",
+  "decision": "四表JOIN查询与写入分别处理。四表仍不因小范围或不超过五表就自动通过，需理由、数据规模及索引/过滤/实际计划证据；无EXPLAIN保持待验。新增或改造UPDATE/DELETE严格单表，不生成JOIN UPDATE/JOIN DELETE或一语句多表修改。跨表资格与依赖通过仓储分步执行时必须保留真实并发保护、资格复核、受影响行数及最小原子边界，不能裸先查再写或声称消除死锁。",
+  "finding_resolution": {
+    "id": "F01",
+    "status": "resolved",
+    "evidence": "SQL与数据访问第95行现明确单表写入，并列禁止JOIN UPDATE/JOIN DELETE/一语句多表修改，与Java契约补充第144行一致；后续并发和原子性限制仍保留。"
+  },
+  "result": "pass",
+  "combined_summary": {
+    "initial_pass": 7,
+    "targeted_retest_pass": 1,
+    "combined_satisfied": 8,
+    "total_cases": 8,
+    "open_findings": 0
+  },
+  "accurate_reporting": "八例独立桌面决策：初评七例符合，C4发现的单表写口径歧义修正后定向复评通过，综合8/8；原始初评保留。其余七例未重跑，不能据此报告Java、SQL执行计划、事务/锁并发或生产验收通过。"
+}

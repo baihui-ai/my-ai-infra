@@ -1,0 +1,124 @@
+<svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif">
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0 H0 V24" fill="none" stroke="#1C2330" stroke-width="0.5"/>
+    </pattern>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrCyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#22D3EE"/>
+    </marker>
+    <marker id="arrPurple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#A78BFA"/>
+    </marker>
+    <marker id="arrGray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8B949E"/>
+    </marker>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1600" height="900" fill="#0D1117"/>
+  <rect width="1600" height="900" fill="url(#grid)"/>
+
+  <!-- 标题 -->
+  <text x="60" y="56" font-size="22" font-weight="600" fill="#E6EDF3">部署网络拓扑图</text>
+  <text x="60" y="80" font-size="12" fill="#8B949E">互联网用户 → CDN → ALB → 应用服务器（多可用区） → MySQL 主从 + Redis 集群</text>
+
+  <!-- VPC 边界 -->
+  <rect x="100" y="190" width="1400" height="640" rx="16" fill="none" stroke="#30363D" stroke-width="1.5" stroke-dasharray="8 6"/>
+  <text x="124" y="222" font-size="13" fill="#8B949E">VPC · 虚拟私有云</text>
+
+  <!-- 可用区 A / B -->
+  <rect x="380" y="460" width="300" height="120" rx="12" fill="none" stroke="#30363D" stroke-width="1.2" stroke-dasharray="6 4"/>
+  <text x="396" y="484" font-size="11" fill="#8B949E">可用区 A</text>
+  <rect x="920" y="460" width="300" height="120" rx="12" fill="none" stroke="#30363D" stroke-width="1.2" stroke-dasharray="6 4"/>
+  <text x="936" y="484" font-size="11" fill="#8B949E">可用区 B</text>
+
+  <!-- 私有子网 -->
+  <rect x="260" y="640" width="1080" height="150" rx="12" fill="none" stroke="#A78BFA" stroke-width="1.2" stroke-dasharray="6 4" opacity="0.55"/>
+  <text x="276" y="664" font-size="11" fill="#A78BFA">私有子网 · 数据层</text>
+
+  <!-- 链路：接入主链路（青） -->
+  <path d="M800 148 V248" fill="none" stroke="#22D3EE" stroke-width="1.5" marker-end="url(#arrCyan)"/>
+  <text x="846" y="202" text-anchor="middle" font-size="11" fill="#8B949E">HTTPS:443</text>
+
+  <path d="M800 306 V368" fill="none" stroke="#22D3EE" stroke-width="1.5" marker-end="url(#arrCyan)"/>
+  <text x="874" y="340" text-anchor="middle" font-size="11" fill="#8B949E">HTTPS:443 · 回源</text>
+
+  <path d="M800 426 V463" fill="none" stroke="#22D3EE" stroke-width="1.5"/>
+  <path d="M800 463 H530 V490" fill="none" stroke="#22D3EE" stroke-width="1.5" marker-end="url(#arrCyan)"/>
+  <path d="M800 463 H1070 V490" fill="none" stroke="#22D3EE" stroke-width="1.5" marker-end="url(#arrCyan)"/>
+  <text x="640" y="456" text-anchor="middle" font-size="11" fill="#8B949E">HTTP:8080</text>
+  <text x="960" y="456" text-anchor="middle" font-size="11" fill="#8B949E">HTTP:8080</text>
+
+  <!-- 链路：写路径（青） -->
+  <path d="M510 548 V612 H790 V676" fill="none" stroke="#22D3EE" stroke-width="1.5" marker-end="url(#arrCyan)"/>
+  <text x="645" y="606" text-anchor="middle" font-size="11" fill="#8B949E">写 · TCP:3306</text>
+  <path d="M1050 548 V612 H810 V676" fill="none" stroke="#22D3EE" stroke-width="1.5" marker-end="url(#arrCyan)"/>
+  <text x="935" y="606" text-anchor="middle" font-size="11" fill="#8B949E">写 · TCP:3306</text>
+
+  <!-- 链路：读路径（紫） -->
+  <path d="M550 548 V636 H424 V676" fill="none" stroke="#A78BFA" stroke-width="1.5" marker-end="url(#arrPurple)"/>
+  <text x="487" y="630" text-anchor="middle" font-size="11" fill="#8B949E">读 · TCP:3306</text>
+  <path d="M1090 548 V652 H436 V676" fill="none" stroke="#A78BFA" stroke-width="1.5" marker-end="url(#arrPurple)"/>
+  <text x="700" y="646" text-anchor="middle" font-size="11" fill="#8B949E">读 · TCP:3306</text>
+
+  <!-- 链路：缓存（紫） -->
+  <path d="M590 548 V664 H1184 V676" fill="none" stroke="#A78BFA" stroke-width="1.5" marker-end="url(#arrPurple)"/>
+  <text x="985" y="658" text-anchor="middle" font-size="11" fill="#8B949E">缓存 · TCP:6379</text>
+  <path d="M1110 548 V660 H1156 V676" fill="none" stroke="#A78BFA" stroke-width="1.5" marker-end="url(#arrPurple)"/>
+  <text x="1230" y="655" text-anchor="middle" font-size="11" fill="#8B949E">缓存 · TCP:6379</text>
+
+  <!-- 链路：主从复制（灰虚线，异步） -->
+  <path d="M710 712 H526" fill="none" stroke="#8B949E" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrGray)"/>
+  <text x="615" y="700" text-anchor="middle" font-size="11" fill="#8B949E">主从复制 · binlog</text>
+
+  <!-- 节点：互联网用户（VPC 外） -->
+  <rect x="710" y="92" width="180" height="56" rx="10" fill="#161B22" stroke="#30363D" stroke-width="1.5"/>
+  <text x="800" y="112" text-anchor="middle" font-size="10" fill="#8B949E">外部用户 · Internet</text>
+  <text x="800" y="132" text-anchor="middle" font-size="14" font-weight="500" fill="#E6EDF3">互联网用户</text>
+
+  <!-- 节点：CDN -->
+  <rect x="710" y="250" width="180" height="56" rx="10" fill="#161B22" stroke="#22D3EE" stroke-width="2" filter="url(#glow)"/>
+  <text x="800" y="270" text-anchor="middle" font-size="10" fill="#8B949E">内容分发 · CDN 节点</text>
+  <text x="800" y="290" text-anchor="middle" font-size="14" font-weight="500" fill="#22D3EE">CDN 加速</text>
+
+  <!-- 节点：ALB -->
+  <rect x="710" y="370" width="180" height="56" rx="10" fill="#161B22" stroke="#22D3EE" stroke-width="2" filter="url(#glow)"/>
+  <text x="800" y="390" text-anchor="middle" font-size="10" fill="#8B949E">流量入口 · Load Balancer</text>
+  <text x="800" y="410" text-anchor="middle" font-size="14" font-weight="500" fill="#22D3EE">ALB 负载均衡</text>
+
+  <!-- 节点：应用服务器 A / B -->
+  <rect x="440" y="492" width="180" height="56" rx="10" fill="#161B22" stroke="#30363D" stroke-width="1.5"/>
+  <text x="530" y="512" text-anchor="middle" font-size="10" fill="#8B949E">App Server</text>
+  <text x="530" y="532" text-anchor="middle" font-size="14" font-weight="500" fill="#E6EDF3">应用服务器 A</text>
+  <rect x="980" y="492" width="180" height="56" rx="10" fill="#161B22" stroke="#30363D" stroke-width="1.5"/>
+  <text x="1070" y="512" text-anchor="middle" font-size="10" fill="#8B949E">App Server</text>
+  <text x="1070" y="532" text-anchor="middle" font-size="14" font-weight="500" fill="#E6EDF3">应用服务器 B</text>
+
+  <!-- 节点：MySQL 主 / 从、Redis 集群（私有子网内） -->
+  <rect x="710" y="680" width="180" height="64" rx="10" fill="#161B22" stroke="#A78BFA" stroke-width="2" filter="url(#glow)"/>
+  <text x="800" y="702" text-anchor="middle" font-size="10" fill="#8B949E">数据库 · 主（写）</text>
+  <text x="800" y="724" text-anchor="middle" font-size="14" font-weight="500" fill="#A78BFA">MySQL Master</text>
+
+  <rect x="340" y="680" width="180" height="64" rx="10" fill="#161B22" stroke="#A78BFA" stroke-width="1.5"/>
+  <text x="430" y="702" text-anchor="middle" font-size="10" fill="#8B949E">数据库 · 从（读）</text>
+  <text x="430" y="724" text-anchor="middle" font-size="14" font-weight="500" fill="#E6EDF3">MySQL Slave</text>
+
+  <rect x="1080" y="680" width="180" height="64" rx="10" fill="#161B22" stroke="#A78BFA" stroke-width="1.5"/>
+  <text x="1170" y="702" text-anchor="middle" font-size="10" fill="#8B949E">缓存 · Cluster</text>
+  <text x="1170" y="724" text-anchor="middle" font-size="14" font-weight="500" fill="#E6EDF3">Redis 集群</text>
+
+  <!-- 图例 -->
+  <line x1="1120" y1="862" x2="1152" y2="862" stroke="#22D3EE" stroke-width="1.5"/>
+  <text x="1200" y="866" text-anchor="middle" font-size="11" fill="#8B949E">主链路 · 写</text>
+  <line x1="1270" y1="862" x2="1302" y2="862" stroke="#A78BFA" stroke-width="1.5"/>
+  <text x="1348" y="866" text-anchor="middle" font-size="11" fill="#8B949E">读 · 缓存</text>
+  <line x1="1410" y1="862" x2="1442" y2="862" stroke="#8B949E" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="1492" y="866" text-anchor="middle" font-size="11" fill="#8B949E">异步复制</text>
+
+  <!-- 脚注 -->
+  <text x="60" y="868" font-size="10" fill="#8B949E">注：协议与端口按组件业界默认值标注（HTTPS:443 / HTTP:8080 / MySQL TCP:3306 / Redis TCP:6379），IP 段按需脱敏未标注</text>
+</svg>

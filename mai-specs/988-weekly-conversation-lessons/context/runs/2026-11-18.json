@@ -1,0 +1,94 @@
+{
+  "date": "2026-11-18",
+  "window": {
+    "start": "2026-11-11T09:04:48Z",
+    "end": "2026-11-18T09:04:48Z",
+    "timezone": "Asia/Shanghai"
+  },
+  "candidateThreadCount": 16,
+  "activeListComplete": true,
+  "method": "复用2026-11-17已审核的周窗口证据和去重清单；本次复读有更新时间变化的5个会话，旧回合可能包含新续发消息，不能用回合开始时间判断所有消息均已处理。没有保存原始对话，按语义和证据ID去重。",
+  "reread": [
+    {
+      "threadId": "01a1d273-04e9-7873-9c83-bd3fba5ac3f9",
+      "pages": 1,
+      "turnsRead": 10
+    },
+    {
+      "threadId": "01a1e862-3b02-7743-8486-360ba0b87ff6",
+      "pages": 3,
+      "turnsRead": 28
+    },
+    {
+      "threadId": "01a1e804-0b0c-7830-b39b-fa4b9db7f9b4",
+      "pages": 1,
+      "turnsRead": 6
+    },
+    {
+      "threadId": "01a1e714-3de8-74c3-b76a-5769fe166aea",
+      "pages": 1,
+      "turnsRead": 2
+    },
+    {
+      "threadId": "01a1e8c0-2a86-76f1-87e3-7f463550111e",
+      "pages": 1,
+      "turnsRead": 2
+    }
+  ],
+  "newLessons": [
+    {
+      "key": "sql-write-and-transaction-budget",
+      "sources": [
+        [
+          "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "01a1ec1c-f70e-7783-b58a-e3c4af8cf8b9"
+        ],
+        [
+          "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "01a1ec69-0b13-7eb3-8812-b99310a0560a"
+        ]
+      ],
+      "target": "assets/skills/my-create-feature/references/java-dev.md",
+      "status": "implemented-validated-synced",
+      "validation": "test/2026-11-18-RUN_REPORT.md"
+    },
+    {
+      "key": "safe-success-retention",
+      "sources": [
+        [
+          "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "01a1ec81-83be-7482-bfea-5d3a8e63cd84"
+        ]
+      ],
+      "target": "assets/skills/my-create-feature/references/delivery-lessons.md",
+      "status": "implemented-validated-synced",
+      "validation": "test/2026-11-18-RUN_REPORT.md"
+    },
+    {
+      "key": "delivery-slice-inventory",
+      "sources": [
+        [
+          "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "01a1ed4e-b23c-72b0-874e-1cfe091a477f"
+        ],
+        [
+          "01a1e862-3b02-7743-8486-360ba0b87ff6",
+          "01a1ed4f-f6ce-7b02-ad70-ab2ad68a6a8e"
+        ]
+      ],
+      "target": "assets/skills/my-create-feature/references/delivery-lessons.md",
+      "status": "implemented-validated-synced",
+      "validation": "test/2026-11-18-RUN_REPORT.md"
+    }
+  ],
+  "deduplicated": [
+    "real-container-interaction",
+    "async-observable-result",
+    "reference-protected-scope"
+  ],
+  "excluded": [
+    "非开发创作请求",
+    "第三方特定保留天数/时刻/批次数",
+    "引用对话中的提交、合并和生产操作授权"
+  ]
+}

@@ -1,0 +1,106 @@
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif">
+  <defs>
+    <marker id="arrAcc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#D97757"/>
+    </marker>
+    <marker id="arrWarm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#C9BFAE"/>
+    </marker>
+  </defs>
+
+  <rect width="1280" height="720" fill="#F5F1EA"/>
+  <text x="76" y="44" font-size="20" font-weight="600" fill="#2B2118" font-family="Georgia, 'Times New Roman', 'Songti SC', 'SimSun', serif">报销审批流程 · UML 活动图</text>
+
+  <!-- 泳道头部底色 -->
+  <rect x="77" y="73" width="358" height="43" fill="#FDFBF7"/>
+  <rect x="461" y="73" width="358" height="43" fill="#FDFBF7"/>
+  <rect x="845" y="73" width="358" height="43" fill="#FDFBF7"/>
+
+  <!-- 泳道边框 -->
+  <rect x="76" y="72" width="360" height="616" rx="10" fill="none" stroke="#E3DCD0" stroke-width="1.5"/>
+  <rect x="460" y="72" width="360" height="616" rx="10" fill="none" stroke="#E3DCD0" stroke-width="1.5"/>
+  <rect x="844" y="72" width="360" height="616" rx="10" fill="none" stroke="#E3DCD0" stroke-width="1.5"/>
+
+  <!-- 泳道头部分隔线 -->
+  <line x1="77" y1="116" x2="435" y2="116" stroke="#E3DCD0" stroke-width="1"/>
+  <line x1="461" y1="116" x2="819" y2="116" stroke="#E3DCD0" stroke-width="1"/>
+  <line x1="845" y1="116" x2="1203" y2="116" stroke="#E3DCD0" stroke-width="1"/>
+
+  <!-- 泳道名 -->
+  <text x="256" y="100" text-anchor="middle" font-size="14" font-weight="600" fill="#C2542F">申请人</text>
+  <text x="640" y="100" text-anchor="middle" font-size="14" font-weight="600" fill="#C2542F">主管</text>
+  <text x="1024" y="100" text-anchor="middle" font-size="14" font-weight="600" fill="#C2542F">财务</text>
+
+  <!-- 边 1：start → submit（主流程） -->
+  <line x1="256" y1="169" x2="256" y2="196" stroke="#D97757" stroke-width="2" marker-end="url(#arrAcc)"/>
+  <!-- 边 2：submit → 主管审批（主流程） -->
+  <line x1="350" y1="228" x2="550" y2="228" stroke="#D97757" stroke-width="2" marker-end="url(#arrAcc)"/>
+  <!-- 边 3：主管审批 → 财务复核 [通过]（主流程） -->
+  <line x1="730" y1="228" x2="934" y2="228" stroke="#D97757" stroke-width="2" marker-end="url(#arrAcc)"/>
+  <text x="832" y="216" text-anchor="middle" font-size="11" fill="#C2542F">[通过]</text>
+  <!-- 边 4：财务复核 → 打款 [通过]（主流程） -->
+  <line x1="1024" y1="276" x2="1024" y2="332" stroke="#D97757" stroke-width="2" marker-end="url(#arrAcc)"/>
+  <text x="1036" y="310" font-size="11" fill="#C2542F">[通过]</text>
+  <!-- 边 5：打款 → end-pay（主流程） -->
+  <line x1="1024" y1="400" x2="1024" y2="448" stroke="#D97757" stroke-width="2" marker-end="url(#arrAcc)"/>
+
+  <!-- 边 6：主管审批 [驳回] → notify（下方空区折线，汇入 notify 右缘） -->
+  <path d="M 640 276 V 456 H 352" fill="none" stroke="#C9BFAE" stroke-width="1.5" marker-end="url(#arrWarm)"/>
+  <text x="650" y="300" font-size="11" fill="#8A7B6B">[驳回]</text>
+
+  <!-- 边 7：财务复核 [驳回] → notify（右缘 → 下缘 → 左缘外侧通道，汇入 notify 左缘，零交叉） -->
+  <path d="M 1112 228 H 1190 V 640 H 140 V 456 H 162" fill="none" stroke="#C9BFAE" stroke-width="1.5" marker-end="url(#arrWarm)"/>
+  <text x="1151" y="216" text-anchor="middle" font-size="11" fill="#8A7B6B">[驳回]</text>
+
+  <!-- 边 8：notify → end-reject -->
+  <line x1="256" y1="488" x2="256" y2="538" stroke="#C9BFAE" stroke-width="1.5" marker-end="url(#arrWarm)"/>
+
+  <!-- start -->
+  <circle cx="256" cy="158" r="9" fill="#2B2118"/>
+  <text x="256" y="140" text-anchor="middle" font-size="10" fill="#8A7B6B">开始</text>
+
+  <!-- submit：Action 提交报销单 -->
+  <rect x="166" y="200" width="180" height="56" rx="10" fill="#FDFBF7" stroke="#E3DCD0" stroke-width="1.5"/>
+  <rect x="166" y="200" width="180" height="4" rx="2" fill="#D97757"/>
+  <text x="256" y="222" text-anchor="middle" font-size="10" fill="#8A7B6B">动作</text>
+  <text x="256" y="242" text-anchor="middle" font-size="14" font-weight="500" fill="#2B2118">提交报销单</text>
+
+  <!-- mgr-decide：Decision 主管审批 -->
+  <polygon points="640,184 724,228 640,272 556,228" fill="#FDFBF7" stroke="#D97757" stroke-width="1.5"/>
+  <text x="640" y="226" text-anchor="middle" font-size="14" font-weight="500" fill="#C2542F">主管审批</text>
+  <text x="640" y="244" text-anchor="middle" font-size="10" fill="#8A7B6B">决策</text>
+
+  <!-- fin-decide：Decision 财务复核 -->
+  <polygon points="1024,184 1108,228 1024,272 940,228" fill="#FDFBF7" stroke="#D97757" stroke-width="1.5"/>
+  <text x="1024" y="226" text-anchor="middle" font-size="14" font-weight="500" fill="#C2542F">财务复核</text>
+  <text x="1024" y="244" text-anchor="middle" font-size="10" fill="#8A7B6B">决策</text>
+
+  <!-- pay：Action 打款 -->
+  <rect x="934" y="340" width="180" height="56" rx="10" fill="#FDFBF7" stroke="#E3DCD0" stroke-width="1.5"/>
+  <rect x="934" y="340" width="180" height="4" rx="2" fill="#D97757"/>
+  <text x="1024" y="362" text-anchor="middle" font-size="10" fill="#8A7B6B">动作</text>
+  <text x="1024" y="382" text-anchor="middle" font-size="14" font-weight="500" fill="#2B2118">打款</text>
+
+  <!-- end-pay -->
+  <circle cx="1024" cy="462" r="12" fill="#FDFBF7" stroke="#2B2118" stroke-width="2"/>
+  <circle cx="1024" cy="462" r="6" fill="#2B2118"/>
+  <text x="1044" y="466" font-size="10" fill="#8A7B6B">结束</text>
+
+  <!-- notify：Action 通知申请人 -->
+  <rect x="166" y="428" width="180" height="56" rx="10" fill="#FDFBF7" stroke="#E3DCD0" stroke-width="1.5"/>
+  <rect x="166" y="428" width="180" height="4" rx="2" fill="#D97757"/>
+  <text x="256" y="450" text-anchor="middle" font-size="10" fill="#8A7B6B">动作</text>
+  <text x="256" y="470" text-anchor="middle" font-size="14" font-weight="500" fill="#2B2118">通知申请人</text>
+
+  <!-- end-reject -->
+  <circle cx="256" cy="552" r="12" fill="#FDFBF7" stroke="#2B2118" stroke-width="2"/>
+  <circle cx="256" cy="552" r="6" fill="#2B2118"/>
+  <text x="256" y="582" text-anchor="middle" font-size="10" fill="#8A7B6B">结束</text>
+
+  <!-- 图例 -->
+  <line x1="76" y1="706" x2="106" y2="706" stroke="#D97757" stroke-width="2" marker-end="url(#arrAcc)"/>
+  <text x="112" y="710" font-size="10" fill="#8A7B6B">主流程（通过路径）</text>
+  <line x1="232" y1="706" x2="262" y2="706" stroke="#C9BFAE" stroke-width="1.5" marker-end="url(#arrWarm)"/>
+  <text x="268" y="710" font-size="10" fill="#8A7B6B">驳回回流（走画布外侧通道，不与主流程交叉）</text>
+  <text x="560" y="710" font-size="10" fill="#8A7B6B">[条件] = 决策守卫</text>
+</svg>

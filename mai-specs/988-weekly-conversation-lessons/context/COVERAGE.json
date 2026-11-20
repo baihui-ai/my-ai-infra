@@ -1,0 +1,120 @@
+{
+  "window": {
+    "start": "2026-11-10T09:39:47.000Z",
+    "end": "2026-11-17T09:39:47.000Z",
+    "timezone": "Asia/Shanghai"
+  },
+  "coverage": [
+    {
+      "threadId": "01a1d273-04e9-7873-9c83-bd3fba5ac3f9",
+      "pages": 4,
+      "turnsInWindow": 32,
+      "olderRemainingOutsideWindow": false
+    },
+    {
+      "threadId": "01a1e862-3b02-7743-8486-360ba0b87ff6",
+      "pages": 1,
+      "turnsInWindow": 8,
+      "olderRemainingOutsideWindow": false
+    },
+    {
+      "threadId": "01a1e8c0-2a86-76f1-87e3-7f463550111e",
+      "pages": 1,
+      "turnsInWindow": 1,
+      "olderRemainingOutsideWindow": false
+    },
+    {
+      "threadId": "01a1e840-da56-7450-a9e7-a0d115640e90",
+      "pages": 1,
+      "turnsInWindow": 5,
+      "olderRemainingOutsideWindow": false
+    },
+    {
+      "threadId": "01a1e804-0b0c-7830-b39b-fa4b9db7f9b4",
+      "pages": 1,
+      "turnsInWindow": 6,
+      "olderRemainingOutsideWindow": false
+    },
+    {
+      "threadId": "01a1e816-7588-72d1-9713-cce6d13093b4",
+      "pages": 1,
+      "turnsInWindow": 2,
+      "olderRemainingOutsideWindow": false
+    },
+    {
+      "threadId": "01a1e714-3de8-74c3-b76a-5769fe166aea",
+      "pages": 1,
+      "turnsInWindow": 2,
+      "olderRemainingOutsideWindow": false
+    },
+    {
+      "threadId": "01a1774e-d413-7342-81cf-b75f238fd1cd",
+      "pages": 1,
+      "turnsInWindow": 4,
+      "olderRemainingOutsideWindow": true
+    },
+    {
+      "threadId": "01a1cd3b-ff24-7591-b08a-2c05930e1d7c",
+      "pages": 23,
+      "turnsInWindow": 227,
+      "olderRemainingOutsideWindow": false
+    },
+    {
+      "threadId": "01a1e703-3da4-7b72-ac3b-989e09e14cc6",
+      "pages": 1,
+      "turnsInWindow": 2,
+      "olderRemainingOutsideWindow": false
+    },
+    {
+      "threadId": "01a1d412-5f3b-7aa2-9196-e458707a356d",
+      "pages": 5,
+      "turnsInWindow": 44,
+      "olderRemainingOutsideWindow": false
+    },
+    {
+      "threadId": "01a1d40a-5180-74c3-8353-4f15a96101ee",
+      "pages": 1,
+      "turnsInWindow": 1,
+      "olderRemainingOutsideWindow": false
+    },
+    {
+      "threadId": "01a1d407-4d87-7fd0-a152-04ef3bc24f99",
+      "pages": 1,
+      "turnsInWindow": 2,
+      "olderRemainingOutsideWindow": false
+    },
+    {
+      "threadId": "019e7221-a8b9-7b32-8ae2-b278f74ea899",
+      "pages": 1,
+      "turnsInWindow": 0,
+      "olderRemainingOutsideWindow": false
+    },
+    {
+      "threadId": "01a1aaad-7d82-7232-9260-11a356662877",
+      "pages": 4,
+      "turnsInWindow": 39,
+      "olderRemainingOutsideWindow": true
+    },
+    {
+      "threadId": "01a1d266-85a8-7343-9487-768749187c28",
+      "pages": 1,
+      "turnsInWindow": 1,
+      "olderRemainingOutsideWindow": false
+    },
+    {
+      "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+      "pages": 3,
+      "turnsInWindow": 25,
+      "olderRemainingOutsideWindow": false
+    },
+    {
+      "threadId": "01a1c4cd-476b-7b41-8520-1770606099a0",
+      "pages": 1,
+      "turnsInWindow": 0,
+      "olderRemainingOutsideWindow": false
+    }
+  ],
+  "activeHistoryFullyListed": true,
+  "archivedHistoryFullyListed": true,
+  "archivedThreadsInWindow": 0
+}

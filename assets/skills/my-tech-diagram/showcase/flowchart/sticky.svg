@@ -1,0 +1,123 @@
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif">
+  <defs>
+    <filter id="note" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="1.5" dy="2" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.10"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#868E96"/>
+    </marker>
+  </defs>
+  <rect width="1280" height="720" fill="#FAFAFA"/>
+
+  <!-- 标题 -->
+  <text x="48" y="46" font-size="20" font-weight="600" fill="#343A40">售后退款流程图</text>
+
+  <!-- 图例(右上) -->
+  <rect x="950" y="62" width="34" height="18" rx="9" fill="#FCE4EC" stroke="#AD1457" stroke-width="1.2"/>
+  <text x="994" y="76" font-size="11" fill="#868E96">开始 / 结束</text>
+  <rect x="950" y="90" width="34" height="18" rx="3" fill="#FFF3BF" stroke="#E8B004" stroke-width="1.2"/>
+  <text x="994" y="104" font-size="11" fill="#868E96">处理</text>
+  <polygon points="967,116 984,125 967,134 950,125" fill="#D3F9D8" stroke="#5C940D" stroke-width="1.2"/>
+  <text x="994" y="129" font-size="11" fill="#868E96">判断</text>
+
+  <!-- ===== 连线 ===== -->
+  <!-- 主轴 -->
+  <line x1="340" y1="104" x2="340" y2="124" stroke="#868E96" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="340" y1="178" x2="340" y2="202" stroke="#868E96" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- D1 否:未发货,直接执行退款 -->
+  <line x1="340" y1="316" x2="340" y2="342" stroke="#868E96" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="358" y="332" font-size="12" fill="#868E96">否</text>
+  <!-- D1 是:寄回商品 -->
+  <line x1="470" y1="260" x2="688" y2="260" stroke="#868E96" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="500" y="250" text-anchor="middle" font-size="12" fill="#868E96">是</text>
+  <!-- 右侧子流程 -->
+  <line x1="780" y1="286" x2="780" y2="310" stroke="#868E96" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="780" y1="364" x2="780" y2="390" stroke="#868E96" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- D2 是:外侧通道 x=560 汇入 E 右缘 -->
+  <polyline points="660,448 560,448 560,370 432,370" fill="none" stroke="#868E96" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="628" y="438" text-anchor="middle" font-size="12" fill="#868E96">是</text>
+  <!-- D2 否:拒绝退款 -->
+  <line x1="900" y1="448" x2="1028" y2="448" stroke="#868E96" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="962" y="438" text-anchor="middle" font-size="12" fill="#868E96">否</text>
+  <!-- 主轴末段 -->
+  <line x1="340" y1="396" x2="340" y2="418" stroke="#868E96" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="340" y1="472" x2="340" y2="494" stroke="#868E96" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- F → H:底部外侧通道 y=640 -->
+  <polyline points="1120,474 1120,640 600,640 600,522 432,522" fill="none" stroke="#868E96" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- ===== 节点(便签 + 折角 + 轻微旋转) ===== -->
+  <!-- A 用户申请退款(开始 Terminator,粉) -->
+  <g transform="rotate(-0.7 340 78)">
+    <rect x="250" y="52" width="180" height="52" rx="26" fill="#FCE4EC" stroke="#AD1457" stroke-width="1.2" filter="url(#note)"/>
+    <text x="340" y="74" text-anchor="middle" font-size="10" fill="#868E96">开始</text>
+    <text x="340" y="92" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">用户申请退款</text>
+  </g>
+
+  <!-- B 校验订单状态(处理,黄) -->
+  <g transform="rotate(0.7 340 152)">
+    <rect x="250" y="126" width="180" height="52" rx="3" fill="#FFF3BF" stroke="#E8B004" stroke-width="1.2" filter="url(#note)"/>
+    <path d="M416 126 h14 v14 z" fill="#E8B004" opacity="0.55"/>
+    <text x="340" y="150" text-anchor="middle" font-size="10" fill="#868E96">处理</text>
+    <text x="340" y="168" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">校验订单状态</text>
+  </g>
+
+  <!-- D1 已发货?(判断,绿) -->
+  <g transform="rotate(-0.6 340 260)">
+    <polygon points="340,204 470,260 340,316 210,260" fill="#D3F9D8" stroke="#5C940D" stroke-width="1.2" filter="url(#note)"/>
+    <text x="340" y="254" text-anchor="middle" font-size="10" fill="#868E96">判断</text>
+    <text x="340" y="272" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">已发货?</text>
+  </g>
+
+  <!-- C 用户寄回商品(处理,黄) -->
+  <g transform="rotate(0.8 780 260)">
+    <rect x="690" y="234" width="180" height="52" rx="3" fill="#FFF3BF" stroke="#E8B004" stroke-width="1.2" filter="url(#note)"/>
+    <path d="M856 234 h14 v14 z" fill="#E8B004" opacity="0.55"/>
+    <text x="780" y="258" text-anchor="middle" font-size="10" fill="#868E96">处理</text>
+    <text x="780" y="276" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">用户寄回商品</text>
+  </g>
+
+  <!-- V 仓库验收(处理,黄) -->
+  <g transform="rotate(-0.7 780 338)">
+    <rect x="690" y="312" width="180" height="52" rx="3" fill="#FFF3BF" stroke="#E8B004" stroke-width="1.2" filter="url(#note)"/>
+    <path d="M856 312 h14 v14 z" fill="#E8B004" opacity="0.55"/>
+    <text x="780" y="336" text-anchor="middle" font-size="10" fill="#868E96">处理</text>
+    <text x="780" y="354" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">仓库验收</text>
+  </g>
+
+  <!-- D2 完好?(判断,绿) -->
+  <g transform="rotate(0.6 780 448)">
+    <polygon points="780,392 900,448 780,504 660,448" fill="#D3F9D8" stroke="#5C940D" stroke-width="1.2" filter="url(#note)"/>
+    <text x="780" y="442" text-anchor="middle" font-size="10" fill="#868E96">判断</text>
+    <text x="780" y="460" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">完好?</text>
+  </g>
+
+  <!-- E 执行退款(处理,黄) -->
+  <g transform="rotate(-0.8 340 370)">
+    <rect x="250" y="344" width="180" height="52" rx="3" fill="#FFF3BF" stroke="#E8B004" stroke-width="1.2" filter="url(#note)"/>
+    <path d="M416 344 h14 v14 z" fill="#E8B004" opacity="0.55"/>
+    <text x="340" y="368" text-anchor="middle" font-size="10" fill="#868E96">处理</text>
+    <text x="340" y="386" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">执行退款</text>
+  </g>
+
+  <!-- F 拒绝退款(处理,黄) -->
+  <g transform="rotate(0.7 1120 448)">
+    <rect x="1030" y="422" width="180" height="52" rx="3" fill="#FFF3BF" stroke="#E8B004" stroke-width="1.2" filter="url(#note)"/>
+    <path d="M1196 422 h14 v14 z" fill="#E8B004" opacity="0.55"/>
+    <text x="1120" y="446" text-anchor="middle" font-size="10" fill="#868E96">处理</text>
+    <text x="1120" y="464" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">拒绝退款</text>
+  </g>
+
+  <!-- G 退款到账(处理,黄) -->
+  <g transform="rotate(0.6 340 446)">
+    <rect x="250" y="420" width="180" height="52" rx="3" fill="#FFF3BF" stroke="#E8B004" stroke-width="1.2" filter="url(#note)"/>
+    <path d="M416 420 h14 v14 z" fill="#E8B004" opacity="0.55"/>
+    <text x="340" y="444" text-anchor="middle" font-size="10" fill="#868E96">处理</text>
+    <text x="340" y="462" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">退款到账</text>
+  </g>
+
+  <!-- H 结束(Terminator,粉) -->
+  <g transform="rotate(-0.6 340 522)">
+    <rect x="250" y="496" width="180" height="52" rx="26" fill="#FCE4EC" stroke="#AD1457" stroke-width="1.2" filter="url(#note)"/>
+    <text x="340" y="527" text-anchor="middle" font-size="14" font-weight="600" fill="#343A40">结束</text>
+  </g>
+</svg>

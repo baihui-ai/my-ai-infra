@@ -68,7 +68,7 @@ mai catalog
 
 ## 面向中文开发者调优的 Skill
 
-内置 **7 个 SDD 阶段 Skill + 5 个辅助 Skill + 4 个工作流 Skill**，围绕职责边界、输入输出、评审尺度与阶段衔接做了深度调优。中文指引和文档模板覆盖需求澄清、业务规则、交互文案与技术评审；既方便开发者阅读和决策，也为 Coding Agent 提供明确的执行上下文。
+内置 **7 个 SDD 阶段 Skill + 8 个辅助 Skill + 4 个工作流 Skill**，围绕职责边界、输入输出、评审尺度与阶段衔接做了深度调优。中文指引和文档模板覆盖需求澄清、业务规则、交互文案与技术评审；既方便开发者阅读和决策，也为 Coding Agent 提供明确的执行上下文。
 
 | Skill | 用途 | 调优重点 |
 |---|---|---|
@@ -84,6 +84,8 @@ mai catalog
 | [my-create-worktree](assets/skills/my-create-worktree/SKILL.md) | 创建隔离工作区 | 隔离 Git 分支与工作目录，支持并行开发 |
 | [my-create-memory](assets/skills/my-create-memory/SKILL.md) | 沉淀长期偏好 | 审慎提炼、合并和修订偏好，按项目与场景复用 |
 | [my-ai-infra](assets/skills/my-ai-infra/SKILL.md) | 维护全局与项目 AI 资产 | 通过 mai 管理个人资产库、项目资产、装配配置与同步检查 |
+
+内置 `my-tech-diagram`、`java-dev`、`xfg-ddd-skills` 的源码、参考与评测统一随包管理，分别接入图示动画与 Java 规范；文档统一使用本项目自己的标准/简版模板。新建 Java 项目默认采用 DDD 六边形架构并在技术方案阶段完成架构及代码设计；存量项目保留既有结构，学习适用代码规范。
 
 每个 Skill 都可以独立调用，也可以由工作流 Skill 连续编排。已有明确需求或方案时，从对应阶段接续即可。
 

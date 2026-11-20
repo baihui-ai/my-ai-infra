@@ -98,6 +98,12 @@ export function resolveConflicts(actions, nextFiles, policy, desired) {
       review.push({path:action.path,reason:'派生格式从唯一 Agent 源重建，原修改已保存为候选',resolution:policy});
       continue;
     }
+    if (policy === 'merge' && action.after?.kind === 'binary' && ['file','binary'].includes(action.before?.kind)) {
+      action.candidates = [{ path: `incoming/${action.path}`, data: action.after.data }];
+      action.after = action.before; action.action = 'preserve';
+      if (nextFiles[action.path]) nextFiles[action.path].preserve = true;
+      review.push({ path: action.path, reason: action.reason, resolution: policy }); continue;
+    }
     if (policy === 'replace' || action.blocker || action.before?.kind !== 'file' || action.internalState || action.configFile || action.path === '.gitignore') {
       action.action = action.after === null ? 'remove' : action.before === null ? 'create' : 'update';
       review.push({ path: action.path, reason: action.reason, resolution: policy }); continue;
@@ -199,5 +205,5 @@ export async function restoreEntry(root, action, recovery) {
   await putEntry(root, action.path, action.before, { restore: true });
 }
 export async function saveCandidates(root, actions, recovery) {
-  for (const action of actions) for (const candidate of action.candidates || []) await write(recovery, candidate.path, candidate.text);
+  for (const action of actions) for (const candidate of action.candidates || []) await write(recovery, candidate.path, candidate.data === undefined ? candidate.text : Buffer.from(candidate.data, 'base64'));
 }

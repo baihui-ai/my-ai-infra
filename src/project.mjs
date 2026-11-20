@@ -3,7 +3,7 @@ import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { catalog, config, defaults, PACKAGE, seed, TOOLS, skillName } from './store.mjs';
 import { SHORTCUT_SKILLS, normalizeText } from './names.mjs';
-import { files, hash, json, locked, read, readJSON, safe, stat, write } from './fs.mjs';
+import { files, hash, json, locked, resource, read, readJSON, safe, stat, write } from './fs.mjs';
 import { snapshot, equalEntry, putEntry } from './entries.mjs';
 import { LEGACY_RULE_FILES } from './legacy-instructions.mjs';
 import { RULES, ruleTarget, ruleActions, ruleInitialization, SHARED_RULE_SOURCE } from './rules.mjs';
@@ -65,11 +65,11 @@ function validateManaged(relative, entry) {
   if (entry?.formatHook !== undefined && !formatConfig) throw Error(`Invalid format Hook state: ${relative}`);
   if (!prefix && !agentPath && !center && !extension && !formatConfig && ![...instructionAliases, INSTRUCTIONS, '.gitignore'].includes(relative)) throw Error(`Invalid managed path: ${relative}`);
   if (prefix) skillName(relative.slice(prefix.length + 1).split('/')[0]);
-  if (!entry || !['file', 'block', 'reference', 'symlink'].includes(entry.kind) || !/^[a-f0-9]{64}$/.test(entry.hash)) throw Error(`Invalid managed state: ${relative}`);
-  if (entry.preserve !== undefined && (entry.kind !== 'file' || entry.preserve !== true)) throw Error(`Invalid preserved state: ${relative}`);
-  if (prefix && !['file','symlink'].includes(entry.kind)) throw Error(`Invalid managed asset state: ${relative}`);
+  if (!entry || !['file', 'binary', 'block', 'reference', 'symlink'].includes(entry.kind) || !/^[a-f0-9]{64}$/.test(entry.hash)) throw Error(`Invalid managed state: ${relative}`);
+  if (entry.preserve !== undefined && (!['file','binary'].includes(entry.kind) || entry.preserve !== true)) throw Error(`Invalid preserved state: ${relative}`);
+  if (prefix && !['file','binary','symlink'].includes(entry.kind)) throw Error(`Invalid managed asset state: ${relative}`);
   if (entry.kind === 'reference' && !instructionAliases.includes(relative)) throw Error(`Invalid managed reference: ${relative}`);
-  if ((agentPath || center || extension) && !['file','symlink'].includes(entry.kind)) throw Error(`Invalid managed Agent state: ${relative}`);
+  if ((agentPath || center || extension) && !(prefix && entry.kind === 'binary') && !['file','symlink'].includes(entry.kind)) throw Error(`Invalid managed Agent state: ${relative}`);
   if (entry.kind === 'symlink') {
     const rule = RULES.find(rule => rule.entry === relative);
     const source = instructionAliases.includes(relative) ? INSTRUCTIONS : prefix && prefix !== TOOLS.codex ? relative.replace(prefix + '/', TOOLS.codex + '/') : null;
@@ -122,9 +122,9 @@ export async function plan(home, project, override, options = {}) {
   for (const name of selected.skills) {
     const { sourceName, sourceRoot: source } = assetList.find(a => a.name === name);
     for (const relative of await files(path.join(source, sourceName))) {
-      let text = await read(source, `${sourceName}/${relative}`);
-      if (text !== null && sourceName !== name) text = normalizeText(text);
-      desired.set(`${SKILL_SOURCE}/${name}/${relative}`, { text, kind: 'file' });
+      const entry = await resource(source, `${sourceName}/${relative}`);
+      if (entry.kind === 'file' && sourceName !== name) entry.text = normalizeText(entry.text);
+      desired.set(`${SKILL_SOURCE}/${name}/${relative}`, entry);
     }
   }
   for (const tool of new Set(['codex',...selected.tools])) {
@@ -138,7 +138,7 @@ export async function plan(home, project, override, options = {}) {
       continue;
     }
     for (const [source, output] of [...desired]) {
-      if (output.kind !== 'file' || !source.startsWith(SKILL_SOURCE + '/')) continue;
+      if (!['file','binary'].includes(output.kind) || !source.startsWith(SKILL_SOURCE + '/')) continue;
       const relative = source.replace(SKILL_SOURCE + '/', TOOLS[tool] + '/');
       if (relative !== source) desired.set(relative, { kind: 'symlink', source, target: aliasTarget(relative, source) });
     }
@@ -188,7 +188,12 @@ export async function plan(home, project, override, options = {}) {
   for (const [relative, output] of desired) {
     const before = await inspect(relative), previous = old.files[relative], migration = migrations.get(relative);
     let action, after, detail;
-    if (output.kind === 'symlink') {
+    if (output.kind === 'binary') {
+      after = output;
+      action = before === null ? 'create' : before.kind === 'binary' && before.hash === output.hash ? 'noop' : previous?.preserve && previous.hash === output.hash && policy !== 'replace' ? 'preserve' : before.kind === 'binary' && previous?.hash === before.hash ? 'update' : 'conflict';
+      if (action === 'preserve') after = before;
+      nextFiles[relative] = { kind: 'binary', hash: output.hash, ...(action === 'preserve' ? { preserve: true } : {}) };
+    } else if (output.kind === 'symlink') {
       after = { kind: 'symlink', target: output.target };
       if (before === null) action = 'create';
       else if (before.kind === 'symlink') action = before.target === output.target ? 'noop' : previous?.kind === 'symlink' && previous.target === before.target && before.target === aliasTarget(relative,legacyAssetPath(output.source)) ? 'update' : 'conflict';
@@ -253,6 +258,7 @@ export async function plan(home, project, override, options = {}) {
     if (before !== null) {
       if (before.inherited) { action = 'preserve'; after = before; }
       else if (previous.kind === 'symlink') action = before.kind === 'symlink' && before.target === previous.target ? 'remove' : 'conflict';
+      else if (previous.kind === 'binary' && before.kind === 'binary') { action = previous.preserve ? 'preserve' : before.hash === previous.hash ? 'remove' : 'conflict'; if (action === 'preserve') after = before; }
       else if (before.kind !== 'file') action = 'conflict';
       else if (previous.preserve) { action = 'preserve'; after = before; }
       else {
