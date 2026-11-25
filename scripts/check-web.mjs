@@ -145,6 +145,7 @@ try {
   await page.locator('#close-preview').click();
   await page.locator('#project-tools input[value="cursor"]').check();
   await page.locator('#project-tools input[value="claudecode"]').check();
+  for (const tool of ['qoder', 'qodercn', 'dsh']) await page.locator(`#project-tools input[value="${tool}"]`).check();
   await page.waitForFunction(() => !document.querySelector('#preview').hasAttribute('aria-busy'));
   assert.equal(await page.locator('#apply').isDisabled(), true);
   assert.equal(await page.locator('#preview-dialog').evaluate(node => node.open), false);
@@ -168,6 +169,11 @@ try {
   assert.ok(await page.locator('.initialization-hints[open]').isVisible());
   const config = JSON.parse(await fs.readFile(path.join(project, '.my-ai-infra.json')));
   assert.ok(config.tools.includes('cursor'));
+  for (const tool of ['qoder', 'qodercn', 'dsh']) assert.ok(config.tools.includes(tool));
+  assert.match(await page.locator('.plan-capabilities').innerText(), /命名角色、自动格式化暂未接入/);
+  assert.equal((await fs.lstat(path.join(project, '.qoder/agents/code-review.md'))).isFile(), true);
+  assert.equal(await fs.realpath(path.join(project, '.qoder/skills/my-review-code')), await fs.realpath(path.join(project, '.agents/skills/my-review-code')));
+  pass('Qoder, CN and DeepSeek choices persist with native mirrors, shared Skills and capability limits');
   assert.ok(config.skills.includes('my-analyze-debt'));
   const debtTemplate = 'skills/my-analyze-debt/assets/templates/DEBT_ANALYSIS.tmpl.md';
   assert.equal(await fs.realpath(path.join(project, '.cursor', debtTemplate)), await fs.realpath(path.join(project, '.agents', debtTemplate)));

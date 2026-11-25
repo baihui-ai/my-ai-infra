@@ -49,7 +49,7 @@ async function checkSkills(project, global = false) {
       for (const prefix of Object.values(global ? GLOBAL_TOOLS : TOOLS)) {
         const entry = path.join(project, prefix, name, file);
         // MiniMax Code rejects a symlinked SKILL.md, so its entry links the Skill directory.
-        if (prefix === '.minimax/skills') {
+        if (['.minimax/skills', '.qoder/skills', '.qoder-cn/skills'].includes(prefix)) {
           const directory = path.join(project, prefix, name);
           assert.ok((await fs.lstat(directory)).isSymbolicLink());
           assert.equal(await fs.realpath(directory), await fs.realpath(path.join(project, '.agents/skills', name)));

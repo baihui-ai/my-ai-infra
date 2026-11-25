@@ -1,6 +1,6 @@
 # 复用项目格式化脚本
 
-`mai init` / `mai sync` 检测项目根目录已有的格式化配置。检测到配置时安装内置 `my-format` Hook，并为所选工具合并原生注册。在主 Agent 一轮任务结束时，Hook 重新检测配置，尝试执行项目已有的格式化脚本。`plan`、`doctor` 和初始化过程均不执行格式化。
+`mai init` / `mai sync` 检测项目根目录已有的格式化配置。检测到配置时安装内置 `my-format` Hook，并为已支持的所选工具合并原生注册。在主 Agent 一轮任务结束时，Hook 重新检测配置，尝试执行项目已有的格式化脚本。`plan`、`doctor` 和初始化过程均不执行格式化。
 
 没有根目录配置时跳过此资产；有配置但没有脚本时，安装后的 Hook 正常退出。不会创建 Prettier、Ruff 等格式化配置，不添加 package scripts，不安装格式化器，也不向项目规则注入格式化正文。配置和脚本新增后可运行 `mai sync`；已安装的 Hook 会在下一次事件中重新检测脚本。
 
@@ -44,12 +44,14 @@
 | Cursor | `.cursor/hooks.json` | `stop` |
 | GitHub Copilot | `.github/hooks/my-ai-infra-format.json` | `Stop` |
 | MiniMax Code | `.minimax/hooks.json` | `Stop` |
+| Qoder CLI / CN | 共用 `.qoder/settings.json` | `Stop`，30 秒 |
+| DeepSeek Harness | 自动 Hook 暂未接入 | 需后续插件注册 |
 
 配置适配只增删 `my-format` 的注册，保留其他设置和 Hook；JSON 文件发生变更时使用两空格缩进。重复同步不追加重复条目。JSON / 结构 / 版本不支持、配置为链接、受管 Hook 被用户修改时保留现场并报告未完成，`replace` 也不覆盖这些共享配置。JSONC 共享配置需要用户先整理成标准 JSON 才能自动合并。
 
-格式化配置被移除后，运行 `sync` 撤回本资产的注册；其他 Hook 和设置保留。取消工具沿用现有工具目录归档规则，GitHub 下仅撤回本 Hook 的注册与脚本链接。
+格式化配置被移除后，运行 `sync` 撤回本资产的注册；其他 Hook 和设置保留。取消旧工具沿用现有工具目录归档规则，GitHub 下仅撤回本 Hook 的注册与脚本链接。Qoder 两端都取消时只撤回自有注册和受管文件，保留 `.qoder` 用户配置；任一端保留时共享注册仍有效。
 
-CLI 的 `formatting` 显示 `no-config`、`no-script` 或 `ready`，附检测依据和命令来源。`discovery` 同时检查脚本与注册文件。`ready` 仅表示装配就绪，`hostVerified` 保持 `false`；宿主开关、信任、权限和版本仍决定实际执行。Codex 需要在 `/hooks` 中审核并信任新 Hook；MiniMax Code 需要在设置页 Hooks 中选中项目并开启开关。`setup` 不安装此项目专用 Hook。
+CLI 的 `formatting` 显示 `no-config`、`no-script` 或 `ready`，附检测依据和命令来源。`discovery` 同时检查脚本与注册文件。`ready` 仅表示装配就绪，`hostVerified` 保持 `false`；宿主开关、信任、权限和版本仍决定实际执行。Codex 需要在 `/hooks` 中审核并信任新 Hook；MiniMax Code 需要在设置页 Hooks 中选中项目并开启开关。Qoder CLI / CN 的信任、权限与 Hook 禁用设置保留；DeepSeek 的 CLI/Web 能力摘要明确显示自动格式化暂未接入。`setup` 不安装此项目专用 Hook。
 
 事件契约参考：[Codex](https://learn.chatgpt.com/docs/hooks)、[Claude Code](https://code.claude.com/docs/en/hooks#stop)、[Cursor](https://cursor.com/docs/hooks#stop)、[Copilot](https://docs.github.com/en/copilot/reference/hooks-reference)、[MiniMax Code](https://agent.minimax.cn/docs/llms.txt)。适配使用当前公开的命令 Hook 格式，实际产品内调度需分别验收。
 

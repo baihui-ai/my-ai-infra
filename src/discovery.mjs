@@ -3,11 +3,12 @@ import { ASSET_ROOT, assetRelative } from './assets.mjs';
 import { AGENT_TOOLS, agentFilename } from './agents.mjs';
 import { RULES } from './rules.mjs';
 import { FORMAT_ASSET } from './format-hook.mjs';
+import { ADAPTERS, toolPaths } from './tool-adapters.mjs';
 
-const skillRoots = {codex:'.agents/skills',claudecode:'.claude/skills',cursor:'.cursor/skills',copilot:'.github/skills',mcode:'.minimax/skills'};
-// MiniMax Code links the canonical Skill directory, so its entry is the directory itself.
-const skillEntry = (tool,name) => tool === 'mcode' ? `${skillRoots[tool]}/${name}` : `${skillRoots[tool]}/${name}/SKILL.md`;
-const invocation = (tool,name) => tool === 'codex' ? `ChatGPT: @${name}；Codex CLI/IDE: $${name} 或 /skills` : tool === 'mcode' ? `会话中用 skill 工具按名称调用 ${name}` : `/${name}`;
+const skillRoots = toolPaths('skills');
+const skillEntry = (tool,name) => ADAPTERS[tool].skills.mode === 'directory' ? `${skillRoots[tool]}/${name}` : `${skillRoots[tool]}/${name}/SKILL.md`;
+const combinedState = states => states.includes('needs-sync') ? 'needs-sync' : states.includes('planned') ? 'planned' : 'ready';
+const invocation = (tool,name) => tool === 'codex' ? `ChatGPT: @${name}；Codex CLI/IDE: $${name} 或 /skills` : tool === 'mcode' ? `会话中用 skill 工具按名称调用 ${name}` : tool === 'dsh' ? `会话中显式请求使用 Skill ${name}` : `/${name}`;
 
 // This is a filesystem plan/diagnostic, never a claim that a host loaded the asset.
 export function discoveryEntries(p, phase = 'plan') {
@@ -19,9 +20,9 @@ export function discoveryEntries(p, phase = 'plan') {
     const a = actions.get(target);
     if (!a || a.resolution === 'skip' || a.action === 'conflict' || !a.after) return 'needs-sync';
     if (a.expectedText !== undefined && a.after.text !== a.expectedText) return 'needs-sync';
-    if (phase !== 'applied' && !['noop','preserve'].includes(a.action)) return phase === 'plan' ? 'planned' : 'needs-sync';
+    const own = phase !== 'applied' && !['noop','preserve'].includes(a.action) ? phase === 'plan' ? 'planned' : 'needs-sync' : 'ready';
     const dependency = a.requires || (a.after.kind === 'symlink' ? path.posix.normalize(path.posix.join(path.posix.dirname(target),a.after.target)) : null);
-    return dependency ? state(dependency,seen) : 'ready';
+    return combinedState([own, ...(dependency ? [state(dependency,seen)] : [])]);
   }
   const add = (tool,type,name,target,call,limitation) => {
     const status = target ? state(target) : 'unsupported';
@@ -32,8 +33,14 @@ export function discoveryEntries(p, phase = 'plan') {
     for (const name of p.agents) {
       const directory = AGENT_TOOLS[tool];
       // MiniMax Code registers a custom Agent in the user data directory only.
-      if (!directory) { add(tool,'agents',name,null,`由主 Agent 直接委派给 ${name}`,'MiniMax Code 只在用户级目录注册自定义 Agent，项目内不装配角色入口；请执行 mai setup 安装用户级角色。'); continue; }
+      if (!directory) {
+        const dsh = tool === 'dsh';
+        add(tool,'agents',name,null,dsh ? '在主会话显式调用对应评审 Skill' : `由主 Agent 直接委派给 ${name}`,dsh ? '当前适配器暂未接入 DeepSeek Agent Preset 注册与允许委派列表。' : 'MiniMax Code 只在用户级目录注册自定义 Agent，项目内不装配角色入口；请执行 mai setup 安装用户级角色。');
+        continue;
+      }
       add(tool,'agents',name,`${directory}/${agentFilename(tool,name)}`,tool === 'claudecode' ? `/agents 查看；请求委派给 ${name}` : tool === 'copilot' ? `在 Agent 选择器选择 ${name}` : `请求主 Agent 委派给 ${name}`);
+      const entry = entries.at(-1);
+      entry.status = combinedState([entry.status, ...(p.agentDependencies?.[name] || []).map(skill => state(skillEntry(tool,skill)))]);
     }
     for (const rule of RULES.filter(rule => rule.tools.includes(tool))) {
       add(tool,'rules',rule.entry,rule.entry,'会话中自动加载项目规则');
@@ -48,7 +55,7 @@ export function discoveryEntries(p, phase = 'plan') {
       const source = `${ASSET_ROOT}/${assetRelative(asset)}`;
       add(tool,asset.type,asset.name,target,asset.type === 'hooks' ? '由宿主事件触发' : asset.type === 'mcp' ? '配置并授权服务器后，由宿主工具调用' : '显式引用资产文件',supported ? '当前仅装配资产文件；请在宿主完成注册或配置并验证生效。' : undefined);
       entries.at(-1).source = source;
-      if (!supported) entries.at(-1).limitation = '此资产未声明该工具的适配入口。';
+      if (!supported) entries.at(-1).limitation = tool === 'dsh' && asset.type === 'hooks' && asset.name === FORMAT_ASSET ? '当前适配器暂未接入 DeepSeek 自动格式化 Hook 插件。' : '此资产未声明该工具的适配入口。';
       if (asset.type === 'hooks' && asset.name === FORMAT_ASSET && supported) {
         const entry = entries.at(-1), registration = p.formatRegistrations?.[tool];
         const scriptState = state(target), registrationState = registration ? state(registration) : 'needs-sync';

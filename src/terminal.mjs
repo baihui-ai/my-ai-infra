@@ -1,7 +1,8 @@
 import path from 'node:path';
 import { stdout } from 'node:process';
+import { TOOL_LABELS } from './tool-adapters.mjs';
 
-export const toolLabel = tool => ({ codex: 'Codex', claudecode: 'Claude Code', cursor: 'Cursor', copilot: 'GitHub Copilot', mcode: 'MiniMax Code' })[tool] || tool;
+export const toolLabel = tool => TOOL_LABELS[tool] || tool;
 const plain = value => String(value).replace(/[\x00-\x1f\x7f-\x9f]/g, ' ');
 
 export function palette(output = stdout, env = process.env) {
@@ -74,6 +75,11 @@ export function terminalUI({ output = stdout, env = process.env } = {}) {
         line(); line(`  ${color.warn('需要处理')}`);
         for (const item of result.skipped) field('跳过', typeof item === 'string' ? item : `${item.path}${item.reason ? ` · ${item.reason}` : ''}`);
         field('操作', '检查保留路径后重试；需要替换时使用 mai sync --conflict replace。');
+      }
+      if (result.capabilities?.length) {
+        line(); line(`  ${color.accent(color.bold('工具能力'))}`);
+        for (const item of result.capabilities) field(item.label, item.description);
+        field('目录', result.capabilities[0].limitation);
       }
       if (result.discovery?.length) {
         line(); line(`  ${color.accent(color.bold('资产入口'))}`);

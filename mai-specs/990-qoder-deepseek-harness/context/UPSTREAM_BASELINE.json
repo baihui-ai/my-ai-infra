@@ -1,0 +1,188 @@
+{
+  "researchDate": "2026-11-22",
+  "timezone": "Asia/Shanghai",
+  "capturedAt": "2026-11-22T10:35:35.458863+00:00",
+  "local": {
+    "package": "@easyuseai/my-ai-infra",
+    "version": "0.0.15",
+    "gitCommit": "151cb1f0debf81eaa37df19268c30d2578e428c2",
+    "branch": "main",
+    "node": "v24.12.0"
+  },
+  "packages": [
+    {
+      "package": "@qoder-ai/qodercli",
+      "version": "1.1.95",
+      "distTags": {
+        "beta": "1.1.54-beta.2",
+        "latest": "1.1.95"
+      },
+      "publishedAt": "2026-11-21T11:07:27.787Z",
+      "engines": {
+        "node": ">=20.0.0"
+      },
+      "dist": {
+        "tarball": "https://registry.npmjs.org/@qoder-ai/qodercli/-/qodercli-1.1.95.tgz",
+        "integrity": "sha512-2Qu4ZWXx5Hs0cDazIbg4Bx7ZDkMHla/+rqi1CYUKl0flLND6tNA5uZMLxqLq+CwE8RYZ/ovLBOfQXmoFfp5Bhg==",
+        "shasum": "581fefabc7535ea00a38c54bba44f860d6969600"
+      }
+    },
+    {
+      "package": "@qodercn-ai/qoderclicn",
+      "version": "1.1.95",
+      "distTags": {
+        "beta": "1.1.7-beta.2",
+        "latest": "1.1.95"
+      },
+      "publishedAt": "2026-11-21T11:05:02.305Z",
+      "engines": {
+        "node": ">=20.0.0"
+      },
+      "dist": {
+        "tarball": "https://registry.npmjs.org/@qodercn-ai/qoderclicn/-/qoderclicn-1.1.95.tgz",
+        "integrity": "sha512-o64kvigGRlFFQfNtzIbygXhQs2WiWrvkDmsaGZmoEHfG24aIs+7LCmoAH3TmWkvUw8r4CD/WVFpzLV7B8uW9pQ==",
+        "shasum": "9ded2cfa5651f40e77c317505ef6ad388d4b559e"
+      }
+    },
+    {
+      "package": "@deepseek-ai/dsh",
+      "version": "0.2.2-rc.5",
+      "distTags": {
+        "next": "0.2.2-rc.5",
+        "latest": "0.2.2-rc.5",
+        "alpha": "0.2.3-alpha.2"
+      },
+      "publishedAt": "2026-11-18T13:17:23.604Z",
+      "engines": {
+        "node": ">=24.9.0"
+      },
+      "dist": {
+        "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh/-/dsh-0.2.2-rc.5.tgz",
+        "integrity": "sha512-cNbp12tLYLUTXaVli7zwwMjzmmEVCD1PRldg4oKtXM4+lFYckcaliMS2PU/FoThB4iAN/fKOSID0nrtRZU4Gjw==",
+        "shasum": "b540ae0577939a34c43fdc6bf44f034b2de040e5"
+      }
+    },
+    {
+      "package": "@deepseek-ai/dsh",
+      "version": "0.2.3-alpha.2",
+      "distTags": {
+        "next": "0.2.2-rc.5",
+        "latest": "0.2.2-rc.5",
+        "alpha": "0.2.3-alpha.2"
+      },
+      "publishedAt": "2026-11-22T09:57:12.419Z",
+      "engines": {
+        "node": "^24.22.3 || >=26.13.1"
+      },
+      "dist": {
+        "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh/-/dsh-0.2.3-alpha.2.tgz",
+        "integrity": "sha512-mi5hq96nk5x6HPU6gkcHSUZEKs0/xoyd8MV7GCTDpULYlcJVIUkfn5JiNv+UAMaV22VO4VQwbLWnjkFBV5b/ig==",
+        "shasum": "8c7b255637e833aefac6103b31d6ef9e63c69dbe"
+      }
+    }
+  ],
+  "qoderOtherSurfaces": [
+    {
+      "surface": "IDE",
+      "version": "1.41.1",
+      "releaseDate": "2026-11-20",
+      "source": "https://changelog.qoder.com/ide"
+    },
+    {
+      "surface": "Desktop app",
+      "version": "0.5.17",
+      "releaseDate": "2026-11-20",
+      "source": "https://changelog.qoder.com/app"
+    }
+  ],
+  "deepseekGitBaseline": {
+    "tag": "dsh-v0.2.2-rc.5",
+    "commit": "9c2670d3bce5275e0d1610272958121af87787bb",
+    "alpha2Source": "Published npm packages; alpha.2 Git tag was unavailable during research"
+  },
+  "alphaSubpackages": [
+    {
+      "package": "@deepseek-ai/dsh-skill-filesystem",
+      "version": "0.2.3-alpha.2",
+      "integrity": "sha512-OM9QLiY3sf+wt/8klXsnY3rsLybl95oyrRTlN+rIP+2z5sff2/MOJNbNwFXPhrEpAR2HwDs/+4BLOi3zyolRcQ==",
+      "files": 7
+    },
+    {
+      "package": "@deepseek-ai/dsh-agent-instructions",
+      "version": "0.2.3-alpha.2",
+      "integrity": "sha512-VYbtEr0df3VyIQmhuXD6DZnflNgTlGJSvuXfFy2c7N8pI0LSJjz7+ZygiMDg78qmqYInDwCrJA0D/BRri+SQlQ==",
+      "files": 17
+    },
+    {
+      "package": "@deepseek-ai/dsh-tool-subagent",
+      "version": "0.2.3-alpha.2",
+      "integrity": "sha512-pAyWZnTBNAMebHPz3I4rDjMmnNMuv6r/WdvvFieloi+i2/tNiGGVRWecW1MxmgCQigR9R4ltWzyp4x1WKZJSow==",
+      "files": 17
+    },
+    {
+      "package": "@deepseek-ai/dsh-agent-preset",
+      "version": "0.2.3-alpha.2",
+      "integrity": "sha512-8I500TofEJrnyL3Q/n7AwX3n2ntULiyp6PZmlWGStFN1ygAd83GdRx0YqYN68HC01fvXMxbHm9VECqqwzqA57Q==",
+      "files": 7
+    },
+    {
+      "package": "@deepseek-ai/dsh-hooks-claude-code",
+      "version": "0.2.3-alpha.2",
+      "integrity": "sha512-i9uYfZfVoAscWmYV/AHqz2kd3LKP+O4WlJ/puvrW1zwKOYRsgfeUui5HytqSPrb8abO76oT7Pia9gAkRH4wQoA==",
+      "files": 9
+    },
+    {
+      "package": "@deepseek-ai/dsh-home-paths",
+      "version": "0.2.3-alpha.2",
+      "integrity": "sha512-tyRtkZyTxur3YyVAmfb4HrQgeRNZmUaGATpUXIBaZ+HGGw/Nhz8N8FQCwWblpcS9ePcFi8gcm2+jmGc6eNXsgg==",
+      "files": 7
+    }
+  ],
+  "isolatedProbes": {
+    "scope": "extracted-published-functions-with-parser-stub; not authenticated-host-test",
+    "package": "@qoder-ai/qodercli@1.1.95",
+    "agentDirectory": {
+      "entries": [
+        "regular.md",
+        "linked.md"
+      ],
+      "discovered": [
+        "regular"
+      ],
+      "errors": []
+    },
+    "sharedSkills": {
+      "ordinaryCliDefault": true,
+      "sdkDefault": false,
+      "explicitOff": false
+    }
+  },
+  "qoderCnFunctionComparison": {
+    "async function _De(": true,
+    "function D2l(": true,
+    "async function nli(": true
+  },
+  "downloadedArchives": [
+    {
+      "filename": "qoder-ai-qodercli-1.1.95.tgz",
+      "sha256": "eb4c9a23289370c136e7b32a0b233bcf2eb3f8f06352734d0ff46e4b82c464f4"
+    },
+    {
+      "filename": "qodercn-ai-qoderclicn-1.1.95.tgz",
+      "sha256": "88e895d59674bfa0341885f9a49a3dedfbf7a0380d282150a6e09e39cc50dc04"
+    },
+    {
+      "filename": "deepseek-ai-dsh-0.2.3-alpha.2.tgz",
+      "sha256": "9900793a077ffa6c9794f7349c7c69120cd6a24dec4163837a7256167e61d250"
+    }
+  ],
+  "hostVerification": {
+    "executed": false,
+    "limitations": [
+      "No authenticated Qoder CLI, CN, IDE or desktop session was run",
+      "No DeepSeek model session was run",
+      "Local Node v24.12.0 does not satisfy alpha.2 engines",
+      "Extracted function probes use a parser stub and are limited to enumeration and flag defaults"
+    ]
+  }
+}

@@ -5,13 +5,16 @@ import { legacyRuleActions } from './legacy-instructions.mjs';
 
 // Runtime principles belong to the project. Only their locations and links are managed.
 export const RULES = [
-  { entry: 'AGENTS.md', source: '.agents/rules/AGENTS.md', tools: ['codex', 'cursor', 'mcode'] },
+  { entry: 'AGENTS.md', source: '.agents/rules/AGENTS.md', tools: ['codex', 'cursor', 'mcode', 'qoder', 'qodercn', 'dsh'] },
   { entry: 'CLAUDE.md', source: '.agents/rules/CLAUDE.md', tools: ['claudecode'] },
   { entry: '.github/copilot-instructions.md', source: '.agents/rules/copilot-instructions.md', tools: ['copilot'] },
 ];
 export const ruleTarget = (rule, source = rule.source) => path.posix.relative(path.posix.dirname(rule.entry), source);
 export const SHARED_RULE_SOURCE = '.agents/rules/AGENTS.md';
 const initialization = {
+  qoder: '在 Qoder CLI 会话中请求读取仓库，补全根目录 AGENTS.md 的项目运行原则、命令和约束。',
+  qodercn: '在 Qoder CLI CN 会话中请求读取仓库，补全根目录 AGENTS.md 的项目运行原则、命令和约束。',
+  dsh: '在 DeepSeek Harness 会话中请求读取仓库，补全根目录 AGENTS.md 的项目运行原则、命令和约束。',
   codex: '在项目目录启动 codex，在会话中执行 /init；若提示文件已存在，请让它根据真实代码补全 AGENTS.md。',
   claudecode: '在项目目录启动 claude，在会话中执行 /init；若提示文件已存在，请让它根据真实代码补全 CLAUDE.md。',
   cursor: '在 Cursor Agent 中发送：请读取仓库，补全根目录 AGENTS.md 中的项目运行原则、命令和约束。',

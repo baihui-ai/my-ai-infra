@@ -11,10 +11,11 @@ import { conflictPolicy } from './conflicts.mjs';
 import { agentCatalog } from './agents.mjs';
 import { bindMemoryProject, readMemory, recallMemory, saveMemory, putMemory, deleteMemory } from './memory.mjs';
 import { terminalUI } from './terminal.mjs';
+import { TOOL_LABELS, canonicalTool } from './tool-adapters.mjs';
 
 const HELP = `my-ai-infra · 个人 AI Coding / SDD 工具
 
-mai setup [--tools codex,claudecode,cursor,copilot,mcode]
+mai setup [--tools codex,claudecode,cursor,copilot,mcode,qoder,qodercn,dsh]
 mai init [--project PATH] [--tools ...] [--dry-run]
 mai plan [--project PATH] [--tools ...]
 mai sync [--project PATH] [--tools ...] [--dry-run]
@@ -66,15 +67,14 @@ function parse(args) {
   return { positionals, options };
 }
 const csv = text => text.split(',').map(t => t.trim()).filter(Boolean);
-const aliases = tools => tools.map(t => ({ claude: 'claudecode', 'claude-code': 'claudecode', 'github-copilot': 'copilot', minimax: 'mcode', 'minimax-code': 'mcode' })[t] || t);
+const aliases = tools => tools.map(canonicalTool);
 
 async function preferences(base, options, interactive) {
   const result = { ...base };
   if (options.tools) result.tools = aliases(csv(options.tools));
   if (interactive && !options.yes && stdin.isTTY && stdout.isTTY) {
     if (!options.tools) {
-      const labels = { codex: 'Codex', claudecode: 'Claude Code', cursor: 'Cursor', copilot: 'GitHub Copilot', mcode: 'MiniMax Code' };
-      result.tools = await selectMany({ title: '选择 AI Coding 工具（可多选）', choices: Object.keys(TOOLS).map(value => ({ value, label: labels[value] })), selected: aliases(base.tools) });
+      result.tools = await selectMany({ title: '选择 AI Coding 工具（可多选）', choices: Object.keys(TOOLS).map(value => ({ value, label: TOOL_LABELS[value] })), selected: aliases(base.tools) });
     }
   }
   if (options.skills) result.skills = csv(options.skills);

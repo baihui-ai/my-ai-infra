@@ -1,5 +1,13 @@
 # 版本记录
 
+## 0.0.16-beta.1 — 2026-11-25
+
+- 本次为 patch beta，使用 npm `beta` 标签；稳定版 `latest` 保持 `0.0.15`。Qoder / DeepSeek 认证会话中的实际发现与事件调度继续单独验收。
+- 包含此前合入的 MiniMax Code 适配：项目 Skill 目录软链、全局角色和格式化 Hook。
+- 新增 Qoder CLI、Qoder CLI CN 与 DeepSeek Harness 工具选择，继续以项目 `.agents` 为唯一源。Qoder Skill 使用目录软链，角色使用受管普通镜像；DeepSeek 原生读取规则与共享 Skill。
+- Qoder 国际/CN 项目入口与 Stop 注册去重，用户级目录分别装配；新工具取消时仅撤回受管文件，保留用户宿主目录和共享配置。
+- CLI/Web 展示能力范围与宿主发现状态。DeepSeek 命名角色、自动 Hook 和 MCP 自动注册保持后续范围；Qoder 注释配置保留原文并提示处理。
+
 ## 0.0.15 — 2026-11-10
 
 - 新增 `my-render-design-html`，将已有 Markdown 技术方案转成同目录同名的 HTML 审阅版，展示架构、数据模型、请求流程、变更文件和核心代码。

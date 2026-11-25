@@ -1,20 +1,21 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
+import { toolPaths, toolCapabilities } from './tool-adapters.mjs';
 import { fileURLToPath } from 'node:url';
 import { files, hash, json, read, readJSON, safe, stat, write, locked } from './fs.mjs';
 import { BUILTINS, SHORTCUT_SKILLS, NAMING_VERSION, REMOVED_SKILLS, canonicalName, definition, normalizeText } from './names.mjs';
-import { ASSET_ROOT, SKILL_SOURCE, BUNDLE, sourceRoots, derivedAgent, addFile, addLink, addExtensions, extensionCatalog, parseExtension, assetRelative, namePart, legacyAssetPath, pruneLegacyAssetDirectories } from './assets.mjs';
+import { ASSET_ROOT, SKILL_SOURCE, BUNDLE, sourceRoots, addFile, addSkillEntries, addExtensions, extensionCatalog, parseExtension, assetRelative, namePart, legacyAssetPath, pruneLegacyAssetDirectories } from './assets.mjs';
 import { hasRetiredPromptLibrary, retiredPrompts } from './retired-prompts.mjs';
 import { pathInspector, inspectEntry, backupEntry, installEntry, restoreEntry } from './conflicts.mjs';
 import { snapshot, equalEntry, putEntry } from './entries.mjs';
 import { randomUUID } from 'node:crypto';
-import { parseAgent, agentCatalog, GLOBAL_AGENT_TOOLS, agentFilename, renderAgent } from './agents.mjs';
+import { parseAgent, agentCatalog, addAgentEntries } from './agents.mjs';
 
 export const PACKAGE = fileURLToPath(new URL('../', import.meta.url));
 export const CORE = BUILTINS.filter(s => s.default).map(s => s.name);
-export const TOOLS = { codex: '.agents/skills', claudecode: '.claude/skills', cursor: '.cursor/skills', copilot: '.github/skills', mcode: '.minimax/skills' };
-export const GLOBAL_TOOLS = { ...TOOLS, copilot: '.copilot/skills' };
+export const TOOLS = toolPaths('skills');
+export const GLOBAL_TOOLS = toolPaths('skills', 'global');
 export const personalHome = () => path.resolve(process.env.MY_AI_INFRA_HOME || path.join(os.homedir(), '.my-ai-infra'));
 export const defaultConfig = () => ({ version: 1, tools: ['codex'], skills: BUILTINS.map(skill => skill.name) });
 export function skillName(name) {
@@ -245,26 +246,14 @@ export async function setup(home, tools = ['codex'], toolHome = os.homedir(), sk
         let text = await read(root,`${sourceName}/${relative}`);
         if (['my-ai-infra', 'my-create-memory'].includes(skill) && relative === 'scripts/my-ai-infra.mjs') text = `#!/usr/bin/env node\nimport { pathToFileURL } from 'node:url';\nconst { main } = await import(pathToFileURL(${JSON.stringify(path.join(home, 'runtime/src/cli.mjs'))}));\nmain(['--home', ${JSON.stringify(home)}, ...process.argv.slice(2)]).catch(e => { console.error(e.message); process.exitCode = e.exitCode || 1; });\n`;
         addFile(desired,target,text);
-        for (const tool of tools.filter(tool => tool !== 'codex' && tool !== 'mcode')) addLink(desired,`${GLOBAL_TOOLS[tool]}/${skill}/${relative}`,target);
       }
-      // MiniMax Code rejects a symlinked SKILL.md; its entry links the canonical Skill directory.
-      if (tools.includes('mcode')) addLink(desired,`${GLOBAL_TOOLS.mcode}/${skill}`,`${SKILL_SOURCE}/${skill}`);
     }
+    addSkillEntries(desired, tools, globalSkills, true);
     for (const agent of agents) {
       const source = `${ASSET_ROOT}/agents/${agent.name}.md`;
       // Global role sources are also managed centrally; native files are derived.
       addFile(desired,source,agent.content);
-      for (const tool of tools) {
-        const target = `${GLOBAL_AGENT_TOOLS[tool]}/${agentFilename(tool,agent.name)}`;
-        // MiniMax Code requires a regular agent.md file; its native path is the entry itself.
-        if (tool === 'mcode') {
-          addFile(desired,target,renderAgent(agent,tool,skill=>path.posix.relative(path.posix.dirname(target),`${GLOBAL_TOOLS.mcode}/${skill}/SKILL.md`)));
-          continue;
-        }
-        const generated = derivedAgent(tool,agent.name,agentFilename(tool,agent.name));
-        const text = renderAgent(agent,tool,skill=>path.posix.relative(path.posix.dirname(target),`${TOOLS.codex}/${skill}/SKILL.md`));
-        addFile(desired,generated,text); addLink(desired,target,generated);
-      }
+      addAgentEntries(desired, agent, tools, true);
     }
     const extensions = await extensionCatalog(home);
     addExtensions(desired,extensions,tools,true);
@@ -331,7 +320,7 @@ export async function setup(home, tools = ['codex'], toolHome = os.homedir(), sk
       throw error;
     }
     await pruneLegacyAssetDirectories(toolHome, migrated.map(item => item.target));
-    return { home, skillMigrations: seeded.skillMigrations, assetMigrations: seeded.assetMigrations, installed: tools, skills: (await catalog(home)).length, agents: agents.map(agent => agent.name) };
+    return { home, capabilities: toolCapabilities(tools, 'global'), skillMigrations: seeded.skillMigrations, assetMigrations: seeded.assetMigrations, installed: tools, skills: (await catalog(home)).length, agents: agents.map(agent => agent.name) };
   });
 }
 export async function saveAsset(home, name, text, revision, type = 'skills') {

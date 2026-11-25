@@ -12,7 +12,7 @@ import { PACKAGE, setup } from '../src/store.mjs';
 import { json, readJSON, write } from '../src/fs.mjs';
 
 const exec = promisify(execFile);
-const chosen = { version: 1, tools: ['codex', 'claudecode', 'cursor', 'copilot', 'mcode'], skills: ['my-review-code'] };
+const chosen = { version: 1, tools: Object.keys(FORMAT_CONFIGS), skills: ['my-review-code'] };
 async function fixture(t) {
   const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'mai-format-')));
   t.after(() => fs.rm(root, { recursive: true, force: true }));
@@ -99,7 +99,7 @@ test('init registers every supported host, keeps user settings, executes from th
   const originals = {};
   for (const [tool, spec] of Object.entries(FORMAT_CONFIGS)) {
     const user = { type: 'command', command: 'echo user-owned' };
-    originals[tool] = { customSetting: tool, hooks: { [spec.event]: [spec.grouped ? { hooks: [user] } : user] }, ...(spec.version ? { version: 1 } : {}) };
+    originals[tool] = { customSetting: spec.path, hooks: { [spec.event]: [spec.grouped ? { hooks: [user] } : user] }, ...(spec.version ? { version: 1 } : {}) };
     await write(project, spec.path, json(originals[tool]));
   }
   const preview = publicPlan(await plan(home, project, chosen));
@@ -112,7 +112,7 @@ test('init registers every supported host, keeps user settings, executes from th
   assert.ok(result.discovery.every(item => !item.hostVerified));
   for (const [tool, spec] of Object.entries(FORMAT_CONFIGS)) {
     const settings = await readJSON(project, spec.path);
-    assert.equal(settings.customSetting, tool);
+    assert.equal(settings.customSetting, spec.path);
     assert.equal(handlers(settings, spec).filter(item => item.command === 'echo user-owned').length, 1);
     const entry = handlers(settings, spec).find(item => item.command.endsWith(' --my-ai-infra-format'));
     const execution = await hook(entry.command, root, { cwd: '/untrusted-payload-path' });
@@ -133,7 +133,7 @@ test('init registers every supported host, keeps user settings, executes from th
   await apply(home, project);
   for (const [tool, current] of Object.entries(FORMAT_CONFIGS)) {
     const remaining = await readJSON(project, current.path);
-    assert.equal(remaining.customSetting, tool);
+    assert.equal(remaining.customSetting, current.path);
     assert.equal(handlers(remaining, current).length, 1);
   }
 });
