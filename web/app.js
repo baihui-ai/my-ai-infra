@@ -1,7 +1,7 @@
 import { mountCogTrain } from './cog-train.js';
 
 const $ = id => document.getElementById(id);
-const labels = { codex: 'Codex', claudecode: 'Claude Code', cursor: 'Cursor', copilot: 'GitHub Copilot', mcode: 'MiniMax Code' };
+let labels = {};
 const originLabel = asset => asset.type === 'skills' || asset.origin ? (asset.origin === 'builtin' ? '内置' : '个人') : '';
 const groups = { workflow: '快捷工作流', sdd: 'SDD 主流程', support: '编码辅助', management: '资产管理', custom: '个人扩展' };
 const token = (/^[a-f0-9]{48}$/.test(location.hash.slice(1)) ? location.hash.slice(1) : '') || sessionStorage.getItem('my-ai-token') || '';
@@ -52,7 +52,9 @@ function choices(prefix, config) {
   const tools = $(prefix + '-tools'); tools.replaceChildren();
   for (const [id, location] of Object.entries(state.tools)) {
     const label = element('label', undefined, 'tool-card'), input = element('input'); input.type = 'checkbox'; input.value = id; input.checked = config.tools.includes(id); input.setAttribute('aria-label', labels[id]);
-    const title = element('div', labels[id], 'tool-title'); title.append(element('small', location)); label.append(input, title); tools.append(label);
+    const title = element('div', labels[id] || id, 'tool-title'); title.append(element('small', location));
+    const capability = state.capabilities?.find(item => item.tool === id);
+    if (capability) title.append(element('small', capability.description, 'hint')); label.append(input, title); tools.append(label);
   }
   const skills = $(prefix + '-skills'); skills.replaceChildren();
   for (const [category, title] of Object.entries(groups)) {
@@ -82,7 +84,7 @@ async function load(project) {
   $('message').hidden = true;
   const projectChanged = state?.project !== next.project;
   if (projectChanged && memoryDirty() && !await mayDiscard(true)) return;
-  const projectChoice = next.config || next.defaults; state = next;
+  const projectChoice = next.config || next.defaults; state = next; labels = next.toolLabels || {};
   if (projectChanged) { memoryDocument = null; $('memory-content').value = ''; $('memory-content').disabled = true; $('memory-entries').replaceChildren(); $('memory-result').textContent = '重新读取记忆后预览。'; updateMemory(); }
   if (preferencesDraft) state.defaults = preferencesBaseline;
   $('home').textContent = state.home; $('home').title = state.home;
@@ -133,6 +135,15 @@ function renderPlan(result, applied = false) {
     item.append(element('strong', String(count)), element('span', actionNames[action])); summary.append(item);
   }
   plan.append(summary);
+  if (result.capabilities?.length) {
+    const capabilities = element('div', undefined, 'plan-capabilities');
+    capabilities.append(element('h3', '工具能力'), element('p', applied ? '文件装配结果见下方；宿主发现待验证。' : '按默认目录预览；宿主发现待验证。', 'hint'));
+    for (const item of result.capabilities) {
+      const row = element('div'); row.append(element('strong', item.label), element('p', item.description, 'hint')); capabilities.append(row);
+    }
+    capabilities.append(element('p', result.capabilities[0].limitation, 'hint'));
+    plan.append(capabilities);
+  }
   const filters = element('div', undefined, 'plan-filters');
   const searchLabel = element('label', undefined, 'search-field');
   searchLabel.append(element('span', '搜索文件路径', 'sr-only'), icon('search'));

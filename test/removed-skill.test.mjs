@@ -25,7 +25,7 @@ async function fixture(t, { linked = false, sole = false } = {}) {
   await write(home, 'defaults.json', json(selected));
   await write(project, '.my-ai-infra.json', json(selected));
   const owned = {};
-  for (const prefix of Object.values(TOOLS)) {
+  for (const prefix of new Set(Object.values(TOOLS))) {
     const target = `${prefix}/${retired}/SKILL.md`;
     if (linked && prefix !== TOOLS.codex) {
       const link = path.posix.relative(path.posix.dirname(target), `${TOOLS.codex}/${retired}/SKILL.md`);
@@ -48,11 +48,11 @@ for (const linked of [false, true]) test(`retired verification upgrades safely a
   assert.ok(!(await catalog(home)).some(a => a.name === retired));
   const preview = await plan(home, project);
   assert.deepEqual(preview.config.skills, ['my-review-code']);
-  assert.equal(preview.actions.filter(a => a.path.includes(`/${retired}/`) && a.action === 'remove').length, Object.keys(TOOLS).length);
+  assert.equal(preview.actions.filter(a => a.path.includes(`/${retired}/`) && a.action === 'remove').length, new Set(Object.values(TOOLS)).size);
   assert.equal(await read(project, '.my-ai-infra.json'), json(selected));
   assert.equal(await read(home, 'defaults.json'), json(selected));
   await apply(home, project, preview.config, preview.revision);
-  for (const prefix of Object.values(TOOLS)) {
+  for (const prefix of new Set(Object.values(TOOLS))) {
     await assert.rejects(fs.lstat(path.join(project, prefix, retired, 'SKILL.md')), { code: 'ENOENT' });
   }
   assert.deepEqual((await projectConfig(home, project)).skills, ['my-review-code']);

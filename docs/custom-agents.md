@@ -29,12 +29,15 @@
 | Cursor | `.cursor/agents/code-review.md` | `~/.cursor/agents/code-review.md` |
 | Copilot | `.github/agents/code-review.agent.md` | `~/.copilot/agents/code-review.agent.md`（Copilot CLI） |
 | MiniMax Code | 无项目级入口 | `~/.minimax/agents/code-review/agent.md` |
+| Qoder CLI | `.qoder/agents/code-review.md` 普通镜像 | `~/.qoder/agents/code-review.md` |
+| Qoder CLI CN | 共用项目 `.qoder/agents/code-review.md` | `~/.qoder-cn/agents/code-review.md` |
+| DeepSeek Harness | Preset 注册暂未接入 | Preset 注册暂未接入 |
 
 Copilot 的项目文件同时适用于支持自定义 Agent 的 IDE；用户级 IDE 入口由各 IDE 管理，不能将 CLI 目录视为所有 IDE 的全局目录。Copilot CLI 同名个人角色优先于项目角色；需要项目版本时检查 `/agent` 的来源。
 
 MiniMax Code 只在用户数据目录注册自定义 Agent，每个角色是独立目录下的 `agent.md`；项目内不装配角色入口，`init` / `sync` 的 `discovery` 将其标记为「未适配」。需要角色时执行 `mai setup --tools mcode`。
 
-Codex 生成必需的 `name`、`description`、`developer_instructions`。Claude Code 与 MiniMax Code 额外通过 `skills` 预载关联 Skill。所有格式均包含指向实际 Skill 文件的引用；Copilot CLI 同时启用项目指令继承。模型、推理强度和权限沿用客户端配置。
+Codex 生成必需的 `name`、`description`、`developer_instructions`。Claude Code 与 MiniMax Code 额外通过 `skills` 预载关联 Skill。所有格式均包含指向实际 Skill 文件的引用；Copilot CLI 同时启用项目指令继承。Qoder 使用 `model: inherit` 与 `skills` 预载，模型、推理强度和权限沿用客户端配置。
 
 ## 维护资产
 
@@ -46,9 +49,11 @@ my-ai-infra sync --project /path/to/project
 
 随包角色源位于 `assets/agents/`，个人角色源位于 `~/.my-ai-infra/assets/agents/`。修改个人源后执行 `sync` 更新项目；更新全局入口使用 `setup`。内置角色在 CLI / Web 中只读，`init` / `sync` / `setup` 直接读取当前发行包。旧个人库中的受管内置副本完整备份后退出生效目录；需复用定制时先改为新的角色名称再导入。
 
-项目的中立源保存在 `.agents/agents/`，原生格式集中生成到 `.agents/.generated/<工具>/agents/`，工具目录全部为软链接入口。修改个人源后同步可更新项目；项目中立源的修改在默认 merge 下保留，并重新生成各工具格式。角色文件支持的字段和引用语法见 [资产说明](../assets/agents/README.md)。
+项目的中立源保存在 `.agents/agents/`，原生格式集中生成到 `.agents/.generated/<工具>/agents/`，Qoder 原生入口为受管普通文件镜像，其他已有项目入口为软链接。Qoder 国际/CN 共用 `.generated/qoder/agents/` 派生格式，DeepSeek 当前保留中立角色源并提示 Preset 注册尚未接入。修改个人源后同步可更新项目；项目中立源的修改在默认 merge 下保留，并重新生成各工具格式。角色文件支持的字段和引用语法见 [资产说明](../assets/agents/README.md)。
 
 安装不代替宿主的能力开关、受信任工作区或组织策略。Codex 的 `agents.enabled` 若被显式禁用，需要由用户启用；安装器不覆盖该配置。自动测试核对原生文件、依赖路径、同步、冲突与分发；实际对话判断质量需在所用客户端中观察。
+
+Qoder 镜像有本地修改时，默认 merge 保留内容、保存候选并显示待同步；修改请集中在 `.agents/agents/`，核对后同步。具体路径、版本和宿主限制见 [Qoder / DeepSeek 接入](qoder-deepseek.md)。
 
 ## 格式依据
 

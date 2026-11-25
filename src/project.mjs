@@ -1,18 +1,19 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
+import { ADAPTERS, toolCapabilities } from './tool-adapters.mjs';
 import { catalog, config, defaults, PACKAGE, seed, TOOLS, skillName } from './store.mjs';
 import { SHORTCUT_SKILLS, normalizeText } from './names.mjs';
 import { files, hash, json, locked, read, readJSON, safe, stat, write } from './fs.mjs';
 import { snapshot, equalEntry, putEntry } from './entries.mjs';
 import { LEGACY_RULE_FILES } from './legacy-instructions.mjs';
 import { RULES, ruleTarget, ruleActions, ruleInitialization, SHARED_RULE_SOURCE } from './rules.mjs';
-import { ASSET_ROOT, legacyAssetPath, pruneAssetDirectories, SKILL_SOURCE, sourceForEntry, assetSourcePath, assetRelative, validDestination, derivedAgent, addFile, addLink, addExtensions, extensionCatalog } from './assets.mjs';
+import { ASSET_ROOT, legacyAssetPath, pruneAssetDirectories, SKILL_SOURCE, sourceForEntry, assetSourcePath, assetRelative, validDestination, addSkillEntries, addExtensions, extensionCatalog } from './assets.mjs';
 import { hasRetiredPromptLibrary, retiredPrompts } from './retired-prompts.mjs';
 import { discoveryEntries } from './discovery.mjs';
 import { detectFormatting } from '../assets/hooks/my-format/run.mjs';
 import { FORMAT_ASSET, formatHookActions, validFormatState } from './format-hook.mjs';
-import { parseAgent, agentCatalog, AGENT_TOOLS, agentFilename, renderAgent, isManagedAgentPath } from './agents.mjs';
+import { parseAgent, agentCatalog, addAgentEntries, isManagedAgentPath } from './agents.mjs';
 import { conflictPolicy, pathInspector, inspectEntry, resolveConflicts, recoveryDirectory, pruneBackups, backupEntry, installEntry, restoreEntry, saveCandidates } from './conflicts.mjs';
 
 export const CONFIG = '.my-ai-infra.json';
@@ -22,7 +23,7 @@ const START = '<!-- my-ai-infra:start -->', END = '<!-- my-ai-infra:end -->';
 const instructionAliases = ['AGENTS.md', 'CLAUDE.md', '.github/copilot-instructions.md'];
 const aliasTarget = (relative, source) => path.posix.relative(path.posix.dirname(relative), source);
 // GitHub also hosts repository infrastructure; only Copilot namespaces are exclusive.
-const TOOL_DIRECTORIES = { codex: ['.codex'], claudecode: ['.claude'], cursor: ['.cursor'], copilot: ['.copilot', '.github/skills', '.github/agents', '.github/prompts', '.github/instructions'], mcode: ['.minimax'] };
+const TOOL_DIRECTORIES = Object.fromEntries(Object.entries(ADAPTERS).map(([tool, adapter]) => [tool, adapter.cleanup]));
 const within = (relative, directory) => relative === directory || relative.startsWith(directory + '/');
 
 function segment(text, first = START, last = END) {
@@ -111,7 +112,7 @@ export async function plan(home, project, override, options = {}) {
   } catch (error) { stateProblem = error.message; old = { version: 1, files: {} }; }
   // An initialized project also cleans leftovers from older, file-only removals.
   // Fresh installations do not take ownership of unselected tool directories.
-  const cleanupTools = rawState !== null && !stateProblem ? Object.keys(TOOLS).filter(tool => !selected.tools.includes(tool)) : [];
+  const cleanupTools = rawState !== null && !stateProblem ? Object.keys(TOOLS).filter(tool => !selected.tools.includes(tool) && TOOL_DIRECTORIES[tool].length) : [];
   const cleanupDirectories = cleanupTools.flatMap(tool => TOOL_DIRECTORIES[tool]);
   const retired = await retiredPrompts(root, old.files, inspect, Object.keys(TOOLS).filter(tool => !selected.tools.includes(tool)).flatMap(tool => TOOL_DIRECTORIES[tool]));
   if (retired.found || await hasRetiredPromptLibrary(home)) selected.skills = [...new Set([...selected.skills, ...SHORTCUT_SKILLS])];
@@ -127,23 +128,8 @@ export async function plan(home, project, override, options = {}) {
       desired.set(`${SKILL_SOURCE}/${name}/${relative}`, { text, kind: 'file' });
     }
   }
-  for (const tool of new Set(['codex',...selected.tools])) {
-    // MiniMax Code rejects a symlinked SKILL.md; its entry links the canonical Skill directory.
-    if (tool === 'mcode') {
-      for (const name of selected.skills) {
-        const source = `${SKILL_SOURCE}/${name}`, relative = `${TOOLS[tool]}/${name}`;
-        // The directory link depends on the canonical SKILL.md that stays a real file.
-        desired.set(relative, { kind: 'symlink', source, target: aliasTarget(relative, source), requires: `${source}/SKILL.md` });
-      }
-      continue;
-    }
-    for (const [source, output] of [...desired]) {
-      if (output.kind !== 'file' || !source.startsWith(SKILL_SOURCE + '/')) continue;
-      const relative = source.replace(SKILL_SOURCE + '/', TOOLS[tool] + '/');
-      if (relative !== source) desired.set(relative, { kind: 'symlink', source, target: aliasTarget(relative, source) });
-    }
-  }
-  const agentPaths = [];
+  addSkillEntries(desired, selected.tools, selected.skills);
+  const agentPaths = [], agentDependencies = {};
   for (const agent of selectedAgents) {
     const source = `${ASSET_ROOT}/agents/${agent.name}.md`;
     desired.set(source, { text: agent.content, kind: 'file' }); agentPaths.push(source);
@@ -152,13 +138,8 @@ export async function plan(home, project, override, options = {}) {
     const effectiveLocal = local?.kind === 'file' ? local : legacyLocal;
     const previous = old.files[source] || old.files[legacyAssetPath(source)];
     const effective = policy !== 'replace' && effectiveLocal?.kind === 'file' && (previous?.preserve || hash(effectiveLocal.text) !== previous?.hash) ? parseAgent(effectiveLocal.text,agent.name) : agent;
-    // A tool without a project-level Agent directory keeps its roles in the user library.
-    for (const tool of selected.tools.filter(tool => Object.hasOwn(AGENT_TOOLS, tool))) {
-      const target = `${AGENT_TOOLS[tool]}/${agentFilename(tool, agent.name)}`;
-      const generated = derivedAgent(tool,agent.name,agentFilename(tool,agent.name));
-      const text = renderAgent(effective, tool, skill => aliasTarget(target, `${TOOLS.codex}/${skill}/SKILL.md`));
-      addFile(desired,generated,text); addLink(desired,target,generated); agentPaths.push(generated,target);
-    }
+    agentDependencies[agent.name] = effective.skills;
+    agentPaths.push(...addAgentEntries(desired, effective, selected.tools));
   }
   const formatting = await detectFormatting(root);
   const allExtensions = await extensionCatalog(home);
@@ -218,8 +199,8 @@ export async function plan(home, project, override, options = {}) {
       if (output.kind === 'file') { after = { kind: 'file', text: output.text }; nextFiles[relative] = { kind: 'file', hash: hash(output.text) }; }
       action = before === null ? 'create' : equalEntry(before, after) ? 'noop' : 'update';
     }
-    const reason = action === 'conflict' ? detail || (before?.kind === 'symlink' ? `链接目标与预期不符，当前为 ${before.target}；不会跟随或覆盖该链接` : previous ? '受管内容与上次安装记录不一致，保留本地修改并等待核对' : '已有同名内容与待安装资产不同，且没有可信安装记录；请保留或对比现有资产') : undefined;
-    actions.push({ path: relative, action, before, after, ...(output.requires ? {requires:output.requires, expectedText:output.text} : {}), ...(reason ? { reason } : {}), ...(output.note ? { note: output.note } : {}) });
+    const reason = action === 'conflict' ? detail || (output.mirror && before?.kind === 'file' ? '角色入口有本地修改；merge 将保留内容并保存候选，请将定制合入中立角色源后重新同步。' : null) || (before?.kind === 'symlink' ? `链接目标与预期不符，当前为 ${before.target}；不会跟随或覆盖该链接` : previous ? '受管内容与上次安装记录不一致，保留本地修改并等待核对' : '已有同名内容与待安装资产不同，且没有可信安装记录；请保留或对比现有资产') : undefined;
+    actions.push({ path: relative, action, before, after, ...(output.requires ? {requires:output.requires} : {}), ...(output.expectedText !== undefined ? {expectedText:output.expectedText} : {}), ...(output.mirror ? {mirror:true, ...(before && before.kind !== 'file' ? {unreadable:true} : {})} : {}), ...(reason ? { reason } : {}), ...(output.note ? { note: output.note } : {}) });
   }
   actions.push(...retired.actions);
   actions.push(...formatHooks.actions); Object.assign(nextFiles, formatHooks.nextFiles);
@@ -301,9 +282,11 @@ export async function plan(home, project, override, options = {}) {
   }
   const summary = {};
   for (const a of actions) summary[a.action] = (summary[a.action] || 0) + 1;
-  return { root, formatting, formatRegistrations: formatHooks.registrations, assetMigrations: [...availableAgents,...allExtensions].flatMap(asset => asset.legacyCopies), skillMigrations: assetList.flatMap(asset => asset.legacyCopies), config: selected, agents: selectedAgents.map(a => a.name), extensions, actions, summary, revision, nextFiles, nextSteps, policy, conflicts: resolved.conflicts, review: resolved.review, skipped: resolved.skipped, complete: resolved.skipped.length === 0 && !actions.some(action=>action.action==='conflict') };
+  const result = { root, agentDependencies, formatting, formatRegistrations: formatHooks.registrations, assetMigrations: [...availableAgents,...allExtensions].flatMap(asset => asset.legacyCopies), skillMigrations: assetList.flatMap(asset => asset.legacyCopies), config: selected, agents: selectedAgents.map(a => a.name), extensions, actions, summary, revision, nextFiles, nextSteps, policy, conflicts: resolved.conflicts, review: resolved.review, skipped: resolved.skipped, complete: resolved.skipped.length === 0 && !actions.some(action=>action.action==='conflict') };
+  result.complete &&= !discoveryEntries(result).some(entry => entry.status === 'needs-sync');
+  return result;
 }
-export const publicPlan = (p, phase = 'plan') => ({ root: p.root, assetMigrations: p.assetMigrations, skillMigrations: p.skillMigrations, config: p.config, agents: p.agents, formatting: p.formatting ? Object.fromEntries(Object.entries(p.formatting).filter(([key]) => key !== 'inputs')) : undefined, discovery: discoveryEntries(p,phase), summary: p.summary, revision: p.revision, nextSteps: p.nextSteps, conflict: p.policy, conflicts: p.conflicts, review: p.review, skipped: p.skipped, complete: p.complete, actions: p.actions.map(({ path, action, after, reason, note, resolution }) => ({ path, action, ...(resolution ? { resolution } : {}), ...(reason ? { reason } : {}), ...(note ? { note } : {}), ...(after?.kind === 'symlink' ? { target: after.target } : {}) })) });
+export const publicPlan = (p, phase = 'plan') => ({ root: p.root, capabilities: toolCapabilities(p.config.tools), assetMigrations: p.assetMigrations, skillMigrations: p.skillMigrations, config: p.config, agents: p.agents, formatting: p.formatting ? Object.fromEntries(Object.entries(p.formatting).filter(([key]) => key !== 'inputs')) : undefined, discovery: discoveryEntries(p,phase), summary: p.summary, revision: p.revision, nextSteps: p.nextSteps, conflict: p.policy, conflicts: p.conflicts, review: p.review, skipped: p.skipped, complete: p.complete, actions: p.actions.map(({ path, action, after, reason, note, resolution }) => ({ path, action, ...(resolution ? { resolution } : {}), ...(reason ? { reason } : {}), ...(note ? { note } : {}), ...(after?.kind === 'symlink' ? { target: after.target } : {}) })) });
 
 export async function apply(home, project, override, expectedRevision, options = {}) {
   return locked(home, async () => {
@@ -368,5 +351,5 @@ export async function doctor(home, project) {
   for (const entry of discovery.filter(entry => entry.status === 'needs-sync')) {
     if (!issues.some(issue => issue.path === entry.path)) issues.push({path:entry.path,action:'check',reason:'入口或其依赖与预期不一致，请核对 discovery 并重新同步。'});
   }
-  return { healthy: issues.length === 0, issues, discovery };
+  return { healthy: issues.length === 0, issues, discovery, capabilities: toolCapabilities(p.config.tools) };
 }

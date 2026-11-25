@@ -8,3 +8,5 @@
 - 全局 setup 不安装；脚本执行范围由仓库已有脚本决定。
 
 完整安装与运行契约见发行包的 `docs/format-hooks.md`。此目录安装到目标项目后，不依赖源仓库文件或额外 npm 包。
+
+Qoder CLI / CN 共用项目 Stop 注册；DeepSeek Harness 当前不自动注册格式化 Hook，能力摘要会显示限制。

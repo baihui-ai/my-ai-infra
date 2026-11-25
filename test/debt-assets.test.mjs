@@ -20,7 +20,7 @@ async function fixture(t) {
   return { root, home, project };
 }
 
-test('debt analysis installs alone with local resources and four movable discovery entries', async t => {
+test('debt analysis installs alone with local resources and all movable discovery entries', async t => {
   const { root, home, project } = await fixture(t);
   const asset = (await catalog(home)).find(item => item.name === name);
   assert.ok(asset);
@@ -51,7 +51,7 @@ test('debt analysis installs alone with local resources and four movable discove
     assert.deepEqual(await fs.readFile(source), await fs.readFile(path.join(PACKAGE, 'assets/skills', name, resource)));
     for (const prefix of Object.values(TOOLS)) {
       const entry = path.join(moved, prefix, name, resource);
-      if (prefix === '.minimax/skills') {
+      if (['.minimax/skills', '.qoder/skills'].includes(prefix)) {
         // MiniMax Code rejects a symlinked SKILL.md, so its entry links the Skill directory.
         const directory = path.join(moved, prefix, name);
         assert.ok((await fs.lstat(directory)).isSymbolicLink());

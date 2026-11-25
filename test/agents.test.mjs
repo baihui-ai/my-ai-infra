@@ -80,11 +80,16 @@ for (const { name, skill } of roles) {
     assert.equal(await fs.readFile(dependency, 'utf8'), await fs.readFile(new URL(`../assets/skills/${skill}/SKILL.md`, import.meta.url), 'utf8'));
     if (tool === 'claudecode') assert.ok(text.includes(`skills: ["${skill}"]`));
     if (tool === 'copilot') assert.ok(text.includes('include-custom-instructions: true'));
-    assert.ok(!/^model[: =]|^sandbox_mode|^permissionMode/m.test(text));
+    if (tool === 'qoder' || tool === 'qodercn') {
+      assert.match(text, /^model: inherit$/m);
+      assert.ok(text.includes(`skills: ["${skill}"]`));
+      assert.ok((await fs.lstat(file)).isFile());
+    } else assert.ok(!/^model[: =]/m.test(text));
+    assert.ok(!/^sandbox_mode|^permissionMode/m.test(text));
     return text;
   }
 
-  test(name + ': roles render to four native formats with working Skill references and survive project relocation', async t => {
+  test(name + ': roles render to all native formats with working Skill references and survive project relocation', async t => {
     const { root, project, home } = await fixture(t);
     const preview = await plan(home, project, chosen());
     assert.deepEqual(preview.agents, [name]);

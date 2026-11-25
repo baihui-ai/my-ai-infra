@@ -2,6 +2,7 @@ import http from 'node:http';
 import { randomBytes } from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { TOOL_LABELS, toolCapabilities } from './tool-adapters.mjs';
 import { allAssets, catalog, config, defaults, PACKAGE, saveAsset, seed, TOOLS } from './store.mjs';
 import { json, locked, read, readJSON, write } from './fs.mjs';
 import { apply, doctor, plan, projectConfig, projectRoot, publicPlan } from './project.mjs';
@@ -41,7 +42,7 @@ export async function startWeb({ home, project, port = 4317 }) {
         const selected = url.searchParams.get('project') || project;
         const root = selected ? await projectRoot(selected) : null;
         const raw = root ? await pathInspector(root).inspect('.my-ai-infra.json') : null;
-        return send(200, { home, tools: TOOLS, projects: await readJSON(home, 'projects.json', []), assets: await catalog(home), inventory: await allAssets(home), agents: (await agentCatalog(home)).map(({ body, content, ...item }) => item), defaults: await defaults(home), project: root, config: root ? await projectConfig(home, root, { recover: true }) : null, initialized: raw !== null });
+        return send(200, { home, tools: TOOLS, toolLabels: TOOL_LABELS, capabilities: toolCapabilities(Object.keys(TOOLS)), projects: await readJSON(home, 'projects.json', []), assets: await catalog(home), inventory: await allAssets(home), agents: (await agentCatalog(home)).map(({ body, content, ...item }) => item), defaults: await defaults(home), project: root, config: root ? await projectConfig(home, root, { recover: true }) : null, initialized: raw !== null });
       }
       if (req.method !== 'POST') return send(404, { error: 'Not found' });
       let size = 0, chunks = [];

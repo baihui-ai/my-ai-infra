@@ -7,6 +7,8 @@
     "claudecode": ".claude/hooks/my-format.mjs",
     "cursor": ".cursor/hooks/my-format.mjs",
     "copilot": ".github/hooks/scripts/my-format.mjs",
-    "mcode": ".minimax/hooks/my-format.mjs"
+    "mcode": ".minimax/hooks/my-format.mjs",
+    "qoder": ".qoder/hooks/my-format.mjs",
+    "qodercn": ".qoder/hooks/my-format.mjs"
   }
 }

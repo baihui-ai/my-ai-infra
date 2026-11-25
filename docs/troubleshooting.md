@@ -33,3 +33,12 @@
 项目入口使用相对文件软链接。`0.0.3` 会检测受管链接被替换或改指向的情况；merge 保留安全的本地内容，遇到指向项目外部的父目录链接时跳过受影响资产并报告部分完成。明确选择 replace 时先备份链接本身，再建立本地目录，不写入外部目标。Windows 需要启用文件软链接权限，失败时安装器报错并回滚；请保留当前现场后处理系统权限。
 
 `npm warn Unknown project config "shamefully-hoist"` 来自 npm 读取 pnpm 项目配置，与 my-ai-infra 的内容冲突独立；它本身不会触发 Conflicting files。
+
+## Qoder 与 DeepSeek
+
+- Qoder 角色缺失：先执行 doctor，确认 `.qoder/agents/<名称>.md` 为普通文件，依赖 Skill 已就绪；在 CLI 刷新角色列表或重启会话。普通镜像有定制时，先合入 `.agents/agents` 并核对同步候选。
+- Qoder 格式化配置冲突：含注释、无法解析的 JSON、外部链接或被修改的框架 Hook 都保持现场。通过宿主设置注册，或将配置整理成有效 JSON 后重新预览；replace 不整体覆盖共享设置。
+- DeepSeek 找不到 Skill：核对 `.agents/skills` 与实际项目根、DSH_AGENTS_HOME、默认 roots/provider，以及 `.dsh/skills` 同名来源的优先级。项目规则和 Skill 的发现范围受宿主 cwd/仓库根策略影响。
+- DeepSeek 角色和格式化提示未适配：当前只接入规则与 Skill，可在主会话显式使用对应 Skill；Preset、允许委派列表及 Hook 插件尚未自动注册。
+
+版本与核验步骤见 [Qoder / DeepSeek 接入](qoder-deepseek.md)。
