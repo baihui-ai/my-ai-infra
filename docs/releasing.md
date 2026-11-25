@@ -17,6 +17,8 @@
 
 `0.0.15` 已于 2026-11-10 发布到 npm，已核对 latest、registry integrity 和下载包 SHA-256。276 项自动化测试、8 组工作台浏览器回归及 17 组实际安装包检查通过，Codex 和 Claude Code 发现全部 16 个 Skill。退款样例完成图表、高亮、交互、浅深主题、窄屏与 CDN 回退检查。发布后 8 组固定版本检查通过，包括四工具装配、HTML 渲染 Skill 交接及模板。包内 116 个文件与合入提交逐字节一致。源码标签 `v0.0.15` 指向 `e4d8935ea791991741aefa77a4543c928c03e330`，见 [GitHub Release](https://github.com/shanggqm/my-ai-infra/releases/tag/v0.0.15)。tarball SHA-256 为 `e3364e19e5e4ef2c28db7d0a97634383dad3b9a6bf2ea05f5e0c2c5bfb02a58d`，GitHub 附件与 npm 下载包一致。宿主模型自动生成链路继续单独评测。原始复制资产的来源与许可登记继续保留。
 
+`0.0.16-beta.1` 已于 2026-11-25 经用户授权发布到 npm `beta` 与 GitHub prerelease，`latest` 保持 `0.0.15`。291 项自动化测试、9 组浏览器回归和 17 组安装包检查通过，包含 Codex/Claude 对全部 16 个 Skill 的发现；发布后 7 组固定版本检查通过，覆盖标签/integrity/下载包、隔离全局与 npx 安装、118 个文件一致性、八工具 init/sync/doctor、个人 Skill 复用、Qoder Stop 单条注册及脚本执行、Web 鉴权。源码标签 `v0.0.16-beta.1` 指向 `37b701abbe8391fb68d6c7b8a79e9eab206b5ee3`，见 [GitHub 预发布](https://github.com/shanggqm/my-ai-infra/releases/tag/v0.0.16-beta.1)。tarball SHA-256 为 `735ede4a6486863216b9716d221cd3f876ab5bf09e0561b9918dffb80defa024`，GitHub 附件与 npm 下载包一致，118 个包内文件与发布提交逐字节一致。Qoder/DeepSeek 认证会话发现与事件调度、独立代码评审继续待验，Feature 990 保持 dev；原始复制资产的来源与许可登记继续保留。
+
 ## 发布前的负责人事项
 
 - 决定发行版本和 dist-tag，确认该 npm 名称/版本可由当前账号发布。
