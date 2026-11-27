@@ -1,6 +1,6 @@
 # 发布指南
 
-本次发行版本：`@easyuseai/my-ai-infra@0.0.15`，目标 dist-tag 为 `latest`。发布后以 npm registry 的版本和 integrity 核验结果为准。本指南的检查不会自动发布、登录、提交 Git 或创建标签。
+本次发行版本：`@easyuseai/my-ai-infra@0.0.16-beta.1`，目标 dist-tag 为 `beta`；`latest` 保持 `0.0.15`。用户已于 2026-11-25 明确授权提交并发布 patch beta。发布后以 npm registry 的版本和 integrity 核验结果为准。本指南的检查不会自动发布、登录、提交 Git 或创建标签。
 
 
 `0.0.9` 已于 2026-10-15 发布到 npm，`latest` 与 registry integrity 已核验。213 项自动化测试、浏览器回归、Codex/Claude 发现检查及发布后的固定版本安装、四工具 init、doctor、Web 检查通过；宿主模型行为评测未执行。源码标签为 `v0.0.9`，对应提交 `2215f1f270fdc9a0ece8008b8555c34ccd96eb62`，见 [GitHub Release](https://github.com/shanggqm/my-ai-infra/releases/tag/v0.0.9)。
@@ -16,6 +16,8 @@
 `0.0.14` 已于 2026-10-25 经负责人明确授权发布到 npm，`latest` 与 registry integrity 已核验。276 项自动化测试、8 组浏览器回归及 17 组实际 tarball 检查通过，包含 Codex/Claude 对 15 个 Skill 的资产发现；包内 114 个文件与合入提交逐字节一致。发布后 7 组固定版本检查通过，覆盖 registry 与下载包、隔离安装和四工具 init/doctor、旧 Prompt 清理、当前工作流 Skill、simple 初始化、个人 Skill 导入/同步、格式化脚本执行与 Web 鉴权。源码标签 `v0.0.14` 指向 `4e2012b468180c80fab678a3d4a9da8b038b61c1`，见 [GitHub Release](https://github.com/shanggqm/my-ai-infra/releases/tag/v0.0.14)。tarball SHA-256 为 `4f747ccca20b446384b2449769e742ecddfffe17fc4887cafb44f2e30ea7ee49`，GitHub 附件与 npm 下载包一致。升级后执行 `mai init`，旧 Prompt 正文和入口会被丢弃并替换为当前包的同名 Skill。模型端到端行为、Cursor/Copilot 真实菜单和格式化 Hook 的真实宿主事件触发继续待验，Feature 992 / 993 保持 review。原始复制资产的来源与许可登记继续如实保留。
 
 `0.0.15` 已于 2026-11-10 发布到 npm，已核对 latest、registry integrity 和下载包 SHA-256。276 项自动化测试、8 组工作台浏览器回归及 17 组实际安装包检查通过，Codex 和 Claude Code 发现全部 16 个 Skill。退款样例完成图表、高亮、交互、浅深主题、窄屏与 CDN 回退检查。发布后 8 组固定版本检查通过，包括四工具装配、HTML 渲染 Skill 交接及模板。包内 116 个文件与合入提交逐字节一致。源码标签 `v0.0.15` 指向 `e4d8935ea791991741aefa77a4543c928c03e330`，见 [GitHub Release](https://github.com/shanggqm/my-ai-infra/releases/tag/v0.0.15)。tarball SHA-256 为 `e3364e19e5e4ef2c28db7d0a97634383dad3b9a6bf2ea05f5e0c2c5bfb02a58d`，GitHub 附件与 npm 下载包一致。宿主模型自动生成链路继续单独评测。原始复制资产的来源与许可登记继续保留。
+
+`0.0.16-beta.1` 已于 2026-11-25 经用户授权发布到 npm `beta` 与 GitHub prerelease，`latest` 保持 `0.0.15`。291 项自动化测试、9 组浏览器回归和 17 组安装包检查通过，包含 Codex/Claude 对全部 16 个 Skill 的发现；发布后 7 组固定版本检查通过，覆盖标签/integrity/下载包、隔离全局与 npx 安装、118 个文件一致性、八工具 init/sync/doctor、个人 Skill 复用、Qoder Stop 单条注册及脚本执行、Web 鉴权。源码标签 `v0.0.16-beta.1` 指向 `37b701abbe8391fb68d6c7b8a79e9eab206b5ee3`，见 [GitHub 预发布](https://github.com/shanggqm/my-ai-infra/releases/tag/v0.0.16-beta.1)。tarball SHA-256 为 `735ede4a6486863216b9716d221cd3f876ab5bf09e0561b9918dffb80defa024`，GitHub 附件与 npm 下载包一致，118 个包内文件与发布提交逐字节一致。Qoder/DeepSeek 认证会话发现与事件调度、独立代码评审继续待验，Feature 990 保持 dev；原始复制资产的来源与许可登记继续保留。
 
 ## 发布前的负责人事项
 
@@ -54,10 +56,10 @@ MAI_CODEX_BIN="$(command -v codex)" MAI_CLAUDE_BIN="$(command -v claude)" npm ru
 
 产物位于 `dist/`：
 
-- `easyuseai-my-ai-infra-0.0.15.tgz`：通过验收的实际安装包。
+- `easyuseai-my-ai-infra-0.0.16-beta.1.tgz`：通过验收的实际安装包。
 - `release-report.json`：文件清单、大小、SHA-256、npm integrity 与实际装配检查结果。
 
-检查使用独立临时目录与 npm cache，不触碰真实个人库或全局工具目录。它验证 npx 入口、四种工具安装、重复同步、冲突保护、Feature 脚本/模板及包内 Web 的 Logo、字体、tokens 与认证。结束后清理临时安装环境，保留发行包和报告。
+检查使用独立临时目录与 npm cache，不触碰真实个人库或全局工具目录。它验证 npx 入口、八种工具安装、重复同步、冲突保护、Feature 脚本/模板及包内 Web 的 Logo、字体、tokens 与认证。结束后清理临时安装环境，保留发行包和报告。
 
 源码开发使用 Node.js 22+、npm 与 Git/Bash；没有运行时 npm 依赖。代码检查覆盖 JavaScript 语法、JSON 解析和源码空白，自动测试覆盖脚本行为与文件装配。所有 Skill 的唯一源均位于本仓库 `assets/skills/`；独立克隆与课程 submodule 使用相同源码和检查流程，课程侧仅通过软链引用。
 
@@ -66,21 +68,21 @@ MAI_CODEX_BIN="$(command -v codex)" MAI_CLAUDE_BIN="$(command -v claude)" npm ru
 先安装已检查的本地包试用：
 
 ```bash
-npx --yes --package=/absolute/path/to/dist/easyuseai-my-ai-infra-0.0.15.tgz my-ai-infra --version
-npx --yes --package=/absolute/path/to/dist/easyuseai-my-ai-infra-0.0.15.tgz my-ai-infra web --port 0
+npx --yes --package=/absolute/path/to/dist/easyuseai-my-ai-infra-0.0.16-beta.1.tgz my-ai-infra --version
+npx --yes --package=/absolute/path/to/dist/easyuseai-my-ai-infra-0.0.16-beta.1.tgz my-ai-infra web --port 0
 ```
 
 需要时预演发布，再由维护者显式执行正式发布：
 
 ```bash
-npm publish ./dist/easyuseai-my-ai-infra-0.0.15.tgz --dry-run --access public --registry=https://registry.npmjs.org/
+npm publish ./dist/easyuseai-my-ai-infra-0.0.16-beta.1.tgz --dry-run --tag beta --access public --registry=https://registry.npmjs.org/
 # 确认授权、身份、版本及检查报告后，再执行：
-npm publish ./dist/easyuseai-my-ai-infra-0.0.15.tgz --access public --registry=https://registry.npmjs.org/
+npm publish ./dist/easyuseai-my-ai-infra-0.0.16-beta.1.tgz --tag beta --access public --registry=https://registry.npmjs.org/
 ```
 
 发布已检查的 tarball 可以避免重新从变化后的源码打包。npm 对 tarball 发布不会替你运行源码的 `prepublishOnly`，因此必须先完成 `release:check` 并确认 SHA-256 未变。dry-run 不替代真实账号权限和服务端规则检查。参见 [npm lifecycle](https://docs.npmjs.com/cli/v11/using-npm/scripts/) 与 [npm publish](https://docs.npmjs.com/cli/v11/commands/npm-publish/)。
 
-预发布版本使用语义版本号（例如 `0.0.15-beta.1`）和明确的 `--tag beta`；稳定版本通常使用 latest。npm 不能用同一个名称/版本覆盖已发布内容；发现问题时修复后发布新的补丁版本。
+预发布版本使用语义版本号（例如 `0.0.16-beta.1`）和明确的 `--tag beta`；稳定版本通常使用 latest。npm 不能用同一个名称/版本覆盖已发布内容；发现问题时修复后发布新的补丁版本。
 
 发布后核对 registry 版本、integrity，并在空目录中运行固定版本 npx 的版本查询、init、doctor 和 web。更新本节的发布状态与 CHANGELOG 日期，再按独立仓库约定创建对应 Git 标签；不要把生成的 cache、个人库、测试项目或凭证提交到源码。
 
@@ -89,5 +91,5 @@ npm publish ./dist/easyuseai-my-ai-infra-0.0.15.tgz --access public --registry=h
 1. 在发布分支整理变更记录与版本号，完成源码、浏览器和实际安装包检查，通过 PR 合入默认分支。
 2. 确认最终安装包内容与合入提交一致，创建并推送带注释的 `v<版本>` 标签；标签创建后保持不变。
 3. 创建同名 GitHub Release 草稿，写明变更、升级方式和验证结果，附上已验证的 npm `.tgz` 与 `SHA256SUMS`。
-4. 将同一 `.tgz` 发布到 npm，核对版本、latest、integrity 和固定版本安装；确认后发布 GitHub Release。
+4. 将同一 `.tgz` 发布到 npm，核对版本、目标 dist-tag、integrity 和固定版本安装；确认后发布 GitHub Release。
 5. 提交发布状态记录，再更新课程仓库的 submodule 引用。任一平台失败时保留已完成的记录，从失败步骤重试，避免覆盖版本或移动已发布标签。

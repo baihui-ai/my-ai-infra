@@ -9,14 +9,14 @@
 
 my-ai-infra 汲取开源社区在规格驱动开发（SDD）与 Agent 工作流上的实践，将需求、设计、评审、编码与验收串成一条清晰的交付路径。围绕中文开发者的需求表达、技术设计与评审习惯深度调优内置 Skill，简单接入现有项目，让开发偏好与可复用资产随实践持续积累。
 
-支持 **Codex · Claude Code · Cursor · GitHub Copilot · MiniMax Code**。
+当前源码支持 **Codex · Claude Code · Cursor · GitHub Copilot · MiniMax Code · Qoder CLI / CN · DeepSeek Harness**。Qoder 与 DeepSeek 接入包含在 `0.0.16-beta.1` 预发布版；安装方式与能力范围见 [接入说明](docs/qoder-deepseek.md)。
 
 ## 少一点配置，多一点交付
 
 - **轻量接入**：一条命令初始化，CLI 与本地 Web 工作台随手切换；运行时无第三方 npm 依赖。
 - **规格驱动**：从需求到验收，以明确规格和评审支撑交付；按任务规模裁剪流程。
 - **持续进化**：记住长期开发偏好，沉淀自己的 Skill，在后续项目中复用有效经验。
-- **一份资产，多种工具**：Skill、Agent 等统一维护，通过软链连接工具入口；同步前可预览，冲突有备份。
+- **一份资产，多种工具**：Skill、Agent 等统一维护，优先通过软链连接工具入口，受限格式由同源生成；同步前可预览，冲突有备份。
 
 ## 快速开始
 

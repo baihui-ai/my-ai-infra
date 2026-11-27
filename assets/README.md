@@ -4,13 +4,13 @@
 
 | 类型 | 结构 | 原生适配 |
 |---|---|---|
-| Skill | `skills/<名称>/SKILL.md` 与附属文件 | Codex 直接使用源文件，其他工具逐文件相对软链接 |
-| SubAgent | `agents/<名称>.md` | 从中立源生成原生格式，原生入口链接到派生文件 |
+| Skill | `skills/<名称>/SKILL.md` 与附属文件 | Codex / DeepSeek 直接读取源；MiniMax / Qoder 链接 Skill 目录；其他逐文件链接 |
+| SubAgent | `agents/<名称>.md` | 从中立源生成原生格式；Qoder 使用普通镜像，其他已有项目入口链接派生文件 |
 | Hook / MCP / 扩展类型 | `<类型>/<名称>/asset.json` 与文本文件 | 清单声明入口和工具路径，安装相对软链接 |
 
 项目源位于 `.agents/`，个人库源位于 `<home>/assets/`，全局入口源位于用户目录 `.agents/`。项目运行规则单独保存在项目 `.agents/rules/`，正文由项目维护。
 
-Agent 原生格式保存在 `.agents/.generated/<工具>/agents/`，属于可重建的派生结果。编辑 `agents/<名称>.md` 后运行 sync；工具格式文件的手工修改会受到冲突保护：abort 停止，merge 保存修改候选后从中立源重建，replace 备份后重建。转换格式的正文仅来自对应角色源。
+Agent 原生格式保存在 `.agents/.generated/<工具>/agents/`，属于可重建的派生结果。编辑 `agents/<名称>.md` 后运行 sync；工具格式文件的手工修改会受到冲突保护：abort 停止，merge 保存修改候选后从中立源重建，replace 备份后重建。转换格式的正文仅来自对应角色源。Qoder 的派生与原生镜像在 merge 时保留编辑并保存候选，偏离源的入口显示待同步；将定制合入中立源后核对候选，或显式 replace 重建。DeepSeek 当前只装配共享 Skill 与规则，角色 Preset 注册后续接入。
 
 ## Skill 来源与个人库
 

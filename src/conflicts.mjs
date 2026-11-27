@@ -5,6 +5,7 @@ import { safe, stat, hash, json, write } from './fs.mjs';
 import { equalEntry, putEntry } from './entries.mjs';
 import { ASSET_ROOT, SKILL_SOURCE } from './assets.mjs';
 import { isManagedAgentPath } from './agents.mjs';
+import { toolPaths } from './tool-adapters.mjs';
 
 export function conflictPolicy(value = 'abort') {
   if (!['merge', 'replace', 'abort'].includes(value)) throw Error('Invalid conflict policy; use merge, replace or abort');
@@ -47,7 +48,7 @@ export function pathInspector(root) {
         let before;
         try { before = await inspectEntry(root, parent); }
         catch (error) { blockers.set(parent,{path:parent,action:'conflict',before:null,after:null,blocker:true,unreadable:true,reason:`无法完整备份父路径：${error.message}`}); return null; }
-        const adapter = ['.agents/skills','.claude/skills','.cursor/skills','.github/skills','.minimax/skills'].find(prefix => parent === prefix || parent.startsWith(prefix + '/'));
+        const adapter = Object.values(toolPaths('skills')).find(prefix => parent === prefix || parent.startsWith(prefix + '/'));
         const canonical = adapter && parent.replace(adapter,SKILL_SOURCE);
         const legacy = adapter && adapter !== '.agents/skills' ? parent.replace(adapter,'.agents/skills') : null;
         if (before.kind === 'symlink' && canonical && [canonical,legacy].filter(Boolean).some(target=>path.resolve(root,path.dirname(parent),before.target) === path.resolve(root,target))) {
@@ -92,7 +93,7 @@ export function resolveConflicts(actions, nextFiles, policy, desired) {
     if (action.action !== 'conflict') continue;
     if (action.unreadable) { action.action = 'preserve'; action.resolution = 'skip'; action.after = action.before; skipped.push({ path: action.path, reason: action.reason }); delete nextFiles[action.path]; continue; }
     action.resolution = policy;
-    if (policy === 'merge' && action.path.startsWith(ASSET_ROOT+'/.generated/') && action.before?.kind === 'file' && action.after?.kind === 'file') {
+    if (policy === 'merge' && !action.mirror && action.path.startsWith(ASSET_ROOT+'/.generated/') && action.before?.kind === 'file' && action.after?.kind === 'file') {
       action.candidates = [{path:`local/${action.path}`,text:action.before.text}];
       action.action = 'update';
       review.push({path:action.path,reason:'派生格式从唯一 Agent 源重建，原修改已保存为候选',resolution:policy});

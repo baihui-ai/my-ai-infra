@@ -11,6 +11,8 @@ import { checkClaudeDiscovery } from './check-claude-discovery.mjs';
 import { parseAgent, AGENT_TOOLS, agentFilename } from '../src/agents.mjs';
 import { RULES, ruleTarget } from '../src/rules.mjs';
 import { files } from '../src/fs.mjs';
+import { TOOLS } from '../src/store.mjs';
+import { FORMAT_CONFIGS } from '../src/format-hook.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const exec = promisify(execFile);
@@ -142,7 +144,7 @@ try {
   await fs.mkdir(path.join(project, '.agents/skills/my-init-repo-memory'), { recursive: true });
   await fs.writeFile(path.join(project, '.agents/skills/my-init-repo-memory/SKILL.md'), 'Customized old wrapper: ../../prompts/my-init-repo-memory.md\n');
   await fs.writeFile(path.join(project, '.my-ai-infra.json'), JSON.stringify({ version: 1, tools: ['codex'], skills: assets.filter(asset => asset.category !== 'workflow').map(asset => asset.name) }));
-  const initialized = JSON.parse((await run('mai', ['init','--tools','codex,claudecode,cursor,copilot,mcode','--yes'], globalOptions)).stdout);
+  const initialized = JSON.parse((await run('mai', ['init','--tools',Object.keys(TOOLS).join(','),'--yes'], globalOptions)).stdout);
   ensure(initialized.complete, 'Init did not finish');
   await fs.access(path.join(home, 'assets/prompts')).then(() => { throw Error('Retired Prompt library survived init'); }, error => { if (error.code !== 'ENOENT') throw error; });
   ensure(await fs.readFile(path.join(project, '.agents/skills/my-init-repo-memory/SKILL.md'), 'utf8') === await fs.readFile(path.join(installedRoot, 'assets/skills/my-init-repo-memory/SKILL.md'), 'utf8'), 'Init did not use the current workflow Skill');
@@ -218,7 +220,7 @@ try {
       }
     }
   }
-  pass('Packaged role assets and four native Agent formats resolve their installed Skill');
+  pass('Packaged role assets and native Agent formats resolve their installed Skill');
   for (const rule of RULES) {
     const source = rule.entry === 'CLAUDE.md' ? '.agents/rules/AGENTS.md' : rule.source;
     ensure(await fs.readlink(path.join(project,rule.entry)) === ruleTarget(rule, source), `Runtime rule link missing: ${rule.entry}`);
@@ -249,9 +251,9 @@ try {
   await fs.writeFile(path.join(formatProject, '.prettierrc.json'), '{}\n');
   await fs.mkdir(path.join(formatProject, 'scripts'));
   await fs.writeFile(path.join(formatProject, 'scripts/format.mjs'), "import fs from 'node:fs'; fs.writeFileSync('formatted.txt', process.cwd());\n");
-  const formatInit = JSON.parse((await run(process.execPath, [cli, 'init', '--home', home, '--project', formatProject, '--tools', 'codex,claudecode,cursor,copilot,mcode', '--skills', 'my-review-code', '--yes'])).stdout);
+  const formatInit = JSON.parse((await run(process.execPath, [cli, 'init', '--home', home, '--project', formatProject, '--tools', Object.keys(TOOLS).join(','), '--skills', 'my-review-code', '--yes'])).stdout);
   ensure(formatInit.formatting.status === 'ready', 'Packaged init did not detect the formatter');
-  ensure(formatInit.discovery.filter(item => item.name === 'my-format' && item.status === 'ready').length === 5, 'Packaged format Hook registrations are incomplete');
+  ensure(formatInit.discovery.filter(item => item.name === 'my-format' && item.status === 'ready').length === Object.keys(FORMAT_CONFIGS).length, 'Packaged format Hook registrations are incomplete');
   const minimaxHook = JSON.parse(await fs.readFile(path.join(formatProject, '.minimax/hooks.json'), 'utf8'));
   const minimaxHandler = minimaxHook.hooks.Stop.flatMap(group => group.hooks).find(item => item.command.endsWith(' --my-ai-infra-format'));
   ensure(minimaxHandler && minimaxHandler.timeout === 10, 'MiniMax Code format Hook registration is invalid');
@@ -267,7 +269,7 @@ try {
   ensure(JSON.parse((await run(process.execPath, [cli, 'doctor', '--home', home, '--project', formatProject])).stdout).healthy, 'Packaged format Hook is not idempotent');
   pass('Packaged format Hook detects configuration, registers every supported host, executes an existing script and skips a missing script');
   const debtProject = path.join(temp, 'debt only 中文'); await fs.mkdir(debtProject);
-  await run(process.execPath, [cli, 'init', '--home', home, '--project', debtProject, '--tools', 'codex,claudecode,cursor,copilot,mcode', '--skills', 'my-analyze-debt', '--yes']);
+  await run(process.execPath, [cli, 'init', '--home', home, '--project', debtProject, '--tools', Object.keys(TOOLS).join(','), '--skills', 'my-analyze-debt', '--yes']);
   const debtSelection = JSON.parse(await fs.readFile(path.join(debtProject, '.my-ai-infra.json'), 'utf8'));
   ensure(JSON.stringify(debtSelection.skills) === JSON.stringify(['my-analyze-debt']), 'Standalone debt installation added other Skills');
   const movedDebtProject = path.join(temp, 'moved debt only'); await fs.rename(debtProject, movedDebtProject);

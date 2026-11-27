@@ -1,5 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { isDeepStrictEqual } from 'node:util';
+import { ADAPTERS, toolPaths } from './tool-adapters.mjs';
 import { fileURLToPath } from 'node:url';
 import { files, read, readJSON, stat, safe, hash, json } from './fs.mjs';
 
@@ -14,7 +16,7 @@ export async function pruneAssetDirectories(root, removed) {
   const directories = new Set();
   for (const relative of removed) {
     const boundary = relative.split('/')[0];
-    if (!relativePath(relative) || !['.agents', '.codex', '.claude', '.cursor', '.github', '.copilot', '.minimax'].includes(boundary)) continue;
+    if (!relativePath(relative) || !['.agents', ...Object.values(ADAPTERS).flatMap(a => Object.values(a.roots))].includes(boundary)) continue;
     // Only visit ancestors of removed managed files; keep host roots and user contents.
     for (let parent = path.posix.dirname(relative); parent.startsWith(boundary + '/'); parent = path.posix.dirname(parent)) directories.add(parent);
   }
@@ -28,12 +30,12 @@ export const SKILL_SOURCE = `${ASSET_ROOT}/skills`;
 export const namePart = value => typeof value === 'string' && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value) && value.length <= 64;
 export const relativePath = value => typeof value === 'string' && value.length > 0 && !value.includes('\\') && !value.includes('\0') && !path.posix.isAbsolute(value) && path.posix.normalize(value) === value && value.split('/').every(part => part !== '..' && part !== '.');
 export const linkTarget = (entry, source) => path.posix.relative(path.posix.dirname(entry), source);
-export const derivedAgent = (tool, name, filename) => `${ASSET_ROOT}/.generated/${tool}/agents/${filename}`;
+export const derivedAgent = (tool, name, filename) => `${ASSET_ROOT}/.generated/${ADAPTERS[tool]?.family || tool}/agents/${filename}`;
 export function sourceForEntry(relative) {
-  for (const prefix of ['.agents/skills', '.claude/skills', '.cursor/skills', '.github/skills', '.copilot/skills', '.minimax/skills']) {
+  for (const prefix of new Set([...Object.values(toolPaths('skills')), ...Object.values(toolPaths('skills', 'global'))])) {
     if (relative.startsWith(prefix + '/')) return relative.replace(prefix, SKILL_SOURCE);
   }
-  for (const [tool, prefix] of Object.entries({codex:'.codex/agents',claudecode:'.claude/agents',cursor:'.cursor/agents',copilot:'.github/agents',mcode:'.minimax/agents'})) {
+  for (const [tool, prefix] of Object.entries(toolPaths('agents'))) {
     if (relative.startsWith(prefix + '/')) return derivedAgent(tool, null, relative.slice(prefix.length + 1));
   }
   return null;
@@ -42,7 +44,8 @@ export function assetSourcePath(relative) {
   return relativePath(relative) && relative.startsWith(ASSET_ROOT + '/') && relative.slice(ASSET_ROOT.length + 1).split('/').length >= 2;
 }
 export function validDestination(relative, tool, global = false) {
-  const prefix = {codex:'.codex/',claudecode:'.claude/',cursor:'.cursor/',copilot:global?'.copilot/':'.github/',mcode:'.minimax/'}[tool];
+  const root = ADAPTERS[tool]?.roots[global ? 'global' : 'project'];
+  const prefix = root && root + '/';
   // Shared configuration files are owned by the user, never entire-file asset aliases.
   return prefix && relativePath(relative) && relative.startsWith(prefix) && relative.slice(prefix.length).includes('/') && !relative.startsWith(prefix+'skills/') && !relative.startsWith(prefix+'agents/');
 }
@@ -135,6 +138,33 @@ export function addExtensions(desired, extensions, tools, global = false) {
     if (!selected.length) continue;
     for (const [file,text] of Object.entries(asset.contents)) addFile(desired,`${ASSET_ROOT}/${assetRelative(asset,file)}`,text);
     const source = `${ASSET_ROOT}/${assetRelative(asset)}`;
-    for (const tool of selected) addLink(desired,targets[tool],source);
+    for (const target of new Set(selected.map(tool => targets[tool]))) addLink(desired,target,source);
+  }
+}
+
+// Known shared host paths may converge only when their full output contracts agree.
+export function collectTarget(desired, target, output) {
+  if (desired.has(target) && !isDeepStrictEqual(desired.get(target), output)) throw Error(`Conflicting asset outputs: ${target}`);
+  desired.set(target, output);
+}
+export function addSkillEntries(desired, tools, names, global = false) {
+  const sourceFiles = [...desired].filter(([source, output]) => source.startsWith(SKILL_SOURCE + '/') && ['file', 'binary'].includes(output.kind));
+  for (const tool of tools) {
+    const spec = ADAPTERS[tool].skills, prefix = spec[global ? 'global' : 'project'];
+    if (spec.mode === 'source') {
+      if (prefix !== SKILL_SOURCE) throw Error('Invalid shared Skill root');
+      continue;
+    }
+    if (spec.mode === 'directory') {
+      for (const name of names) {
+        const source = `${SKILL_SOURCE}/${name}`, target = `${prefix}/${name}`;
+        collectTarget(desired, target, { kind: 'symlink', source, target: linkTarget(target, source), requires: `${source}/SKILL.md` });
+      }
+    } else {
+      for (const [source] of sourceFiles) {
+        const target = source.replace(SKILL_SOURCE + '/', prefix + '/');
+        collectTarget(desired, target, { kind: 'symlink', source, target: linkTarget(target, source) });
+      }
+    }
   }
 }

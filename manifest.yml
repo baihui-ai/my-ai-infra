@@ -1,8 +1,8 @@
 name: my-ai-infra
 package_name: "@easyuseai/my-ai-infra"
 license: MIT
-version: 0.0.15
-status: released
+version: 0.0.16-beta.1
+status: prerelease
 purpose: Lightweight SDD scaffolding for enterprise AI coding, with reusable assets and persistent development preferences
 repository:
   url: https://github.com/shanggqm/my-ai-infra
@@ -65,7 +65,7 @@ configuration:
   specifications_root: mai-specs/
   project_state: .my-ai-infra/state.json
   project_source: .agents/
-  adapter_strategy: relative-file-symlinks
+  adapter_strategy: shared-source-symlinks-and-managed-native-mirrors
   managed_state_version: 4
   project_runtime_rules: .agents/rules/
   bundle_baseline: ~/.my-ai-infra/bundle-state.json
@@ -75,6 +75,9 @@ configuration:
   - cursor
   - copilot
   - mcode
+  - qoder
+  - qodercn
+  - dsh
 deliverables:
 - assets/skills/my-create-feature/references/code-review-rules.md
 - assets/skills/my-create-feature/references/delivery-lessons.md
@@ -85,6 +88,8 @@ deliverables:
 - assets/skills/java-dev/SKILL.md
 - assets/skills/my-create-feature/references/technical-docs.md
 - assets/skills/my-create-feature/references/java-dev.md
+- src/tool-adapters.mjs
+- docs/qoder-deepseek.md
 - docs/workflow-skills.md
 - src/retired-prompts.mjs
 - assets/skills/my-auto-feature/SKILL.md

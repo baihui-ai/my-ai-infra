@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="zh-CN" data-generated-by="my-render-design-html">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="referrer" content="no-referrer">
+  <title>Qoder 与 DeepSeek 工程适配</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&amp;icon_names=account_tree,code,database,folder,route&amp;display=block">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.11.1/styles/github.min.css" media="(prefers-color-scheme: light)">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.11.1/styles/github-dark.min.css" media="(prefers-color-scheme: dark)">
+  <script defer src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.11.1/highlight.min.js"></script>
+  <!-- 下方样式和首屏 SVG 是示例，可按方案主题调整配色、字体与构图。 -->
+  <style>
+    :root {
+      color-scheme: light dark;
+      --project-accent: #FF7918;
+      --system-accent: #315db6;
+      --accent: var(--project-accent, var(--system-accent));
+      --page: #f7f8fa;
+      --panel: #fff;
+      --soft: #eff1f5;
+      --ink: #172132;
+      --muted: #515d6d;
+      --line: #d9dee7;
+      font-family: system-ui, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: var(--page);
+      color: var(--ink);
+    }
+    @supports (color: AccentColor) {
+      :root { --system-accent: AccentColor; }
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --page: #12161e;
+        --panel: #1a202b;
+        --soft: #222a38;
+        --ink: #edf0f5;
+        --muted: #b1bdd0;
+        --line: #384353;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      max-width: 76rem;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 4vw, 3.5rem);
+      line-height: 1.7;
+      accent-color: var(--accent);
+    }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    a { color: inherit; text-decoration-color: var(--accent); text-underline-offset: .25em; }
+    p, ul { margin: .6rem 0 0; }
+    h1, h2, h3 { margin: 0; line-height: 1.25; }
+    h1 { font-size: clamp(2.35rem, 4.4vw, 3.75rem); letter-spacing: -.045em; text-wrap: balance; }
+    h2 { font-size: clamp(1.45rem, 3vw, 2rem); }
+    h3 { font-size: 1.12rem; }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+      gap: clamp(1.25rem, 4vw, 3rem);
+      align-items: center;
+      padding-block: clamp(2.5rem, 8vw, 6rem) clamp(1.75rem, 5vw, 3.5rem);
+      border-top: 4px solid var(--accent);
+    }
+    .eyebrow { margin: 0 0 .8rem; color: var(--muted); font-size: .85rem; font-weight: 650; }
+    .lead { max-width: 32em; margin-top: 1rem; color: var(--muted); font-size: 1.1rem; }
+    .hero-graphic, .diagram, .table-scroll {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 1rem;
+      background: var(--panel);
+    }
+    .hero-graphic { margin: 0; padding: clamp(.6rem, 1.6vw, 1.15rem); }
+    .hero-graphic svg { display: block; width: 100%; height: auto; color: var(--ink); }
+    .hero-graphic .track { fill: none; stroke: var(--line); }
+    .hero-graphic .route { fill: none; stroke: var(--accent); stroke-width: 2.5; }
+    .hero-graphic .arrow { fill: var(--accent); }
+    .hero-graphic .node { fill: var(--panel); stroke: var(--line); stroke-width: 1.5; }
+    .hero-graphic .node-primary { fill: var(--soft); stroke: var(--accent); stroke-width: 2; }
+    .hero-graphic .node-kind { fill: var(--muted); font-size: 15px; }
+    .hero-graphic .node-label { fill: currentColor; font-size: 21px; font-weight: 650; }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem 1.25rem;
+      padding-block: .8rem;
+      border-block: 1px solid var(--line);
+      font-size: .92rem;
+    }
+    main { padding-bottom: 4rem; }
+    section { padding-block: clamp(1.55rem, 4vw, 2.75rem); border-bottom: 1px solid var(--line); }
+    section > p, section > ul { max-width: 58em; }
+    section > h3 { margin-top: 1.4rem; }
+    figure { margin: 1rem 0 0; }
+    .diagram, .table-scroll { padding: clamp(.75rem, 2vw, 1.25rem); }
+    .diagram-output, .table-scroll, pre { overflow-x: auto; }
+    .diagram-output > svg {
+      display: block;
+      width: clamp(calc(var(--diagram-width) * .85), 100%, var(--diagram-width));
+      max-width: none !important;
+      height: auto;
+      margin-inline: auto;
+    }
+    figcaption, summary { color: var(--muted); font-size: .9rem; }
+    .diagram-output:not([hidden]) + figcaption { margin-top: .8rem; }
+    summary { cursor: pointer; margin-top: .45rem; }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    .table-scroll table { min-width: 38rem; }
+    .scroll-hint { display: none; }
+    th, td { padding: .5rem .7rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+    pre, code { font-family: ui-monospace, "SFMono-Regular", Consolas, monospace; }
+    pre {
+      margin: .7rem 0 0;
+      padding: .9rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: .65rem;
+      background: var(--soft);
+      font-size: .88rem;
+      line-height: 1.6;
+      tab-size: 2;
+    }
+    pre > code.hljs { padding: 0; background: transparent; }
+    :not(pre) > code { overflow-wrap: anywhere; }
+    .material-symbols-outlined { display: none; }
+    .symbols-ready .material-symbols-outlined {
+      display: inline-block;
+      margin-inline-end: .4rem;
+      vertical-align: -.12em;
+      color: var(--muted);
+      font: normal 1.25rem/1 "Material Symbols Outlined";
+      font-feature-settings: "liga";
+      white-space: nowrap;
+    }
+    @media (max-width: 46rem) {
+      .hero { grid-template-columns: 1fr; }
+      .scroll-hint { display: block; color: var(--muted); font-size: .85rem; }
+      .diagram-output > svg { width: max(40rem, 100%); }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">技术方案 · 开发者审阅</p>
+      <h1>Qoder 与 DeepSeek 工程适配</h1>
+      <p class="lead">保留 .agents 统一资产源，让宿主按自身入口发现规则、Skill 与角色。</p>
+    </div>
+    <figure class="hero-graphic">
+      <svg viewBox="0 0 600 300" role="img" aria-labelledby="hero-title hero-desc">
+<title id="hero-title">共享资产的两条装配路径</title><desc id="hero-desc">中立源经原生目录和普通角色镜像进入 Qoder，DeepSeek 直接读取共享 Skill。</desc>
+<defs><marker id="hero-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path class="arrow" d="M0 0 L8 4 L0 8 Z"/></marker></defs>
+<path class="track" d="M20 40H580M20 260H580" stroke-dasharray="4 5"/>
+<path class="route" d="M194 150H262V83H337" marker-end="url(#hero-arrow)"/><path class="route" d="M262 150V218H337" marker-end="url(#hero-arrow)"/>
+<rect class="node-primary" x="16" y="102" width="178" height="96" rx="12"/><rect class="node" x="340" y="38" width="242" height="90" rx="12"/><rect class="node" x="340" y="173" width="242" height="90" rx="12"/>
+<g text-anchor="middle"><text class="node-kind" x="105" y="132">统一项目源</text><text class="node-label" x="105" y="164">.agents</text><text class="node-label" x="461" y="74" style="font-size:20px">Qoder CLI / CN</text><text class="node-kind" x="461" y="103">目录入口 · 普通角色镜像</text><text class="node-label" x="461" y="210" style="font-size:20px">DeepSeek Harness</text><text class="node-kind" x="461" y="239">原生读取规则与 Skill</text></g></svg>
+      <figcaption>Qoder 增加原生入口，DeepSeek 直接读取共享 Skill。</figcaption>
+    </figure>
+  </header>
+  <nav aria-label="页内目录">
+    <a href="#architecture">整体架构</a> <a href="#contracts">数据契约</a> <a href="#transaction">事务流程</a> <a href="#collision">核心代码</a> <a href="#withdrawal">撤回边界</a> <a href="#hook">能力范围</a> <a href="#changes">文件变更</a>
+  </nav>
+  <p class="scroll-hint">图表、表格和代码可在各自区域横向滚动。</p>
+  <main>
+    <section id="architecture"><h2><span class="material-symbols-outlined" aria-hidden="true">account_tree</span>共享源，按宿主装配</h2><p>保留既有事务和资产模型。Qoder 补齐原生入口；DeepSeek 使用共享规则与 Skill。两款 Qoder CLI 的项目入口按物理路径收敛。</p><figure class="diagram" data-diagram><div class="diagram-output" tabindex="0" hidden></div><figcaption>所有文件变更进入同一份预览、备份和回滚计划。</figcaption><details><summary>查看图源</summary><pre data-mermaid>flowchart TB
+    accTitle: 共享资产与宿主入口架构
+    UI[CLI / Web] --&gt; CFG[config 与静态工具描述]
+    CFG --&gt; PLAN[project.plan / store.setup]
+    LIB[assets 与个人库] --&gt; PLAN
+    PLAN --&gt; SRC[.agents 统一源]
+    SRC --&gt; QSK[.qoder/skills 目录入口]
+    SRC --&gt; DSH[DeepSeek 原生共享 Skill 发现]
+    SRC --&gt; GEN[.agents/.generated/qoder/agents]
+    GEN --&gt; MIRROR[.qoder/agents 普通文件镜像]
+    PLAN --&gt; HOOK[Qoder settings 的自有 Stop 条目]
+    PLAN --&gt; TX[冲突 / revision / 备份 / 回滚]
+    TX --&gt; DISC[discovery 与能力摘要]
+</pre></details></figure><div class="table-scroll"><table><thead><tr><th>工具</th><th>项目 Skill</th><th>用户 Skill</th><th>角色</th></tr></thead><tbody><tr><td>Qoder CLI</td><td><code>.qoder/skills</code><br>目录软链</td><td><code>~/.qoder/skills</code></td><td>普通文件镜像</td></tr><tr><td>Qoder CLI CN</td><td>共用项目 <code>.qoder</code></td><td><code>~/.qoder-cn/skills</code></td><td>项目共用，用户级独立</td></tr><tr><td>DeepSeek Harness</td><td><code>.agents/skills</code><br>直接读取源</td><td><code>~/.agents/skills</code></td><td>Preset 注册后续接入</td></tr></tbody></table></div></section>
+<section id="contracts"><h2><span class="material-symbols-outlined" aria-hidden="true">database</span>入口形态与数据契约</h2><div class="table-scroll"><table><thead><tr><th>对象</th><th>关键字段</th><th>约束</th></tr></thead><tbody><tr><td>静态工具描述</td><td>family · skills · agents · cleanup</td><td>声明路径、入口形态、支持范围；无文件读取</td></tr><tr><td>期望输出 Map</td><td>path → kind / text / target / requires</td><td>同物理路径必须具有相同内容和依赖</td></tr><tr><td>受管状态</td><td>既有 v4 文件 hash</td><td>新镜像沿用普通文件形态</td></tr><tr><td>发现结果</td><td>status · hostVerified</td><td>文件就绪与宿主发现分别报告</td></tr></tbody></table></div><p>三种 Skill 入口：source 直接读取，directory 链接目录，files 链接文件。Qoder 角色采用普通文件镜像，持续由中立角色源生成。</p><p>拟议代码：<code>src/tool-adapters.mjs</code></p><pre tabindex="0"><code class="language-javascript">export const NEW_ADAPTERS = {
+  qoder: {
+    label: &#x27;Qoder CLI&#x27;, aliases: [], family: &#x27;qoder&#x27;,
+    skills: { project: &#x27;.qoder/skills&#x27;, global: &#x27;.qoder/skills&#x27;, mode: &#x27;directory&#x27; },
+    agents: { project: &#x27;.qoder/agents&#x27;, global: &#x27;.qoder/agents&#x27;, mode: &#x27;mirror&#x27; },
+    cleanup: [],
+  },
+  qodercn: {
+    label: &#x27;Qoder CLI CN&#x27;, aliases: [&#x27;qoder-cn&#x27;], family: &#x27;qoder&#x27;,
+    skills: { project: &#x27;.qoder/skills&#x27;, global: &#x27;.qoder-cn/skills&#x27;, mode: &#x27;directory&#x27; },
+    agents: { project: &#x27;.qoder/agents&#x27;, global: &#x27;.qoder-cn/agents&#x27;, mode: &#x27;mirror&#x27; },
+    cleanup: [],
+  },
+  dsh: {
+    label: &#x27;DeepSeek Harness&#x27;, aliases: [&#x27;deepseek-harness&#x27;], family: &#x27;dsh&#x27;,
+    skills: { project: &#x27;.agents/skills&#x27;, global: &#x27;.agents/skills&#x27;, mode: &#x27;source&#x27; },
+    agents: { project: null, global: null, mode: &#x27;unsupported&#x27; },
+    cleanup: [],
+  },
+};
+
+// 调用方已通过 config 校验；无目录的能力必须跳过。
+function agentTargets(adapters, tools, scope) {
+  return tools.flatMap(tool =&gt; {
+    const adapter = adapters[tool];
+    const directory = adapter.agents[scope];
+    return directory ? [{ tool, directory, family: adapter.family,
+      mode: adapter.agents.mode }] : [];
+  });
+}
+</code></pre></section>
+<section id="transaction"><h2><span class="material-symbols-outlined" aria-hidden="true">route</span>预览、写入与失败恢复</h2><figure class="diagram" data-diagram><div class="diagram-output" tabindex="0" hidden></div><figcaption>revision 或现场变化时重新预览；中途失败按 journal 回滚。</figcaption><details><summary>查看图源</summary><pre data-mermaid>sequenceDiagram
+    accTitle: 预览到应用的事务与失败恢复
+    actor User as 用户
+    participant UI as CLI/Web
+    participant Plan as plan
+    participant FS as 文件系统
+    participant Apply as apply
+    User-&gt;&gt;UI: 选择工具 / 预览
+    UI-&gt;&gt;Plan: 配置与冲突策略
+    Plan-&gt;&gt;FS: 只读检查源、入口、状态和共享配置
+    Plan-&gt;&gt;Plan: 先收敛源，再生成派生与镜像，按目标去重
+    Plan--&gt;&gt;UI: actions + revision + discovery
+    User-&gt;&gt;UI: 应用当前预览
+    UI-&gt;&gt;Apply: 配置、策略、revision
+    Apply-&gt;&gt;FS: 加锁并重新读取状态
+    alt revision 或写入前状态变化
+      Apply--&gt;&gt;UI: 拒绝并要求重新预览
+    else 当前状态一致
+      Apply-&gt;&gt;FS: 备份、写入、保存受管状态
+      alt 中途失败
+        Apply-&gt;&gt;FS: 根据 journal 回滚
+        Apply--&gt;&gt;UI: 失败与恢复位置
+      else 成功
+        Apply--&gt;&gt;UI: 装配结果、能力限制、hostVerified false
+      end
+    end
+</pre></details></figure><p>全局 setup 保持原有冲突预检与保留既有安装策略。Web 继续校验 token、Host 和 Origin。</p></section>
+<section id="collision"><h2><span class="material-symbols-outlined" aria-hidden="true">code</span>共享目标与角色同步</h2><h3>同目标必须具有一致语义</h3><p>相同 kind、内容、来源和依赖可以合并；冲突输出在写入前失败。代码为拟议设计。</p><pre tabindex="0"><code class="language-javascript">import path from &#x27;node:path&#x27;;
+import { isDeepStrictEqual } from &#x27;node:util&#x27;;
+
+function collectTarget(desired, relative, output) {
+  if (!desired.has(relative)) {
+    desired.set(relative, output);
+    return;
+  }
+  if (!isDeepStrictEqual(desired.get(relative), output)) {
+    throw Error(`Conflicting asset outputs: ${relative}`);
+  }
+}
+
+function skillAliases(adapter, scope, name, relativeFiles) {
+  const source = `.agents/skills/${name}`;
+  const target = `${adapter.skills[scope]}/${name}`;
+  if (adapter.skills.mode === &#x27;source&#x27;) {
+    if (source !== target) throw Error(&#x27;Invalid shared Skill root&#x27;);
+    return []; // 源已由调用方写入一次。
+  }
+  const link = (destination, origin, requires) =&gt; [destination, {
+    kind: &#x27;symlink&#x27;, source: origin,
+    target: path.posix.relative(path.posix.dirname(destination), origin),
+    ...(requires ? { requires } : {}),
+  }];
+  if (adapter.skills.mode === &#x27;directory&#x27;) {
+    return [link(target, source, `${source}/SKILL.md`)];
+  }
+  if (adapter.skills.mode === &#x27;files&#x27;) {
+    return relativeFiles.map(file =&gt; link(`${target}/${file}`, `${source}/${file}`));
+  }
+  throw Error(`Unsupported Skill entry mode: ${adapter.skills.mode}`);
+}
+</code></pre><h3>镜像冲突保留用户修改</h3><p>有效中立源先收敛，再渲染派生和原生镜像。镜像、派生或依赖 Skill 待同步时，角色不能显示就绪。</p><pre tabindex="0"><code class="language-javascript">function classifyMirror({ before, previous, text, policy, blocked, hash }) {
+  if (![&#x27;merge&#x27;, &#x27;replace&#x27;, &#x27;abort&#x27;].includes(policy)) throw Error(&#x27;Invalid policy&#x27;);
+  const candidate = { kind: &#x27;file&#x27;, text };
+  if (blocked || (before !== null &amp;&amp; before.kind !== &#x27;file&#x27;)) {
+    return { decision: &#x27;conflict&#x27;, after: before, candidate,
+      writable: false, needsSync: true };
+  }
+  if (before === null) {
+    return { decision: &#x27;create&#x27;, after: candidate, needsSync: false };
+  }
+  if (before.text === text) {
+    return { decision: &#x27;noop&#x27;, after: before, needsSync: false };
+  }
+  const unchanged = previous?.kind === &#x27;file&#x27; &amp;&amp; !previous.preserve
+    &amp;&amp; hash(before.text) === previous.hash;
+  if (unchanged) {
+    return { decision: &#x27;update&#x27;, after: candidate, needsSync: false };
+  }
+  if (policy === &#x27;replace&#x27;) {
+    return { decision: &#x27;replace&#x27;, after: candidate,
+      backup: true, needsSync: false };
+  }
+  if (policy === &#x27;abort&#x27;) {
+    return { decision: &#x27;conflict&#x27;, after: before, candidate, needsSync: true };
+  }
+  return { decision: &#x27;preserve&#x27;, after: before, candidate,
+    saveCandidate: true, preserve: true, needsSync: true };
+}
+</code></pre></section>
+<section id="withdrawal"><h2><span class="material-symbols-outlined" aria-hidden="true">folder</span>撤回只处理受管文件</h2><figure class="diagram" data-diagram><div class="diagram-output" tabindex="0" hidden></div><figcaption>取消一款 Qoder CLI 时保留另一款仍需使用的共享入口。</figcaption><details><summary>查看图源</summary><pre data-mermaid>flowchart TD
+    accTitle: Qoder 双端共享文件的撤回条件
+    A[当前选择生成完整期望图] --&gt; B{旧受管路径仍被需要}
+    B --&gt;|是| C[保留或同步共享入口]
+    B --&gt;|否| D{是否共享宿主配置}
+    D --&gt;|是| E[只撤回自有 Hook 条目]
+    D --&gt;|否| F{文件仍与受管记录一致}
+    F --&gt;|是| G[经备份撤回该文件]
+    F --&gt;|否| H[保留并进入冲突处理]
+    I[未受管文件与宿主根目录] --&gt; J[保持原样]
+</pre></details></figure><p>新工具采用逐文件撤回，已有五工具保持原清理行为。Qoder settings 只撤回带框架标记的 Hook；用户配置及未受管目录保留。</p></section>
+<section id="hook"><h2><span class="material-symbols-outlined" aria-hidden="true">account_tree</span>Hook 与能力边界</h2><div class="table-scroll"><table><thead><tr><th>能力</th><th>Qoder CLI / CN</th><th>DeepSeek Harness</th></tr></thead><tbody><tr><td>工程规则</td><td>根 AGENTS.md</td><td>根 AGENTS.md</td></tr><tr><td>Skill</td><td>目录入口与共享源</td><td>共享源</td></tr><tr><td>命名角色</td><td>普通镜像</td><td>后续 Preset + 允许委派列表</td></tr><tr><td>格式化</td><td>Stop · 30 秒 · 项目级</td><td>后续按会话工作区执行的插件</td></tr><tr><td>MCP</td><td colspan="2">独立资源装配；注册、授权及凭据由宿主管理</td></tr></tbody></table></div><p>Qoder 双端共享同一个 Hook 注册。含注释或结构异常的配置保留原文并显示冲突，用户处理后重新预览。宿主信任、权限和禁用设置持续生效。</p><p>当前按默认目录装配。自定义宿主目录、关闭默认发现或私有同名 Skill 会影响实际发现来源。</p></section>
+<section id="changes"><h2><span class="material-symbols-outlined" aria-hidden="true">folder</span>文件变更与实施顺序</h2><pre tabindex="0"><code class="language-diff">+ src/tool-adapters.mjs             静态工具描述
+! src/store.mjs                     共享源、全局入口与能力门控
+! src/project.mjs                   去重、镜像与受管撤回
+! src/agents.mjs                    Qoder 原生格式
+! src/rules.mjs                     绑定根 AGENTS.md
+! src/format-hook.mjs               同路径分组与 Stop 注册
+! src/assets.mjs                    受管路径和扩展边界
+! src/discovery.mjs                 角色依赖与能力提示
+! src/cli.mjs / web/                工具选项与预览反馈
+! assets/hooks/my-format/asset.json Qoder 格式化入口
+! manifest.yml / docs/ / README.md  分发登记与使用说明
+! test/ / scripts/                  对应行为覆盖</code></pre><p>先统一描述和装配，再加入角色与撤回边界，最后完成 Hook、诊断和工具界面。既有 API、配置版本和运行时依赖保持。</p></section>
+<section id="close"><h2><span class="material-symbols-outlined" aria-hidden="true">account_tree</span>本次设计的落点</h2><p>一个共享资产源、三种工具选择。Qoder CLI 覆盖规则、Skill、角色和格式化；DeepSeek 首批覆盖规则与 Skill，原生角色和 Hook 后续独立接入。</p><p>最关键的实现约束是同目标去重、普通镜像同步和受管文件撤回。所有新入口继续接受原有事务与路径边界保护。</p></section>
+  </main>
+  <script type="module">
+    window.hljs?.highlightAll();
+    document.fonts.load('20px "Material Symbols Outlined"').then(fonts => {
+      if (fonts.length) document.documentElement.classList.add('symbols-ready');
+    }).catch(() => {});
+
+    const diagrams = [...document.querySelectorAll('[data-diagram]')];
+    if (diagrams.length) {
+      try {
+        const { default: mermaid } = await import('https://cdn.jsdelivr.net/npm/mermaid@11.16.0/dist/mermaid.esm.min.mjs');
+        const colorScheme = matchMedia('(prefers-color-scheme: dark)');
+        let pending = Promise.resolve();
+        let renderedTheme;
+
+        async function renderDiagrams() {
+          const theme = colorScheme.matches ? 'dark' : 'neutral';
+          if (theme === renderedTheme) return;
+          mermaid.initialize({
+            startOnLoad: false,
+            securityLevel: 'strict',
+            suppressErrorRendering: true,
+            htmlLabels: false,
+            theme,
+            fontFamily: getComputedStyle(document.body).fontFamily
+          });
+          for (const [index, figure] of diagrams.entries()) {
+            const output = figure.querySelector('.diagram-output');
+            const source = figure.querySelector('[data-mermaid]');
+            try {
+              const { svg } = await mermaid.render(`review-${theme}-${index + 1}`, source.textContent.trim());
+              output.innerHTML = svg;
+              const drawing = output.querySelector('svg');
+              drawing.style.setProperty('--diagram-width', `${drawing.viewBox.baseVal.width}px`);
+              output.hidden = false;
+              source.closest('details').hidden = true;
+            } catch (error) {
+              output.hidden = true;
+              source.closest('details').hidden = false;
+              console.warn('图表未能绘制', error);
+            }
+          }
+          renderedTheme = theme;
+        }
+
+        function scheduleRender() {
+          pending = pending.then(renderDiagrams);
+        }
+
+        colorScheme.addEventListener('change', scheduleRender);
+        scheduleRender();
+      } catch (error) {
+        console.warn('图表组件未能加载', error);
+      }
+    }
+  </script>
+</body>
+</html>
