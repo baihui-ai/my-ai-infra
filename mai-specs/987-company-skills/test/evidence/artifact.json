@@ -1,0 +1,34 @@
+{
+  "checkedAt": "2026-11-24T10:14:34.010Z",
+  "package": "lily-sdd",
+  "version": "0.1.0",
+  "node": "v26.5.0",
+  "platform": "darwin",
+  "filename": "lily-sdd-0.1.0.tgz",
+  "sha256": "10cb04a9dd40a32cc9cf53fc0679a595ca3e0cb0a2cd787709a09c5033b0482b",
+  "entryCount": 326,
+  "checks": [
+    "Distribution whitelist, resources, executable entry and tarball integrity",
+    "Offline npx bin, read-only version/catalog, packaged documentation and Skill resources",
+    "Project-owned document templates are packaged without the removed document-cloud runtime or external template Skill",
+    "Installed CLI init discards old Prompts and installs current workflow Skills",
+    "Global lily-sdd command, current-directory init and doctor",
+    "All 19 selected Skills have discoverable regular SKILL.md files",
+    "Packaged DDD source, references and optional scaffold script preserve upstream checksums and install through adapters without executing generation",
+    "Packaged lily-sdd-tech-diagram preserves every source/image byte, resolves tool references and generates offline animation HTML",
+    "Packaged role assets and four native Agent formats resolve their installed Skill",
+    "New AGENTS/CLAUDE share one empty source and relative native entry links",
+    "Every adapter, installed Feature initializer/templates, repeat sync and doctor",
+    "Packaged format Hook detects configuration, registers every supported host, executes an existing script and skips a missing script",
+    "Tarball debt Skill installs alone with every reference, template and eval resource through four movable adapters",
+    "Conflict refusal preserves modified project files and config",
+    "Global lily-sdd web selects current directory; packaged resources and API authentication",
+    "Packaged Markdown memory, stable identity, repeat sync, scene recall and Web management",
+    "Personal Skill import, upgrade isolation, npm global uninstall/reinstall persistence and new-project reuse"
+  ],
+  "publication": "not-published",
+  "deferred": [
+    "Windows real-machine validation",
+    "host model end-to-end behavior"
+  ]
+}

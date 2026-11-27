@@ -1,0 +1,124 @@
+{
+  "date": "2026-11-22",
+  "kind": "scheduled-no-new-evidence",
+  "window": {
+    "start": "2026-11-15T08:58:16.149Z",
+    "end": "2026-11-22T08:58:16.149Z",
+    "timezone": "Asia/Shanghai"
+  },
+  "previousWatermark": "2026-11-21T09:04:30.242Z",
+  "regularQuotaRemainingPercent": 77,
+  "personalLimitIgnored": true,
+  "activeListComplete": true,
+  "archivedListComplete": true,
+  "activeIndexCount": 35,
+  "archivedIndexCount": 9,
+  "candidateThreadCount": 17,
+  "candidateSnapshots": [
+    {
+      "threadId": "01a1d273-04e9-7873-9c83-bd3fba5ac3f9",
+      "updatedAt": 1795340744
+    },
+    {
+      "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+      "updatedAt": 1795193194
+    },
+    {
+      "threadId": "01a1f7f1-bb65-7741-ba59-06c4f33b8ec2",
+      "updatedAt": 1795161273
+    },
+    {
+      "threadId": "01a1e862-3b02-7743-8486-360ba0b87ff6",
+      "updatedAt": 1795155041
+    },
+    {
+      "threadId": "01a1f27e-97fe-7ad2-87b8-be4773f27258",
+      "updatedAt": 1795077090
+    },
+    {
+      "threadId": "01a17bcb-5d5e-7560-a0d8-129bad5ec8fd",
+      "updatedAt": 1795065798
+    },
+    {
+      "threadId": "01a1f1c5-ad19-7fd1-9e5a-0748b3d1815b",
+      "updatedAt": 1795057766
+    },
+    {
+      "threadId": "01a1e816-7588-72d1-9713-cce6d13093b4",
+      "updatedAt": 1795054870
+    },
+    {
+      "threadId": "01a1774e-d413-7342-81cf-b75f238fd1cd",
+      "updatedAt": 1795053741
+    },
+    {
+      "threadId": "01a1e8c0-2a86-76f1-87e3-7f463550111e",
+      "updatedAt": 1795051165
+    },
+    {
+      "threadId": "01a1e804-0b0c-7830-b39b-fa4b9db7f9b4",
+      "updatedAt": 1794917088
+    },
+    {
+      "threadId": "01a1e714-3de8-74c3-b76a-5769fe166aea",
+      "updatedAt": 1794915371
+    },
+    {
+      "threadId": "01a1e840-da56-7450-a9e7-a0d115640e90",
+      "updatedAt": 1794903047
+    },
+    {
+      "threadId": "01a1cd3b-ff24-7591-b08a-2c05930e1d7c",
+      "updatedAt": 1794884575
+    },
+    {
+      "threadId": "01a1e703-3da4-7b72-ac3b-989e09e14cc6",
+      "updatedAt": 1794877868
+    },
+    {
+      "threadId": "01a1d412-5f3b-7aa2-9196-e458707a356d",
+      "updatedAt": 1794829744
+    },
+    {
+      "threadId": "01a1d40a-5180-74c3-8353-4f15a96101ee",
+      "updatedAt": 1794807610
+    }
+  ],
+  "reread": [
+    {
+      "threadId": "01a1d273-04e9-7873-9c83-bd3fba5ac3f9",
+      "pages": 1,
+      "turns": 10
+    }
+  ],
+  "method": "索引发现上次水位后仅本复盘会话更新；读取实际用户消息并跨过旧水位，无新开发指令。其余16个窗口候选复用已审核周数据；9个归档均在窗口前。回合开始时间仅辅助定位，仍核对旧回合实际用户消息。",
+  "newLessons": [],
+  "newDuplicateOccurrences": [],
+  "excludedEvidence": [
+    {
+      "threadId": "01a1d273-04e9-7873-9c83-bd3fba5ac3f9",
+      "turnId": "01a2027a-40e1-7103-b359-a33e956afe81",
+      "messageId": "01a2027a-4352-7bd1-882b-d931df971910",
+      "reason": "定时触发，不作为开发偏好或新问题证据"
+    }
+  ],
+  "dedupBaseline": "context/LESSONS.json",
+  "reusedRuns": [
+    "context/runs/2026-11-21.json",
+    "context/runs/2026-11-20-scheduled.json"
+  ],
+  "missingSources": [
+    "不可访问账号、设备与非Codex服务",
+    "16个未变化候选复用既有审核记录，未本轮全量重读"
+  ],
+  "validation": {
+    "status": "document-validation-passed",
+    "sourceChanged": false,
+    "modelBehaviorRerun": false,
+    "packageRerun": false,
+    "syncPerformed": false,
+    "command": "npm run validate",
+    "exitCode": 0
+  },
+  "noBusinessDecisionNeeded": true
+}

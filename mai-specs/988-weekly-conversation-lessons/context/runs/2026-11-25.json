@@ -1,0 +1,290 @@
+{
+  "date": "2026-11-25",
+  "kind": "scheduled-incremental",
+  "window": {
+    "start": "2026-11-18T09:03:41.147Z",
+    "end": "2026-11-25T09:03:41.147Z",
+    "timezone": "Asia/Shanghai"
+  },
+  "previousWatermark": "2026-11-24T08:58:15.401Z",
+  "regularQuotaRemainingPercent": {
+    "initial": 51,
+    "stageBoundary": 51,
+    "beforeSync": 50,
+    "final": 50
+  },
+  "personalLimitIgnored": true,
+  "secondary": "not configured; excluded rather than assumed sufficient",
+  "activeListComplete": true,
+  "archivedListComplete": true,
+  "activeIndexCount": 40,
+  "archivedIndexCount": 9,
+  "candidateThreadCount": 17,
+  "readPages": 24,
+  "completedTurns": 141,
+  "userRoleItems": 233,
+  "coverage": [
+    {
+      "threadId": "01a1d273-04e9-7873-9c83-bd3fba5ac3f9",
+      "title": "改造项目以沉淀 SDD 经验",
+      "cwd": "/Users/sondge/git/workspace/my-ai-infra",
+      "pages": 3,
+      "turns": 28,
+      "userMessages": 57,
+      "hasMore": true,
+      "olderBoundaryReached": true
+    },
+    {
+      "threadId": "01a20ff1-e2e9-7291-b350-170f4b940930",
+      "title": "Initialize my-ai-infra",
+      "cwd": "/Users/sondge/git/lily-ops/seekr",
+      "pages": 2,
+      "turns": 16,
+      "userMessages": 21,
+      "hasMore": false,
+      "olderBoundaryReached": false
+    },
+    {
+      "threadId": "01a21173-e3bf-7d93-ba4e-c885bbfba024",
+      "title": "统计搜索来源的301重定向",
+      "cwd": "/Users/sondge/git/lily-ops/lily-searcher-service",
+      "pages": 1,
+      "turns": 8,
+      "userMessages": 9,
+      "hasMore": false,
+      "olderBoundaryReached": false
+    },
+    {
+      "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+      "title": "新建聊天",
+      "cwd": "/Users/sondge/git/lily-ops/lily-searcher-service",
+      "pages": 4,
+      "turns": 39,
+      "userMessages": 103,
+      "hasMore": true,
+      "olderBoundaryReached": true
+    },
+    {
+      "threadId": "01a21088-b2fa-7e00-aaf5-3d624246ecf7",
+      "title": "创建搜索器 MCP 插件",
+      "cwd": "/Users/sondge/git/workspace/my-ai-infra",
+      "pages": 1,
+      "turns": 2,
+      "userMessages": 2,
+      "hasMore": false,
+      "olderBoundaryReached": false
+    },
+    {
+      "threadId": "01a1e714-3de8-74c3-b76a-5769fe166aea",
+      "title": "设计 SDD 项目工作台插件",
+      "cwd": "/Users/sondge/git/my-ai-infra-dsh",
+      "pages": 1,
+      "turns": 0,
+      "userMessages": 0,
+      "hasMore": false,
+      "olderBoundaryReached": true
+    },
+    {
+      "threadId": "01a1e840-da56-7450-a9e7-a0d115640e90",
+      "title": "初始化 my-ai-infra",
+      "cwd": "/Users/sondge/git/a2ui-render-in-dsh",
+      "pages": 1,
+      "turns": 1,
+      "userMessages": 1,
+      "hasMore": false,
+      "olderBoundaryReached": true
+    },
+    {
+      "threadId": "01a20b67-7499-70a3-a767-c08236ff7775",
+      "title": "评估大模型分布式资源配置",
+      "cwd": "/Users/sondge/Documents/Codex/2026-11-24/f",
+      "pages": 1,
+      "turns": 3,
+      "userMessages": 7,
+      "hasMore": false,
+      "olderBoundaryReached": true
+    },
+    {
+      "threadId": "01a20b07-2f85-7c11-bc39-c28e2e5f0bc4",
+      "title": "处理无效请求来源",
+      "cwd": "/Users/sondge/git/geektime/compass",
+      "pages": 1,
+      "turns": 1,
+      "userMessages": 2,
+      "hasMore": false,
+      "olderBoundaryReached": true
+    },
+    {
+      "threadId": "01a1f7f1-bb65-7741-ba59-06c4f33b8ec2",
+      "title": "确认旧上新平台图纸更新机制",
+      "cwd": "/Users/sondge/git/lily-ops/lily-searcher-service",
+      "pages": 1,
+      "turns": 2,
+      "userMessages": 3,
+      "hasMore": false,
+      "olderBoundaryReached": true
+    },
+    {
+      "threadId": "01a1e862-3b02-7743-8486-360ba0b87ff6",
+      "title": "优化后台导航管理",
+      "cwd": "/Users/sondge/git/lily-ops/lily-searcher-service",
+      "pages": 1,
+      "turns": 10,
+      "userMessages": 17,
+      "hasMore": true,
+      "olderBoundaryReached": true
+    },
+    {
+      "threadId": "01a1f27e-97fe-7ad2-87b8-be4773f27258",
+      "title": "Retry with updated uv",
+      "cwd": "/Users/sondge/git/geektime/compass",
+      "pages": 1,
+      "turns": 6,
+      "userMessages": 6,
+      "hasMore": false,
+      "olderBoundaryReached": true
+    },
+    {
+      "threadId": "01a17bcb-5d5e-7560-a0d8-129bad5ec8fd",
+      "title": "Add pm-skills marketplace",
+      "cwd": "/Users/sondge/workspace/电商网站调研",
+      "pages": 2,
+      "turns": 20,
+      "userMessages": 0,
+      "hasMore": true,
+      "olderBoundaryReached": true
+    },
+    {
+      "threadId": "01a1f1c5-ad19-7fd1-9e5a-0748b3d1815b",
+      "title": "调研 AI 时代研发团队管理",
+      "cwd": "/Users/sondge/Documents/Codex/2026-11-19/qing",
+      "pages": 1,
+      "turns": 1,
+      "userMessages": 1,
+      "hasMore": false,
+      "olderBoundaryReached": true
+    },
+    {
+      "threadId": "01a1e816-7588-72d1-9713-cce6d13093b4",
+      "title": "分析任务列表接口性能债务",
+      "cwd": "/Users/sondge/git/lily-ops/lily-searcher-service",
+      "pages": 1,
+      "turns": 0,
+      "userMessages": 0,
+      "hasMore": false,
+      "olderBoundaryReached": true
+    },
+    {
+      "threadId": "01a1774e-d413-7342-81cf-b75f238fd1cd",
+      "title": "探索 AI 时代的新电商模式",
+      "cwd": "/Users/sondge/git/project",
+      "pages": 1,
+      "turns": 4,
+      "userMessages": 4,
+      "hasMore": true,
+      "olderBoundaryReached": true
+    },
+    {
+      "threadId": "01a1e8c0-2a86-76f1-87e3-7f463550111e",
+      "title": "了解赵本山小品风格",
+      "cwd": "/Users/sondge/Documents/Codex/2026-11-17/zhao",
+      "pages": 1,
+      "turns": 0,
+      "userMessages": 0,
+      "hasMore": false,
+      "olderBoundaryReached": true
+    }
+  ],
+  "method": "候选17会话重新读取24页，窗口内141个已完成回合、233条用户角色条目（含结构化答复和附件说明，不等于233条独立人类指令）。已更新主会话/业务会话分页读到上次水位；仍在窗口内更早的页复用前一天审核，未全量重读。三项候选在窗口内无实际回合，一项仅工具/机器回合。当前运行回合不作为新增证据。",
+  "lessons": [
+    {
+      "key": "counterexample-regression-and-proven-skip",
+      "sources": [
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a211b9-3a5e-7942-8003-1b4ce243eff6",
+          "messageId": "01a211c3-b174-7cf1-bcc8-02bc513bf0d5"
+        },
+        {
+          "threadId": "01a20ff1-e2e9-7291-b350-170f4b940930",
+          "turnId": "01a211ea-7629-7922-b6a6-90be583d73da",
+          "messageId": "01a211eb-13d8-7663-8764-d5871d9e4298"
+        }
+      ],
+      "status": "implemented-validated-synced-with-partial-assembly",
+      "target": "assets/skills/my-create-feature/references/delivery-lessons.md",
+      "validation": "test/2026-11-25-RUN_REPORT.md"
+    },
+    {
+      "key": "explicit-target-handoff-boundary",
+      "sources": [
+        {
+          "threadId": "01a1d273-04e9-7873-9c83-bd3fba5ac3f9",
+          "turnId": "01a20cfb-895f-7501-b320-2e47d48f643e",
+          "messageId": "01a20cff-41c6-7f10-9849-9b4a61fdd8a0"
+        },
+        {
+          "threadId": "01a1d273-04e9-7873-9c83-bd3fba5ac3f9",
+          "turnId": "01a2108f-b723-7eb2-a30d-52e046a1ea40",
+          "messageId": "01a2108f-b8e0-7261-8508-029bfc0d2f61"
+        }
+      ],
+      "status": "implemented-validated-synced-with-partial-assembly",
+      "target": "assets/skills/my-create-feature/references/stage-contracts.md",
+      "validation": "test/2026-11-25-RUN_REPORT.md"
+    }
+  ],
+  "refinedExisting": [
+    "async-observable-result",
+    "delivery-slice-inventory",
+    "avoid-reasking-known-answer"
+  ],
+  "deduplicated": [
+    "composite-index-and-equivalent-range-rewrite",
+    "persisted-payload-representation-compatibility",
+    "failure-retry-alerts",
+    "bounded-task-replay-and-empty-payload",
+    "company-skill-ui-routing-already-delivered-in-feature-987"
+  ],
+  "notGeneralized": [
+    "COUNT(1)改写不作为全局性能优化规则",
+    "特定产品/品牌/价格/图片优先规则",
+    "某次补偿的月份截止和调用额度",
+    "某业务表/任务/PR编号",
+    "公司版独有命名与隐式触发策略"
+  ],
+  "missingSources": [
+    "其他账号/设备与非Codex来源未覆盖",
+    "窗口内更早长会话页复用既有审核，未全量重读",
+    "附件未独立解析，只依据明确文字纠正",
+    "列表更新时间不等于用户消息时间，按回合开始时间筛选；未完成回合不作新增证据"
+  ],
+  "validation": {
+    "projectChecks": "release:check passed",
+    "tests": 284,
+    "failures": 0,
+    "skipped": 0,
+    "actualPackageChecks": 17,
+    "independentDesktopCases": {
+      "passed": 6,
+      "total": 6,
+      "realBusinessExecution": 0
+    },
+    "genericValidator": "failed: existing compatibility frontmatter unsupported; no frontmatter changed",
+    "hostEndToEnd": false
+  },
+  "sync": {
+    "globalReferences": 2,
+    "registeredProjects": 10,
+    "exactReferenceProjects": 10,
+    "cliCompletedProjects": 9,
+    "doctorHealthyProjects": 9,
+    "partialProject": "deepseek-harness: targeted reference merge; unselected CLAUDE.md/.claude preserved and state metadata drift remains",
+    "runtimeBackup": "dist/nov25-rollout.json",
+    "newProjectsAdded": 0
+  },
+  "noBusinessDecisionNeeded": true,
+  "gitWrites": false,
+  "personalMemoryWrites": false,
+  "externalServiceWrites": false
+}

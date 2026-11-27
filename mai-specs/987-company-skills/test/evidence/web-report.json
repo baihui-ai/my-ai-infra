@@ -1,0 +1,29 @@
+{
+  "checks": [
+    "Four workflow Skills appear as selectable defaults in the workflow group",
+    "The core workflow shortcut includes design HTML rendering and excludes standalone debt analysis",
+    "Builtin origin and read-only editor, personal Skill creation and source labels",
+    "Default home, animated gear frames, pointer acceleration/reversal/settling and offscreen suspension, modal focus, Escape, file search, filters and link details",
+    "Late-response rejection, policy invalidation, inline API error, real apply, saved config and completion hints",
+    "Unchecking Claude Code removes its entire directory, including orphan folders, and preserves canonical Skills",
+    "Real conflict blocks apply and preserves customized files",
+    "1440/1280/390/375 layouts, visible modal footer, reduced motion, no page errors or external requests"
+  ],
+  "motion": [
+    "8a4d816a2f96c1f1b93221cd2c4b1517e8a0fe9499cb6ebdb2f7721605bfd3df",
+    "225a63064e5fb30192e4880e9efe0d8eb5490728214d5b1bf8261a333058dad9",
+    "97bac57af719b8f4244d855ef7aa33090cfd648c01ee4143e0e6417ed5f16047"
+  ],
+  "pointerRates": {
+    "baseline": -0.5485714281229419,
+    "forward": -4.2043546663776254,
+    "reverse": 3.2496507496528926,
+    "settled": -0.5420452150557351
+  },
+  "viewports": [
+    1440,
+    1280,
+    390,
+    375
+  ]
+}

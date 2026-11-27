@@ -1,0 +1,180 @@
+{
+  "date": "2026-11-26",
+  "kind": "scheduled-incremental",
+  "window": {
+    "start": "2026-11-19T09:04:55.933Z",
+    "end": "2026-11-26T09:04:55.933Z",
+    "timezone": "Asia/Shanghai"
+  },
+  "previousWatermark": "2026-11-25T09:03:41.147Z",
+  "regularQuotaRemainingPercent": {
+    "initial": 43,
+    "stageBoundary": 43,
+    "beforeSync": 42,
+    "final": 42
+  },
+  "personalLimitIgnored": true,
+  "secondary": "not configured; excluded",
+  "activeIndexCount": 42,
+  "archivedIndexCount": 9,
+  "activeListComplete": true,
+  "archivedListComplete": true,
+  "candidateThreadCount": 13,
+  "freshReadThreadCount": 6,
+  "readPages": 14,
+  "completedTurns": 84,
+  "userRoleItems": 146,
+  "newCompletedTurns": 56,
+  "newUserRoleItems": 96,
+  "coverage": [
+    {
+      "threadId": "01a1d273-04e9-7873-9c83-bd3fba5ac3f9",
+      "pages": 1,
+      "completedTurns": 8,
+      "userRoleItems": 15,
+      "newCompletedTurns": 0,
+      "newUserRoleItems": 0,
+      "olderBoundaryReached": true,
+      "hasMore": true
+    },
+    {
+      "threadId": "01a20ff1-e2e9-7291-b350-170f4b940930",
+      "pages": 3,
+      "completedTurns": 29,
+      "userRoleItems": 58,
+      "newCompletedTurns": 20,
+      "newUserRoleItems": 36,
+      "olderBoundaryReached": true,
+      "hasMore": true
+    },
+    {
+      "threadId": "01a215b7-9f6a-7b93-8ea6-d84e7fb35558",
+      "pages": 5,
+      "completedTurns": 5,
+      "userRoleItems": 12,
+      "newCompletedTurns": 5,
+      "newUserRoleItems": 12,
+      "olderBoundaryReached": false,
+      "hasMore": true
+    },
+    {
+      "threadId": "01a21173-e3bf-7d93-ba4e-c885bbfba024",
+      "pages": 2,
+      "completedTurns": 19,
+      "userRoleItems": 25,
+      "newCompletedTurns": 13,
+      "newUserRoleItems": 18,
+      "olderBoundaryReached": true,
+      "hasMore": true
+    },
+    {
+      "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+      "pages": 2,
+      "completedTurns": 20,
+      "userRoleItems": 31,
+      "newCompletedTurns": 15,
+      "newUserRoleItems": 25,
+      "olderBoundaryReached": true,
+      "hasMore": true
+    },
+    {
+      "threadId": "01a2122e-29df-7a91-bfc5-c664eed5cfa8",
+      "pages": 1,
+      "completedTurns": 3,
+      "userRoleItems": 5,
+      "newCompletedTurns": 3,
+      "newUserRoleItems": 5,
+      "olderBoundaryReached": false,
+      "hasMore": false
+    }
+  ],
+  "localFallback": {
+    "threadId": "01a215b7-9f6a-7b93-8ea6-d84e7fb35558",
+    "reason": "single oversized turn; read_thread turnLimit=1 still fails",
+    "additionalCompletedTurns": 1,
+    "additionalUserRoleItems": 5,
+    "scope": "only this known rollout; user text read, injected skill/environment excluded"
+  },
+  "reusedAudit": "context/runs/2026-11-25.json",
+  "method": "增量6会话14个有效页，读取至上次水位或会话结束；7个未更新候选及更早窗口页复用前次审阅。超大回合按已定位本地记录补读，当前运行与注入Skill不作人类偏好证据。总计85个已完成回合、151条用户角色条目，其中水位后57回合101条，结构化回复/附件说明不等于独立人类指令。",
+  "newLessonKeys": [],
+  "refinedExisting": [
+    "counterexample-regression-and-proven-skip"
+  ],
+  "evidence": [
+    {
+      "threadId": "01a20ff1-e2e9-7291-b350-170f4b940930",
+      "turnId": "01a2151f-b87d-7c43-b877-4f734822d65f",
+      "messageId": "01a2151f-b8e4-7a83-8634-d3e7a8bcbd4a",
+      "summary": "尚未部署，停止将旧版本评测视作修复验收"
+    },
+    {
+      "threadId": "01a20ff1-e2e9-7291-b350-170f4b940930",
+      "turnId": "01a21525-d256-7571-9f95-d0956a3cd00c",
+      "messageId": "01a21525-d3ba-7a92-b162-4069eb5dcbbf",
+      "summary": "部署后先核对版本，再跑全量评测"
+    },
+    {
+      "threadId": "01a20ff1-e2e9-7291-b350-170f4b940930",
+      "turnId": "01a21558-6646-7a01-b317-da35a8c2febb",
+      "messageId": "01a2155a-d5ed-7b93-a692-14ad4691d2df",
+      "summary": "纠正跨环境核对说明混淆"
+    },
+    {
+      "threadId": "01a20ff1-e2e9-7291-b350-170f4b940930",
+      "turnId": "01a2155b-7bb4-7ab0-a71f-cc404a250a78",
+      "messageId": "01a2155b-7bf1-7552-b89c-711b6f53d482",
+      "summary": "要求核对对象详细信息再修订评测用例"
+    }
+  ],
+  "deduplicated": [
+    "safe-success-retention",
+    "reference-protected-scope",
+    "project-spec-git-policy",
+    "counterexample-regression-and-proven-skip"
+  ],
+  "notGeneralized": [
+    "主站具体搜索交互及等待文案",
+    "搜索关联ID与缓存的局部协议",
+    "报表Excel/PC版及中文站过滤口径",
+    "Git身份与仓库迁移选择"
+  ],
+  "missingSources": [
+    "其他账号设备与非Codex会话未覆盖",
+    "附件图片未独立解析，只依据用户文字纠正",
+    "更早窗口长页复用既有记录，未全量重读",
+    "消息时间以回合开始为主；当前未完成回合排除"
+  ],
+  "validation": {
+    "projectChecks": "release:check passed",
+    "tests": 284,
+    "failures": 0,
+    "skipped": 0,
+    "actualPackageChecks": 17,
+    "independentDesktopCases": {
+      "passed": 4,
+      "total": 4,
+      "realBusinessExecution": 0
+    },
+    "hostEndToEnd": false,
+    "featureLayout": "passed",
+    "genericValidator": "not rerun: known compatibility frontmatter mismatch; project validator passed",
+    "packageSha256": "52aba42bf54b7194e1d8917e23ba5829879acb1227c3521c88ea4b95e686d446",
+    "packageCheckedAt": "2026-11-26T09:10:59.046Z"
+  },
+  "sync": {
+    "globalReferences": 2,
+    "registeredProjects": 10,
+    "exactReferenceProjects": 10,
+    "cliCompletedProjects": 9,
+    "doctorHealthyProjects": 9,
+    "partialProject": "deepseek-harness: only references merged; CLAUDE.md/.claude and state metadata drift preserved",
+    "runtimeBackup": "dist/nov26-rollout.json",
+    "backup": "/Users/sondge/.my-ai-infra/backups/lessons-2026-11-26-1795684262",
+    "newProjectsAdded": 0
+  },
+  "gitWrites": false,
+  "personalMemoryWrites": false,
+  "externalServiceWrites": false,
+  "noBusinessDecisionNeeded": true
+}

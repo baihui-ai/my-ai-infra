@@ -150,6 +150,8 @@ deliverables:
 - assets/skills/my-create-feature/references/stage-contracts.md
 - assets/skills/my-create-prd/assets/templates/PRD.simple.tmpl.md
 - assets/skills/my-create-design/assets/templates/TECH_DESIGN.simple.tmpl.md
+- assets/skills/lily-main-site-ui-skill/SKILL.md
+
 validation:
   commands:
   - npm run verify

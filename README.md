@@ -68,7 +68,7 @@ mai catalog
 
 ## 面向中文开发者调优的 Skill
 
-内置 **7 个 SDD 阶段 Skill + 8 个辅助 Skill + 4 个工作流 Skill**，围绕职责边界、输入输出、评审尺度与阶段衔接做了深度调优。中文指引和文档模板覆盖需求澄清、业务规则、交互文案与技术评审；既方便开发者阅读和决策，也为 Coding Agent 提供明确的执行上下文。
+内置 **7 个 SDD 阶段 Skill + 9 个辅助 Skill + 4 个工作流 Skill**，围绕职责边界、输入输出、评审尺度与阶段衔接做了深度调优。中文指引和文档模板覆盖需求澄清、业务规则、交互文案与技术评审；既方便开发者阅读和决策，也为 Coding Agent 提供明确的执行上下文。
 
 | Skill | 用途 | 调优重点 |
 |---|---|---|
@@ -105,3 +105,7 @@ mai catalog
 感谢开源社区对 SDD、Agent 协作与工程实践的持续探索。my-ai-infra 在这些经验之上做取舍与整合，追求精简、易用、可持续演进的开发体验。
 
 项目采用 [MIT 许可证](LICENSE)。第三方资产的来源与授权状态见[来源与许可说明](THIRD_PARTY_NOTICES.md)。
+
+## 主站UI样式规范
+
+使用`$lily-main-site-ui-skill`显式调用LILY主站UI规范，入口仅加载当前样式主题或当前阶段，七阶段详案及设计token参考按需读取。资源完整内置于assets/skills/lily-main-site-ui-skill，不依赖外部Skill目录；不改变个人版其他Skill触发策略。

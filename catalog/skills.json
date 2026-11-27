@@ -152,6 +152,13 @@
       "category": "support",
       "default": false,
       "aliases": []
+    },
+    {
+      "name": "lily-main-site-ui-skill",
+      "label": "LILY主站UI样式与页面改版",
+      "category": "support",
+      "default": false,
+      "aliases": []
     }
   ],
   "removedSkills": [

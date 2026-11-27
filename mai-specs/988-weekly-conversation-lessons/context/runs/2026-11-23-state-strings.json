@@ -1,0 +1,19 @@
+{
+  "date": "2026-11-23",
+  "kind": "explicit-status-code-preference",
+  "sourceDescription": "本会话用户明确要求状态枚举尽量使用有业务含义字符串、尽量少用数字",
+  "scope": "新设计优先，既有/外部数字协议兼容",
+  "sourceSha256": {
+    "assets/skills/my-create-feature/references/java-dev.md": "bc5aecb4a18717cbd30ff9e366fbe18138c3c47e15f159d4da02e1adb08c6477",
+    "assets/skills/my-create-feature/references/code-review-rules.md": "59225b49c81778cbd8e6849522ecab6bf8b2db4e2cbdba4314b721f6fa76fc68"
+  },
+  "independentDesktopCases": 3,
+  "regressionTests": 284,
+  "releaseCheck": "passed",
+  "globalResources": 2,
+  "projectsCovered": 10,
+  "exactProjects": 9,
+  "backup": "/Users/sondge/.my-ai-infra/backups/status-strings-2026-11-23-1795425252615",
+  "validation": "test/2026-11-23-STATE_STRINGS.md",
+  "weeklyWatermarkUnchanged": true
+}

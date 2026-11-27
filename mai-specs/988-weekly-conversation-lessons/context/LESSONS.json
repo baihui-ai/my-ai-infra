@@ -55,7 +55,8 @@
       ],
       "target": "assets/skills/my-create-feature/references/delivery-lessons.md",
       "status": "implemented-validated-synced",
-      "validation": "test/ACCEPTANCE_REPORT.md"
+      "validation": "test/ACCEPTANCE_REPORT.md",
+      "lastObserved": "2026-11-25"
     },
     {
       "key": "project-spec-git-policy",
@@ -83,7 +84,8 @@
       ],
       "target": "assets/skills/my-create-feature/references/delivery-lessons.md",
       "status": "implemented-validated-synced",
-      "validation": "test/ACCEPTANCE_REPORT.md"
+      "validation": "test/ACCEPTANCE_REPORT.md",
+      "lastObserved": "2026-11-25"
     },
     {
       "key": "real-container-interaction",
@@ -150,7 +152,8 @@
       "target": "assets/skills/my-create-feature/references/delivery-lessons.md",
       "status": "implemented-validated-synced",
       "validation": "test/2026-11-18-RUN_REPORT.md",
-      "date": "2026-11-18"
+      "date": "2026-11-18",
+      "lastObserved": "2026-11-25"
     },
     {
       "key": "avoid-unnecessary-transactions",
@@ -167,12 +170,29 @@
           "threadId": "01a1e862-3b02-7743-8486-360ba0b87ff6",
           "turnId": "01a1f276-fb30-7863-b1d3-63f9cdaca761",
           "messageId": "01a1f278-fd33-7880-b4ec-68ef96de11c9"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f847-861b-7901-bfc2-801850d40f04",
+          "messageId": "01a1f84b-634f-7301-972f-105c5c53cf2d"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f847-861b-7901-bfc2-801850d40f04",
+          "messageId": "01a1f84c-9449-7150-bb70-d37d6f64760f"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f846-d077-7631-ba0b-884bfa4a3e0e",
+          "messageId": "01a1f847-32a3-7bb0-9e0c-aefafb1a7d82"
         }
       ],
       "target": "assets/skills/my-create-feature/references/java-dev.md",
       "status": "implemented-validated-synced",
       "validation": "test/2026-11-20-RUN_REPORT.md",
-      "date": "2026-11-20"
+      "date": "2026-11-20",
+      "lastObserved": "2026-11-21",
+      "lastObservationReport": "test/2026-11-21-RUN_REPORT.md"
     },
     {
       "key": "default-no-query-row-locks",
@@ -617,10 +637,17 @@
           "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
           "turnId": "01a1f82d-4efb-7fd3-8329-e5a631d8084a",
           "messageId": "01a1f82d-db25-7653-ae8e-501a99b7af92"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f82d-4efb-7fd3-8329-e5a631d8084a",
+          "messageId": "01a1f82f-4981-7ba3-b8f4-ca2fa91f2692"
         }
       ],
       "status": "implemented-validated-synced-with-customizations",
-      "validation": "test/2026-11-20-SCHEDULED_REPORT.md"
+      "validation": "test/2026-11-20-SCHEDULED_REPORT.md",
+      "lastObserved": "2026-11-21",
+      "lastObservationReport": "test/2026-11-21-RUN_REPORT.md"
     },
     {
       "key": "replay-latest-correction-vs-winner-priority",
@@ -668,6 +695,173 @@
       ],
       "status": "implemented-validated-synced-with-customizations",
       "validation": "test/2026-11-20-SCHEDULED_REPORT.md"
+    },
+    {
+      "key": "java-state-enum-and-pure-operations",
+      "sources": [
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a20608-9383-7e73-a9ba-de9e600b1a11",
+          "messageId": "01a2063f-35c9-7301-a365-4494a1e2aeeb"
+        },
+        {
+          "threadId": "01a1d273-04e9-7873-9c83-bd3fba5ac3f9",
+          "turnId": "01a207ac-1ce2-7420-8252-f2ea7d6bebec",
+          "messageId": "01a207ac-1dd9-7a00-aa9d-3e3e6c112a1c"
+        }
+      ],
+      "status": "implemented-validated-synced-with-customizations",
+      "target": "assets/skills/my-create-feature/references/java-dev.md",
+      "validation": "test/2026-11-23-STATE_STRINGS.md",
+      "date": "2026-11-23",
+      "encodingPreference": {
+        "newDesign": "explicit-semantic-string-code-preferred",
+        "legacyNumeric": "preserve-compatible-mapping",
+        "sourceDescription": "本会话用户明确要求状态枚举尽量使用有业务含义字符串、尽量少用数字"
+      },
+      "lastObserved": "2026-11-23"
+    },
+    {
+      "key": "composite-index-and-equivalent-range-rewrite",
+      "sources": [
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a205f7-4393-7251-83b0-44a476611621",
+          "messageId": "01a205f9-52ba-7cb2-9d4e-27cd3b2fc47c"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a205f7-4393-7251-83b0-44a476611621",
+          "messageId": "01a205fa-975b-7290-ae5a-076a5ab91a2f"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a205f7-4393-7251-83b0-44a476611621",
+          "messageId": "01a205fb-afa6-7f83-9a02-4ca95ff02c7f"
+        }
+      ],
+      "status": "implemented-validated-synced-with-customizations",
+      "target": "assets/skills/my-create-feature/references/java-dev.md",
+      "validation": "test/2026-11-23-RUN_REPORT.md",
+      "date": "2026-11-23"
+    },
+    {
+      "key": "reference-rewrite-when-explicitly-requested",
+      "sources": [
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a20c9d-15d3-7351-b937-2a41326fd2d8",
+          "messageId": "01a20ca3-d4c3-7d50-9fb5-b7bff1482c9c"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a20c9d-15d3-7351-b937-2a41326fd2d8",
+          "messageId": "01a20ca6-417a-7580-94b5-f2e7731f8826"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a20c9d-15d3-7351-b937-2a41326fd2d8",
+          "messageId": "01a20ca7-6eae-7cc0-a245-06eba37a87cf"
+        }
+      ],
+      "status": "implemented-validated-synced-with-customizations",
+      "target": "assets/skills/my-create-feature/references/delivery-lessons.md",
+      "validation": "test/2026-11-24-RUN_REPORT.md",
+      "date": "2026-11-24"
+    },
+    {
+      "key": "server-performance-observation-boundaries",
+      "sources": [
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a207e7-a7bf-7df2-87b8-e070028eeb27",
+          "messageId": "01a207ea-632d-7881-bf67-cd4bbc02a1cc"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a207e7-a7bf-7df2-87b8-e070028eeb27",
+          "messageId": "01a207ea-dbc8-7d70-a82b-0937c01208c2"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a207e6-1f40-7492-9946-1c41adf113d8",
+          "messageId": "01a207e6-26b0-7f93-8cab-5eadbc2c7730"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a207c4-a4af-7280-871b-ef3566609f90",
+          "messageId": "01a207c4-a5d1-7b73-899f-a51650e96cd5"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a207c4-a4af-7280-871b-ef3566609f90",
+          "messageId": "01a207d8-0663-7440-889c-d9173f9d876b"
+        }
+      ],
+      "status": "implemented-validated-synced-with-customizations",
+      "target": "assets/skills/my-create-feature/references/delivery-lessons.md",
+      "validation": "test/2026-11-24-RUN_REPORT.md",
+      "date": "2026-11-24"
+    },
+    {
+      "key": "counterexample-regression-and-proven-skip",
+      "sources": [
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a211b9-3a5e-7942-8003-1b4ce243eff6",
+          "messageId": "01a211c3-b174-7cf1-bcc8-02bc513bf0d5"
+        },
+        {
+          "threadId": "01a20ff1-e2e9-7291-b350-170f4b940930",
+          "turnId": "01a211ea-7629-7922-b6a6-90be583d73da",
+          "messageId": "01a211eb-13d8-7663-8764-d5871d9e4298"
+        },
+        {
+          "threadId": "01a20ff1-e2e9-7291-b350-170f4b940930",
+          "turnId": "01a2151f-b87d-7c43-b877-4f734822d65f",
+          "messageId": "01a2151f-b8e4-7a83-8634-d3e7a8bcbd4a"
+        },
+        {
+          "threadId": "01a20ff1-e2e9-7291-b350-170f4b940930",
+          "turnId": "01a21525-d256-7571-9f95-d0956a3cd00c",
+          "messageId": "01a21525-d3ba-7a92-b162-4069eb5dcbbf"
+        },
+        {
+          "threadId": "01a20ff1-e2e9-7291-b350-170f4b940930",
+          "turnId": "01a21558-6646-7a01-b317-da35a8c2febb",
+          "messageId": "01a2155a-d5ed-7b93-a692-14ad4691d2df"
+        },
+        {
+          "threadId": "01a20ff1-e2e9-7291-b350-170f4b940930",
+          "turnId": "01a2155b-7bb4-7ab0-a71f-cc404a250a78",
+          "messageId": "01a2155b-7bf1-7552-b89c-711b6f53d482"
+        }
+      ],
+      "status": "implemented-validated-synced-with-partial-assembly",
+      "target": "assets/skills/my-create-feature/references/delivery-lessons.md",
+      "validation": "test/2026-11-26-RUN_REPORT.md",
+      "date": "2026-11-25",
+      "lastObserved": "2026-11-26",
+      "lastRefinement": "远端部署/工具环境核对；独立基准证据和历史重判边界"
+    },
+    {
+      "key": "explicit-target-handoff-boundary",
+      "sources": [
+        {
+          "threadId": "01a1d273-04e9-7873-9c83-bd3fba5ac3f9",
+          "turnId": "01a20cfb-895f-7501-b320-2e47d48f643e",
+          "messageId": "01a20cff-41c6-7f10-9849-9b4a61fdd8a0"
+        },
+        {
+          "threadId": "01a1d273-04e9-7873-9c83-bd3fba5ac3f9",
+          "turnId": "01a2108f-b723-7eb2-a30d-52e046a1ea40",
+          "messageId": "01a2108f-b8e0-7261-8508-029bfc0d2f61"
+        }
+      ],
+      "status": "implemented-validated-synced-with-partial-assembly",
+      "target": "assets/skills/my-create-feature/references/stage-contracts.md",
+      "validation": "test/2026-11-25-RUN_REPORT.md",
+      "date": "2026-11-25"
     }
   ],
   "deduplicated": [
@@ -685,9 +879,9 @@
     "other-project-Feishu-requests"
   ],
   "lastProcessedWindow": {
-    "start": "2026-11-13T08:58:16.346Z",
-    "end": "2026-11-20T08:58:16.346Z",
+    "start": "2026-11-19T09:04:55.933Z",
+    "end": "2026-11-26T09:04:55.933Z",
     "timezone": "Asia/Shanghai"
   },
-  "lastRun": "context/runs/2026-11-20-scheduled.json"
+  "lastRun": "context/runs/2026-11-26.json"
 }

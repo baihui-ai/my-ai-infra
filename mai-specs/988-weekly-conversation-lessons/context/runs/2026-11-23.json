@@ -1,0 +1,123 @@
+{
+  "date": "2026-11-23",
+  "kind": "scheduled-incremental",
+  "window": {
+    "start": "2026-11-16T09:01:49.460Z",
+    "end": "2026-11-23T09:01:49.460Z",
+    "timezone": "Asia/Shanghai"
+  },
+  "previousWatermark": "2026-11-22T08:58:16.149Z",
+  "regularQuotaRemainingPercent": 69,
+  "personalLimitIgnored": true,
+  "activeListComplete": true,
+  "archivedListComplete": true,
+  "activeIndexCount": 35,
+  "archivedIndexCount": 9,
+  "candidateThreadCount": 16,
+  "reread": [
+    {
+      "threadId": "01a1d273-04e9-7873-9c83-bd3fba5ac3f9",
+      "pages": 1,
+      "turns": 10
+    },
+    {
+      "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+      "pages": 6,
+      "turns": 60
+    },
+    {
+      "threadId": "01a1f7f1-bb65-7741-ba59-06c4f33b8ec2",
+      "pages": 1,
+      "turns": 2
+    }
+  ],
+  "method": "增量复读上次水位后更新的3个会话，共8页72回合，读取实际用户消息与相关上下文，包含旧回合续发消息；其余13个候选复用周审核记录。图纸会话仅元数据更新，未见新用户指令。附件仅作上下文索引，未独立解析截图。",
+  "lessons": [
+    {
+      "key": "java-state-enum-and-pure-operations",
+      "sources": [
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a20608-9383-7e73-a9ba-de9e600b1a11",
+          "messageId": "01a2063f-35c9-7301-a365-4494a1e2aeeb"
+        }
+      ],
+      "status": "implemented-validated-synced-with-customizations",
+      "target": "assets/skills/my-create-feature/references/java-dev.md",
+      "validation": "test/2026-11-23-RUN_REPORT.md"
+    },
+    {
+      "key": "composite-index-and-equivalent-range-rewrite",
+      "sources": [
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a205f7-4393-7251-83b0-44a476611621",
+          "messageId": "01a205f9-52ba-7cb2-9d4e-27cd3b2fc47c"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a205f7-4393-7251-83b0-44a476611621",
+          "messageId": "01a205fa-975b-7290-ae5a-076a5ab91a2f"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a205f7-4393-7251-83b0-44a476611621",
+          "messageId": "01a205fb-afa6-7f83-9a02-4ca95ff02c7f"
+        }
+      ],
+      "status": "implemented-validated-synced-with-customizations",
+      "target": "assets/skills/my-create-feature/references/java-dev.md",
+      "validation": "test/2026-11-23-RUN_REPORT.md"
+    }
+  ],
+  "deduplicated": [
+    "reference-protected-scope",
+    "async-observable-result",
+    "bounded-task-replay-and-empty-payload",
+    "sql-business-computation-boundary",
+    "delivery-slice-inventory",
+    "avoid-unnecessary-transactions",
+    "default-no-query-row-locks"
+  ],
+  "notGeneralized": [
+    "业务缓存周期和定时刷新时间",
+    "局部状态值、表名和按钮展示条件",
+    "任务锁必须按task_id作为全局设计",
+    "原会话生产撤回/重试/发布指令及已取消操作",
+    "一次浏览器授权排障的临时操作"
+  ],
+  "missingSources": [
+    "不可访问账号、设备及非Codex服务",
+    "13个无变化候选未本轮逐条重读",
+    "附件未独立检视，仅依据明确文本纠正"
+  ],
+  "validation": {
+    "status": "passed-project-checks",
+    "releaseCheck": "passed",
+    "tests": 284,
+    "failures": 0,
+    "independentDesktopDecisions": {
+      "passed": 4,
+      "total": 4
+    },
+    "htmlWidths": [
+      1280,
+      390
+    ],
+    "genericSkillValidator": {
+      "status": "failed-existing-schema-mismatch",
+      "reason": "系统quick_validate.py不接受项目既有compatibility字段；未修改该字段，项目build/validate接受并通过。"
+    },
+    "javaOrDatabaseExecution": false
+  },
+  "noBusinessDecisionNeeded": true,
+  "sync": {
+    "globalResourcesCovered": 2,
+    "registeredProjects": 10,
+    "projectsWithVerifiedDelta": 10,
+    "canonicalByteIdenticalProjects": 9,
+    "doctorHealthyProjects": 9,
+    "backup": "/Users/sondge/.my-ai-infra/backups/lessons-2026-11-23-1795424739668",
+    "customizationsPreserved": true
+  }
+}

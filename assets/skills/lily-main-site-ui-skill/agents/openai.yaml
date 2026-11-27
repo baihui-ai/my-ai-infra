@@ -1,0 +1,6 @@
+interface:
+  display_name: "LILY主站UI规范"
+  short_description: "LILY主站样式与页面改版，按当前任务和阶段加载必要资料，不适用于运营后台"
+  default_prompt: "使用 $lily-main-site-ui-skill 处理本次LILY主站UI任务，先确认主站范围，只读取当前样式主题或阶段所需资料，保留已有决定并报告实际验证。"
+policy:
+  allow_implicit_invocation: false

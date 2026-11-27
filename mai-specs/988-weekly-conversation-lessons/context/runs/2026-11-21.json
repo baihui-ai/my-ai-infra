@@ -1,0 +1,83 @@
+{
+  "date": "2026-11-21",
+  "kind": "scheduled-no-new-lessons",
+  "window": {
+    "start": "2026-11-14T09:04:30.242Z",
+    "end": "2026-11-21T09:04:30.242Z",
+    "timezone": "Asia/Shanghai"
+  },
+  "previousWatermark": "2026-11-20T08:58:16.346Z",
+  "regularQuotaRemainingPercent": 77,
+  "personalLimitIgnored": true,
+  "activeListComplete": true,
+  "archivedListComplete": true,
+  "candidateThreadCount": 17,
+  "archivedIndexCount": 9,
+  "reread": [
+    {
+      "threadId": "01a1d273-04e9-7873-9c83-bd3fba5ac3f9",
+      "pages": 1,
+      "turns": 10
+    },
+    {
+      "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+      "pages": 1,
+      "turns": 10
+    }
+  ],
+  "method": "复用既有周审核证据，对处理水位后更新的2会话各读取1页共20回合及实际用户消息/相关上下文；读到旧水位之前停止，长回合内续发纠正仍纳入核对。其他15个窗口候选无更新，未重复读取。归档9项均在窗口前。",
+  "newLessons": [],
+  "deduplicated": [
+    {
+      "key": "sql-business-computation-boundary",
+      "sourceIds": [
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f847-861b-7901-bfc2-801850d40f04",
+          "messageId": "01a1f84b-634f-7301-972f-105c5c53cf2d"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f847-861b-7901-bfc2-801850d40f04",
+          "messageId": "01a1f84c-9449-7150-bb70-d37d6f64760f"
+        },
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f846-d077-7631-ba0b-884bfa4a3e0e",
+          "messageId": "01a1f847-32a3-7bb0-9e0c-aefafb1a7d82"
+        }
+      ],
+      "reason": "用户再次明确JSON判断、时间及类型转换优先代码；共享Java规范已覆盖解析/格式转换/时区精度及必要数据库操作边界。"
+    },
+    {
+      "key": "persisted-payload-representation-compatibility",
+      "sourceIds": [
+        {
+          "threadId": "01a1c4cd-1f3d-7b71-8f2c-d72e7cbc8cd1",
+          "turnId": "01a1f82d-4efb-7fd3-8329-e5a631d8084a",
+          "messageId": "01a1f82f-4981-7ba3-b8f4-ca2fa91f2692"
+        }
+      ],
+      "reason": "两种合法表示兼容已有规范；具体异步结果优先、JSON回退的读取次序保留为项目局部实现，不全局化。"
+    }
+  ],
+  "notGeneralized": [
+    "具体业务载荷读取回退顺序",
+    "局部SQL/索引/业务表和查询样本",
+    "引用对话里的子任务/改库/发布授权"
+  ],
+  "missingSources": [
+    "不可访问账号、设备与非Codex对话",
+    "15个未变化候选复用既有审核证据而非本轮全量重读"
+  ],
+  "validation": {
+    "status": "document-validation-passed",
+    "sourceChanged": false,
+    "modelBehaviorRerun": false,
+    "packageRerun": false,
+    "syncPerformed": false,
+    "command": "npm run validate",
+    "exitCode": 0
+  },
+  "noBusinessDecisionNeeded": true
+}
